@@ -9,38 +9,61 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WpadminRouteRouteImport } from './routes/_wpadmin/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WpadminWpAdminIndexRouteImport } from './routes/_wpadmin/wp-admin.index'
 
+const WpadminRouteRoute = WpadminRouteRouteImport.update({
+  id: '/_wpadmin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WpadminWpAdminIndexRoute = WpadminWpAdminIndexRouteImport.update({
+  id: '/wp-admin/',
+  path: '/wp-admin/',
+  getParentRoute: () => WpadminRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/wp-admin/': typeof WpadminWpAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/wp-admin': typeof WpadminWpAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_wpadmin': typeof WpadminRouteRouteWithChildren
+  '/_wpadmin/wp-admin/': typeof WpadminWpAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/wp-admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/wp-admin'
+  id: '__root__' | '/' | '/_wpadmin' | '/_wpadmin/wp-admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  WpadminRouteRoute: typeof WpadminRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_wpadmin': {
+      id: '/_wpadmin'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof WpadminRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +71,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_wpadmin/wp-admin/': {
+      id: '/_wpadmin/wp-admin/'
+      path: '/wp-admin'
+      fullPath: '/wp-admin/'
+      preLoaderRoute: typeof WpadminWpAdminIndexRouteImport
+      parentRoute: typeof WpadminRouteRoute
+    }
   }
 }
 
+interface WpadminRouteRouteChildren {
+  WpadminWpAdminIndexRoute: typeof WpadminWpAdminIndexRoute
+}
+
+const WpadminRouteRouteChildren: WpadminRouteRouteChildren = {
+  WpadminWpAdminIndexRoute: WpadminWpAdminIndexRoute,
+}
+
+const WpadminRouteRouteWithChildren = WpadminRouteRoute._addFileChildren(
+  WpadminRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  WpadminRouteRoute: WpadminRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

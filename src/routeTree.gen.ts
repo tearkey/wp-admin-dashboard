@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WpadminRouteRouteImport } from './routes/_wpadmin/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WpadminWpAdminIndexRouteImport } from './routes/_wpadmin/wp-admin.index'
+import { Route as WpadminWpAdminPostsRouteImport } from './routes/_wpadmin/wp-admin.posts'
 
 const WpadminRouteRoute = WpadminRouteRouteImport.update({
   id: '/_wpadmin',
@@ -27,27 +28,40 @@ const WpadminWpAdminIndexRoute = WpadminWpAdminIndexRouteImport.update({
   path: '/wp-admin/',
   getParentRoute: () => WpadminRouteRoute,
 } as any)
+const WpadminWpAdminPostsRoute = WpadminWpAdminPostsRouteImport.update({
+  id: '/wp-admin/posts',
+  path: '/wp-admin/posts',
+  getParentRoute: () => WpadminRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/wp-admin/posts': typeof WpadminWpAdminPostsRoute
   '/wp-admin/': typeof WpadminWpAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/wp-admin/posts': typeof WpadminWpAdminPostsRoute
   '/wp-admin': typeof WpadminWpAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_wpadmin': typeof WpadminRouteRouteWithChildren
+  '/_wpadmin/wp-admin/posts': typeof WpadminWpAdminPostsRoute
   '/_wpadmin/wp-admin/': typeof WpadminWpAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/wp-admin/'
+  fullPaths: '/' | '/wp-admin/posts' | '/wp-admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/wp-admin'
-  id: '__root__' | '/' | '/_wpadmin' | '/_wpadmin/wp-admin/'
+  to: '/' | '/wp-admin/posts' | '/wp-admin'
+  id:
+    | '__root__'
+    | '/'
+    | '/_wpadmin'
+    | '/_wpadmin/wp-admin/posts'
+    | '/_wpadmin/wp-admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -78,14 +92,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WpadminWpAdminIndexRouteImport
       parentRoute: typeof WpadminRouteRoute
     }
+    '/_wpadmin/wp-admin/posts': {
+      id: '/_wpadmin/wp-admin/posts'
+      path: '/wp-admin/posts'
+      fullPath: '/wp-admin/posts'
+      preLoaderRoute: typeof WpadminWpAdminPostsRouteImport
+      parentRoute: typeof WpadminRouteRoute
+    }
   }
 }
 
 interface WpadminRouteRouteChildren {
+  WpadminWpAdminPostsRoute: typeof WpadminWpAdminPostsRoute
   WpadminWpAdminIndexRoute: typeof WpadminWpAdminIndexRoute
 }
 
 const WpadminRouteRouteChildren: WpadminRouteRouteChildren = {
+  WpadminWpAdminPostsRoute: WpadminWpAdminPostsRoute,
   WpadminWpAdminIndexRoute: WpadminWpAdminIndexRoute,
 }
 

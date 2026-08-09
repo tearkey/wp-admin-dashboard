@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as WpadminRouteRouteImport } from './routes/_wpadmin/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WpadminWpAdminIndexRouteImport } from './routes/_wpadmin/wp-admin.index'
+import { Route as WpadminWpAdminSettingsRouteImport } from './routes/_wpadmin/wp-admin.settings'
 import { Route as WpadminWpAdminPostsRouteImport } from './routes/_wpadmin/wp-admin.posts'
 import { Route as WpadminWpAdminPagesRouteImport } from './routes/_wpadmin/wp-admin.pages'
 import { Route as WpadminWpAdminCommentsRouteImport } from './routes/_wpadmin/wp-admin.comments'
@@ -28,6 +29,11 @@ const IndexRoute = IndexRouteImport.update({
 const WpadminWpAdminIndexRoute = WpadminWpAdminIndexRouteImport.update({
   id: '/wp-admin/',
   path: '/wp-admin/',
+  getParentRoute: () => WpadminRouteRoute,
+} as any)
+const WpadminWpAdminSettingsRoute = WpadminWpAdminSettingsRouteImport.update({
+  id: '/wp-admin/settings',
+  path: '/wp-admin/settings',
   getParentRoute: () => WpadminRouteRoute,
 } as any)
 const WpadminWpAdminPostsRoute = WpadminWpAdminPostsRouteImport.update({
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/wp-admin/comments': typeof WpadminWpAdminCommentsRoute
   '/wp-admin/pages': typeof WpadminWpAdminPagesRoute
   '/wp-admin/posts': typeof WpadminWpAdminPostsRoute
+  '/wp-admin/settings': typeof WpadminWpAdminSettingsRoute
   '/wp-admin/': typeof WpadminWpAdminIndexRoute
 }
 export interface FileRoutesByTo {
@@ -58,6 +65,7 @@ export interface FileRoutesByTo {
   '/wp-admin/comments': typeof WpadminWpAdminCommentsRoute
   '/wp-admin/pages': typeof WpadminWpAdminPagesRoute
   '/wp-admin/posts': typeof WpadminWpAdminPostsRoute
+  '/wp-admin/settings': typeof WpadminWpAdminSettingsRoute
   '/wp-admin': typeof WpadminWpAdminIndexRoute
 }
 export interface FileRoutesById {
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   '/_wpadmin/wp-admin/comments': typeof WpadminWpAdminCommentsRoute
   '/_wpadmin/wp-admin/pages': typeof WpadminWpAdminPagesRoute
   '/_wpadmin/wp-admin/posts': typeof WpadminWpAdminPostsRoute
+  '/_wpadmin/wp-admin/settings': typeof WpadminWpAdminSettingsRoute
   '/_wpadmin/wp-admin/': typeof WpadminWpAdminIndexRoute
 }
 export interface FileRouteTypes {
@@ -76,6 +85,7 @@ export interface FileRouteTypes {
     | '/wp-admin/comments'
     | '/wp-admin/pages'
     | '/wp-admin/posts'
+    | '/wp-admin/settings'
     | '/wp-admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -83,6 +93,7 @@ export interface FileRouteTypes {
     | '/wp-admin/comments'
     | '/wp-admin/pages'
     | '/wp-admin/posts'
+    | '/wp-admin/settings'
     | '/wp-admin'
   id:
     | '__root__'
@@ -91,6 +102,7 @@ export interface FileRouteTypes {
     | '/_wpadmin/wp-admin/comments'
     | '/_wpadmin/wp-admin/pages'
     | '/_wpadmin/wp-admin/posts'
+    | '/_wpadmin/wp-admin/settings'
     | '/_wpadmin/wp-admin/'
   fileRoutesById: FileRoutesById
 }
@@ -122,6 +134,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WpadminWpAdminIndexRouteImport
       parentRoute: typeof WpadminRouteRoute
     }
+    '/_wpadmin/wp-admin/settings': {
+      id: '/_wpadmin/wp-admin/settings'
+      path: '/wp-admin/settings'
+      fullPath: '/wp-admin/settings'
+      preLoaderRoute: typeof WpadminWpAdminSettingsRouteImport
+      parentRoute: typeof WpadminRouteRoute
+    }
     '/_wpadmin/wp-admin/posts': {
       id: '/_wpadmin/wp-admin/posts'
       path: '/wp-admin/posts'
@@ -150,6 +169,7 @@ interface WpadminRouteRouteChildren {
   WpadminWpAdminCommentsRoute: typeof WpadminWpAdminCommentsRoute
   WpadminWpAdminPagesRoute: typeof WpadminWpAdminPagesRoute
   WpadminWpAdminPostsRoute: typeof WpadminWpAdminPostsRoute
+  WpadminWpAdminSettingsRoute: typeof WpadminWpAdminSettingsRoute
   WpadminWpAdminIndexRoute: typeof WpadminWpAdminIndexRoute
 }
 
@@ -157,6 +177,7 @@ const WpadminRouteRouteChildren: WpadminRouteRouteChildren = {
   WpadminWpAdminCommentsRoute: WpadminWpAdminCommentsRoute,
   WpadminWpAdminPagesRoute: WpadminWpAdminPagesRoute,
   WpadminWpAdminPostsRoute: WpadminWpAdminPostsRoute,
+  WpadminWpAdminSettingsRoute: WpadminWpAdminSettingsRoute,
   WpadminWpAdminIndexRoute: WpadminWpAdminIndexRoute,
 }
 

@@ -94,11 +94,3 @@ function HouseGlyph() {
   );
 }
 
-/** Non-interactive placeholder kept out of the bar so the file stays presentational. */
-export function AdminBarSiteLink() {
-  return (
-    <Link to="/wp-admin" className="text-wp-blue hover:underline">
-      Dashboard
-    </Link>
-  );
-}

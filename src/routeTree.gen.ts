@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as WpadminWpAdminIndexRouteImport } from './routes/_wpadmin/wp-admin.index'
 import { Route as WpadminWpAdminPostsRouteImport } from './routes/_wpadmin/wp-admin.posts'
 import { Route as WpadminWpAdminPagesRouteImport } from './routes/_wpadmin/wp-admin.pages'
+import { Route as WpadminWpAdminCommentsRouteImport } from './routes/_wpadmin/wp-admin.comments'
 
 const WpadminRouteRoute = WpadminRouteRouteImport.update({
   id: '/_wpadmin',
@@ -39,15 +40,22 @@ const WpadminWpAdminPagesRoute = WpadminWpAdminPagesRouteImport.update({
   path: '/wp-admin/pages',
   getParentRoute: () => WpadminRouteRoute,
 } as any)
+const WpadminWpAdminCommentsRoute = WpadminWpAdminCommentsRouteImport.update({
+  id: '/wp-admin/comments',
+  path: '/wp-admin/comments',
+  getParentRoute: () => WpadminRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/wp-admin/comments': typeof WpadminWpAdminCommentsRoute
   '/wp-admin/pages': typeof WpadminWpAdminPagesRoute
   '/wp-admin/posts': typeof WpadminWpAdminPostsRoute
   '/wp-admin/': typeof WpadminWpAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/wp-admin/comments': typeof WpadminWpAdminCommentsRoute
   '/wp-admin/pages': typeof WpadminWpAdminPagesRoute
   '/wp-admin/posts': typeof WpadminWpAdminPostsRoute
   '/wp-admin': typeof WpadminWpAdminIndexRoute
@@ -56,19 +64,31 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_wpadmin': typeof WpadminRouteRouteWithChildren
+  '/_wpadmin/wp-admin/comments': typeof WpadminWpAdminCommentsRoute
   '/_wpadmin/wp-admin/pages': typeof WpadminWpAdminPagesRoute
   '/_wpadmin/wp-admin/posts': typeof WpadminWpAdminPostsRoute
   '/_wpadmin/wp-admin/': typeof WpadminWpAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/wp-admin/pages' | '/wp-admin/posts' | '/wp-admin/'
+  fullPaths:
+    | '/'
+    | '/wp-admin/comments'
+    | '/wp-admin/pages'
+    | '/wp-admin/posts'
+    | '/wp-admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/wp-admin/pages' | '/wp-admin/posts' | '/wp-admin'
+  to:
+    | '/'
+    | '/wp-admin/comments'
+    | '/wp-admin/pages'
+    | '/wp-admin/posts'
+    | '/wp-admin'
   id:
     | '__root__'
     | '/'
     | '/_wpadmin'
+    | '/_wpadmin/wp-admin/comments'
     | '/_wpadmin/wp-admin/pages'
     | '/_wpadmin/wp-admin/posts'
     | '/_wpadmin/wp-admin/'
@@ -116,16 +136,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WpadminWpAdminPagesRouteImport
       parentRoute: typeof WpadminRouteRoute
     }
+    '/_wpadmin/wp-admin/comments': {
+      id: '/_wpadmin/wp-admin/comments'
+      path: '/wp-admin/comments'
+      fullPath: '/wp-admin/comments'
+      preLoaderRoute: typeof WpadminWpAdminCommentsRouteImport
+      parentRoute: typeof WpadminRouteRoute
+    }
   }
 }
 
 interface WpadminRouteRouteChildren {
+  WpadminWpAdminCommentsRoute: typeof WpadminWpAdminCommentsRoute
   WpadminWpAdminPagesRoute: typeof WpadminWpAdminPagesRoute
   WpadminWpAdminPostsRoute: typeof WpadminWpAdminPostsRoute
   WpadminWpAdminIndexRoute: typeof WpadminWpAdminIndexRoute
 }
 
 const WpadminRouteRouteChildren: WpadminRouteRouteChildren = {
+  WpadminWpAdminCommentsRoute: WpadminWpAdminCommentsRoute,
   WpadminWpAdminPagesRoute: WpadminWpAdminPagesRoute,
   WpadminWpAdminPostsRoute: WpadminWpAdminPostsRoute,
   WpadminWpAdminIndexRoute: WpadminWpAdminIndexRoute,

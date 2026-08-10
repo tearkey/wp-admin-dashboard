@@ -1,16 +1,28 @@
-import { MessageSquare, Plus, RefreshCw, Search, User } from "lucide-react";
+import { Menu, MessageSquare, Plus, RefreshCw, Search, User } from "lucide-react";
 import { site } from "@/data/wp-mock";
+import { cn } from "@/lib/utils";
 
 
 interface AdminBarProps {
   pendingComments: number;
+  onToggleMenu?: () => void;
+  menuOpen?: boolean;
 }
 
 /** The fixed 32px wp-admin toolbar. */
-export function AdminBar({ pendingComments }: AdminBarProps) {
+export function AdminBar({ pendingComments, onToggleMenu, menuOpen }: AdminBarProps) {
   return (
     <header className="fixed inset-x-0 top-0 z-50 flex h-8 items-stretch bg-wp-bar font-wp text-[13px] text-wp-menu-text">
       <div className="flex items-stretch">
+        <button
+          type="button"
+          onClick={onToggleMenu}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={!!menuOpen}
+          className="flex items-center px-2 text-wp-menu-icon hover:bg-wp-menu-hover hover:text-wp-blue-hover md:hidden"
+        >
+          <Menu size={18} />
+        </button>
         <BarItem title="About WordPress">
           <WpLogo />
         </BarItem>
@@ -20,7 +32,7 @@ export function AdminBar({ pendingComments }: AdminBarProps) {
             <span className="hidden sm:inline">{site.name}</span>
           </span>
         </BarItem>
-        <BarItem title="Updates">
+        <BarItem title="Updates" className="hidden sm:flex">
           <span className="flex items-center gap-1.5">
             <RefreshCw size={15} />
             <span>{site.updates}</span>
@@ -49,7 +61,7 @@ export function AdminBar({ pendingComments }: AdminBarProps) {
       </div>
 
       <div className="ml-auto flex items-stretch">
-        <BarItem title="Search">
+        <BarItem title="Search" className="hidden sm:flex">
           <Search size={15} />
         </BarItem>
         <BarItem title="My account">
@@ -65,13 +77,24 @@ export function AdminBar({ pendingComments }: AdminBarProps) {
   );
 }
 
-function BarItem({ children, title }: { children: React.ReactNode; title: string }) {
+function BarItem({
+  children,
+  title,
+  className,
+}: {
+  children: React.ReactNode;
+  title: string;
+  className?: string;
+}) {
   return (
     <button
       type="button"
       title={title}
       aria-label={title}
-      className="flex items-center px-2 text-wp-menu-icon transition-colors hover:bg-wp-menu-hover hover:text-wp-blue-hover sm:px-3"
+      className={cn(
+        "flex items-center px-2 text-wp-menu-icon transition-colors hover:bg-wp-menu-hover hover:text-wp-blue-hover sm:px-3",
+        className,
+      )}
     >
       {children}
     </button>

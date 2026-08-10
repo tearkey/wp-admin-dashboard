@@ -18,7 +18,7 @@ export const Route = createFileRoute("/_wpadmin/wp-admin/pages")({
   component: PagesScreen,
 });
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
+const dateFmt = new Intl.DateTimeFormat("en-US", { timeZone: "UTC",
   year: "numeric",
   month: "long",
   day: "numeric",
@@ -31,10 +31,10 @@ function PagesScreen() {
     {
       id: "title",
       label: "Title",
-      className: "w-[45%]",
+      className: "md:w-[45%]",
       render: (p) => (
         <>
-          <button type="button" className="font-semibold text-wp-blue hover:underline">
+          <button type="button" className="text-left font-semibold text-wp-blue hover:underline">
             {p.title}
           </button>
           {p.status === "draft" && <span className="ml-1.5 font-semibold"> — Draft</span>}
@@ -49,17 +49,17 @@ function PagesScreen() {
         </>
       ),
     },
-    { id: "author", label: "Author", render: (p) => <span className="text-wp-blue">{p.author}</span> },
+    { id: "author", label: "Author", className: "hidden md:table-cell", render: (p) => <span className="text-wp-blue">{p.author}</span> },
     {
       id: "comments",
       label: "Comments",
-      className: "w-[6em] text-center",
+      className: "hidden w-[6em] text-center sm:table-cell",
       render: (p) => <span className="text-wp-muted">{p.comments}</span>,
     },
     {
       id: "date",
       label: "Date",
-      className: "w-[12em]",
+      className: "hidden w-[12em] md:table-cell",
       render: (p) => (
         <>
           <div>{p.status === "publish" ? "Published" : "Last Modified"}</div>
@@ -70,7 +70,7 @@ function PagesScreen() {
   ];
 
   return (
-    <div className="px-5 pt-2 pb-10">
+    <div className="px-3 pt-2 pb-10 sm:px-5">
       <ScreenMeta
         helpTabs={[
           {

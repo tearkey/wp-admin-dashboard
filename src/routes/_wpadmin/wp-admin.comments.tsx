@@ -23,7 +23,7 @@ export const Route = createFileRoute("/_wpadmin/wp-admin/comments")({
   component: CommentsScreen,
 });
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
+const dateFmt = new Intl.DateTimeFormat("en-US", { timeZone: "UTC",
   year: "numeric",
   month: "long",
   day: "numeric",
@@ -49,7 +49,7 @@ function CommentsScreen() {
     {
       id: "author",
       label: "Author",
-      className: "w-[15em]",
+      className: "w-[10em] sm:w-[15em]",
       render: (c) => (
         <>
           <div className="font-semibold text-wp-text">{c.author}</div>
@@ -64,7 +64,7 @@ function CommentsScreen() {
         <>
           <div className="mb-1 text-wp-muted">{dateFmt.format(new Date(c.date))}</div>
           <p className="text-wp-text">{c.content}</p>
-          <div className="mt-1 flex flex-wrap items-center gap-x-1 text-[13px] opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
+          <div className="mt-1 flex flex-wrap items-center gap-x-1 text-[13px] opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100 md:focus-within:opacity-100">
             {c.status === "pending" ? (
               <Act onClick={() => setCommentStatus(c.id, "approved")}>Approve</Act>
             ) : (
@@ -89,7 +89,7 @@ function CommentsScreen() {
     {
       id: "post",
       label: "In response to",
-      className: "w-[14em]",
+      className: "hidden w-[14em] md:table-cell",
       render: (c) => (
         <button type="button" className="text-left text-wp-blue hover:underline">
           {c.postTitle}
@@ -107,7 +107,7 @@ function CommentsScreen() {
   ] as const;
 
   return (
-    <div className="px-5 pt-2 pb-10">
+    <div className="px-3 pt-2 pb-10 sm:px-5">
       <ScreenMeta
         helpTabs={[
           {

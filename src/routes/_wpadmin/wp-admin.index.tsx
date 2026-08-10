@@ -8,6 +8,7 @@ import {
   SiteHealthWidget,
 } from "@/components/wp/widgets";
 import { useDashboardData } from "@/hooks/use-dashboard-data";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { DASHBOARD_WIDGETS, useScreenOptions, type WidgetId } from "@/hooks/use-screen-options";
 import { cn } from "@/lib/utils";
 
@@ -34,7 +35,9 @@ export const Route = createFileRoute("/_wpadmin/wp-admin/")({
 
 function DashboardScreen() {
   const data = useDashboardData();
-  const { columns, hidden, toggleWidget, setColumns, isVisible } = useScreenOptions();
+  const { columns: prefColumns, hidden, toggleWidget, setColumns, isVisible } = useScreenOptions();
+  const isMobile = useIsMobile();
+  const columns = isMobile ? 1 : prefColumns;
 
   const widgets: { id: WidgetId; node: React.ReactNode }[] = [
     { id: "at-a-glance", node: <AtAGlanceWidget data={data} /> },
@@ -49,7 +52,7 @@ function DashboardScreen() {
   const right = columns === 1 ? [] : visible.filter((_, i) => i % 2 === 1);
 
   return (
-    <div className="px-5 pt-2 pb-10">
+    <div className="px-3 pt-2 pb-10 sm:px-5">
       <ScreenMeta
         screenOptions={
           <div className="space-y-3">
@@ -76,7 +79,7 @@ function DashboardScreen() {
                     <input
                       type="radio"
                       name="columns"
-                      checked={columns === n}
+                      checked={prefColumns === n}
                       onChange={() => setColumns(n)}
                     />
                     {n} column{n > 1 ? "s" : ""}

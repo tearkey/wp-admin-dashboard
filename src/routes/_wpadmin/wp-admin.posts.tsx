@@ -23,7 +23,7 @@ export const Route = createFileRoute("/_wpadmin/wp-admin/posts")({
   component: PostsScreen,
 });
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
+const dateFmt = new Intl.DateTimeFormat("en-US", { timeZone: "UTC",
   year: "numeric",
   month: "long",
   day: "numeric",
@@ -53,10 +53,10 @@ function PostsScreen() {
     {
       id: "title",
       label: "Title",
-      className: "w-[40%]",
+      className: "md:w-[40%]",
       render: (p) => (
         <>
-          <button type="button" className="font-semibold text-wp-blue hover:underline">
+          <button type="button" className="text-left font-semibold text-wp-blue hover:underline">
             {p.title}
           </button>
           {p.status !== "publish" && (
@@ -75,23 +75,24 @@ function PostsScreen() {
         </>
       ),
     },
-    { id: "author", label: "Author", render: (p) => <span className="text-wp-blue">{p.author}</span> },
+    { id: "author", label: "Author", className: "hidden md:table-cell", render: (p) => <span className="text-wp-blue">{p.author}</span> },
     {
       id: "categories",
       label: "Categories",
+      className: "hidden lg:table-cell",
       render: (p) => (p.categories.length ? p.categories.join(", ") : "—"),
     },
-    { id: "tags", label: "Tags", render: (p) => (p.tags.length ? p.tags.join(", ") : "—") },
+    { id: "tags", label: "Tags", className: "hidden lg:table-cell", render: (p) => (p.tags.length ? p.tags.join(", ") : "—") },
     {
       id: "comments",
       label: "Comments",
-      className: "w-[6em] text-center",
+      className: "hidden w-[6em] text-center sm:table-cell",
       render: (p) => <span className="text-wp-muted">{p.comments}</span>,
     },
     {
       id: "date",
       label: "Date",
-      className: "w-[12em]",
+      className: "hidden w-[12em] md:table-cell",
       render: (p) => (
         <>
           <div>{p.status === "publish" ? "Published" : "Last Modified"}</div>
@@ -102,7 +103,7 @@ function PostsScreen() {
   ];
 
   return (
-    <div className="px-5 pt-2 pb-10">
+    <div className="px-3 pt-2 pb-10 sm:px-5">
       <ScreenMeta
         helpTabs={[
           {
@@ -149,7 +150,7 @@ function PostsScreen() {
           ))}
         </ul>
 
-        <div className="ml-auto flex items-center gap-1">
+        <div className="flex w-full items-center gap-1 sm:ml-auto sm:w-auto">
           <label htmlFor="post-search" className="sr-only">
             Search posts
           </label>
@@ -158,7 +159,7 @@ function PostsScreen() {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search posts"
-            className="h-[30px] w-[220px] rounded border border-wp-border px-2 text-[13px] outline-none focus:border-wp-blue"
+            className="h-[30px] w-full rounded sm:w-[220px]  border border-wp-border px-2 text-[13px] outline-none focus:border-wp-blue"
           />
         </div>
       </div>

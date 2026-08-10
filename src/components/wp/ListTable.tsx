@@ -41,13 +41,14 @@ export function ListTable<T>({
         >
           Apply
         </button>
-        <span className="ml-auto text-[13px] text-wp-muted">{rows.length} items</span>
+        <span className="ml-auto shrink-0 text-[13px] text-wp-muted">{rows.length} items</span>
       </div>
 
-      <table className="w-full border-collapse border border-wp-border bg-wp-surface text-[13px]">
+      <div className="-mx-3 overflow-x-auto sm:mx-0">
+      <table className="w-full min-w-[320px] border-collapse border border-wp-border bg-wp-surface text-[13px]">
         <thead>
           <tr className="border-b border-wp-border text-left">
-            <th scope="col" className="w-[2.2em] px-2 py-2">
+            <th scope="col" className="w-[2.2em] px-2 py-2 align-top">
               <input type="checkbox" aria-label="Select all" className="align-middle" />
             </th>
             {columns.map((col) => (
@@ -86,6 +87,7 @@ export function ListTable<T>({
           ))}
         </tbody>
       </table>
+      </div>
     </>
   );
 }
@@ -93,7 +95,7 @@ export function ListTable<T>({
 /** The hover-revealed "Edit | Quick Edit | Trash | View" strip under a row title. */
 export function RowActions({ actions }: { actions: { label: string; danger?: boolean }[] }) {
   return (
-    <div className="mt-0.5 text-[13px] opacity-0 transition-opacity group-hover:opacity-100 focus-within:opacity-100">
+    <div className="mt-0.5 text-[13px] opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100 md:focus-within:opacity-100">
       {actions.map((a, i) => (
         <span key={a.label}>
           {i > 0 && <span className="text-wp-muted"> | </span>}

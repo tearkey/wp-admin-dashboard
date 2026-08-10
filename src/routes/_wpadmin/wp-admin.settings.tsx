@@ -39,7 +39,7 @@ function SettingsScreen() {
   };
 
   return (
-    <div className="px-5 pt-2 pb-10">
+    <div className="px-3 pt-2 pb-10 sm:px-5">
       <ScreenMeta
         helpTabs={[
           {

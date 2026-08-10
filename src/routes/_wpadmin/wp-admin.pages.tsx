@@ -31,7 +31,7 @@ function PagesScreen() {
     {
       id: "title",
       label: "Title",
-      className: "w-[45%]",
+      className: "md:w-[45%]",
       render: (p) => (
         <>
           <button type="button" className="font-semibold text-wp-blue hover:underline">

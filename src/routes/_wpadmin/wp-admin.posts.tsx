@@ -53,7 +53,7 @@ function PostsScreen() {
     {
       id: "title",
       label: "Title",
-      className: "w-[40%]",
+      className: "md:w-[40%]",
       render: (p) => (
         <>
           <button type="button" className="font-semibold text-wp-blue hover:underline">

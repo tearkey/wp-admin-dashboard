@@ -48,7 +48,7 @@ export function ListTable<T>({
       <table className="w-full min-w-[320px] border-collapse border border-wp-border bg-wp-surface text-[13px]">
         <thead>
           <tr className="border-b border-wp-border text-left">
-            <th scope="col" className="w-[2.2em] px-2 py-2">
+            <th scope="col" className="w-[2.2em] px-2 py-2 align-top">
               <input type="checkbox" aria-label="Select all" className="align-middle" />
             </th>
             {columns.map((col) => (

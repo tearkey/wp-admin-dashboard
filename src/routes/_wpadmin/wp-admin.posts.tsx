@@ -56,7 +56,7 @@ function PostsScreen() {
       className: "md:w-[40%]",
       render: (p) => (
         <>
-          <button type="button" className="font-semibold text-wp-blue hover:underline">
+          <button type="button" className="text-left font-semibold text-wp-blue hover:underline">
             {p.title}
           </button>
           {p.status !== "publish" && (

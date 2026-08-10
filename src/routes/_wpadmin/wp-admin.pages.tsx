@@ -34,7 +34,7 @@ function PagesScreen() {
       className: "md:w-[45%]",
       render: (p) => (
         <>
-          <button type="button" className="font-semibold text-wp-blue hover:underline">
+          <button type="button" className="text-left font-semibold text-wp-blue hover:underline">
             {p.title}
           </button>
           {p.status === "draft" && <span className="ml-1.5 font-semibold"> — Draft</span>}

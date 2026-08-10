@@ -49,17 +49,17 @@ function PagesScreen() {
         </>
       ),
     },
-    { id: "author", label: "Author", render: (p) => <span className="text-wp-blue">{p.author}</span> },
+    { id: "author", label: "Author", className: "hidden md:table-cell", render: (p) => <span className="text-wp-blue">{p.author}</span> },
     {
       id: "comments",
       label: "Comments",
-      className: "w-[6em] text-center",
+      className: "hidden w-[6em] text-center sm:table-cell",
       render: (p) => <span className="text-wp-muted">{p.comments}</span>,
     },
     {
       id: "date",
       label: "Date",
-      className: "w-[12em]",
+      className: "hidden w-[12em] md:table-cell",
       render: (p) => (
         <>
           <div>{p.status === "publish" ? "Published" : "Last Modified"}</div>

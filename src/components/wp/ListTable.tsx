@@ -45,7 +45,7 @@ export function ListTable<T>({
       </div>
 
       <div className="-mx-3 overflow-x-auto sm:mx-0">
-      <table className="w-full min-w-[520px] border-collapse border border-wp-border bg-wp-surface text-[13px]">
+      <table className="w-full min-w-[320px] border-collapse border border-wp-border bg-wp-surface text-[13px]">
         <thead>
           <tr className="border-b border-wp-border text-left">
             <th scope="col" className="w-[2.2em] px-2 py-2">

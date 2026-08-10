@@ -14,8 +14,8 @@ import { cn } from "@/lib/utils";
 
 type Data = ReturnType<typeof useDashboardData>;
 
-const dateFmt = new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" });
-const timeFmt = new Intl.DateTimeFormat("en-US", { hour: "numeric", minute: "2-digit" });
+const dateFmt = new Intl.DateTimeFormat("en-US", { timeZone: "UTC", month: "short", day: "numeric" });
+const timeFmt = new Intl.DateTimeFormat("en-US", { timeZone: "UTC", hour: "numeric", minute: "2-digit" });
 
 function fmt(iso: string) {
   const d = new Date(iso);

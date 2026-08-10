@@ -49,7 +49,7 @@ function DashboardScreen() {
   const right = columns === 1 ? [] : visible.filter((_, i) => i % 2 === 1);
 
   return (
-    <div className="px-5 pt-2 pb-10">
+    <div className="px-3 pt-2 pb-10 sm:px-5">
       <ScreenMeta
         screenOptions={
           <div className="space-y-3">

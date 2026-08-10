@@ -23,7 +23,7 @@ export const Route = createFileRoute("/_wpadmin/wp-admin/comments")({
   component: CommentsScreen,
 });
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
+const dateFmt = new Intl.DateTimeFormat("en-US", { timeZone: "UTC",
   year: "numeric",
   month: "long",
   day: "numeric",
@@ -107,7 +107,7 @@ function CommentsScreen() {
   ] as const;
 
   return (
-    <div className="px-5 pt-2 pb-10">
+    <div className="px-3 pt-2 pb-10 sm:px-5">
       <ScreenMeta
         helpTabs={[
           {

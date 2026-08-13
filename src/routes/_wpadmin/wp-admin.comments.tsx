@@ -124,31 +124,19 @@ function CommentsScreen() {
       />
       <h1 className="mt-1 mb-3 text-[23px] leading-[1.3] font-normal text-wp-text">Comments</h1>
 
-      <ul className="mb-2 flex flex-wrap items-center gap-x-1 text-[13px]">
-        {tabs.map(([key, label, count], i) => (
-          <li key={key} className="flex items-center gap-1">
-            {i > 0 && <span className="text-wp-muted">|</span>}
-            <button
-              type="button"
-              onClick={() => setFilter(key)}
-              className={cn(
-                "hover:underline",
-                filter === key ? "font-semibold text-wp-text" : "text-wp-blue",
-              )}
-            >
-              {label} <span className="text-wp-muted">({count})</span>
-            </button>
-          </li>
-        ))}
-      </ul>
-
       <ListTable
         rows={rows}
         columns={columns}
         rowKey={(c) => c.id}
         bulkActions={["Bulk actions", "Approve", "Mark as spam", "Move to Trash"]}
         emptyLabel="No comments found."
+        toolbar={
+          <div className="mb-2">
+            <FilterTabs tabs={tabs} value={filter} onChange={setFilter} />
+          </div>
+        }
       />
+
     </div>
   );
 }

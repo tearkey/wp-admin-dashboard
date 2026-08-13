@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronUp } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
 interface PostboxProps {
@@ -7,11 +8,53 @@ interface PostboxProps {
   children: React.ReactNode;
   className?: string;
   action?: React.ReactNode;
+  /** Stable id used to persist the collapsed state per browser. */
+  id?: string;
+  /** Start collapsed on small screens (until the user says otherwise). */
+  collapsedOnMobile?: boolean;
 }
 
+const key = (id: string) => `wp-admin:postbox:${id}`;
+
 /** The wp-admin "postbox" metabox panel: header with a collapse toggle. */
-export function Postbox({ title, children, className, action }: PostboxProps) {
+export function Postbox({
+  title,
+  children,
+  className,
+  action,
+  id,
+  collapsedOnMobile,
+}: PostboxProps) {
+  const isMobile = useIsMobile();
   const [open, setOpen] = useState(true);
+
+  // Read persisted state (or apply the mobile default) after hydration so the
+  // server and first client render agree.
+  useEffect(() => {
+    let stored: string | null = null;
+    try {
+      stored = id ? window.localStorage.getItem(key(id)) : null;
+    } catch {
+      /* storage unavailable */
+    }
+    if (stored === "open") setOpen(true);
+    else if (stored === "closed") setOpen(false);
+    else setOpen(!(isMobile && collapsedOnMobile));
+  }, [id, isMobile, collapsedOnMobile]);
+
+  const toggle = () => {
+    setOpen((v) => {
+      const next = !v;
+      try {
+        if (id) window.localStorage.setItem(key(id), next ? "open" : "closed");
+      } catch {
+        /* storage unavailable */
+      }
+      return next;
+    });
+  };
+
+  const panelId = `postbox-${(id ?? title).replace(/\s+/g, "-").toLowerCase()}`;
 
   return (
     <section
@@ -20,20 +63,33 @@ export function Postbox({ title, children, className, action }: PostboxProps) {
         className,
       )}
     >
-      <div className="flex items-center gap-2 border-b border-wp-border px-3 py-2">
-        <h2 className="flex-1 text-[14px] leading-tight font-semibold text-wp-text">{title}</h2>
+      <div className="flex items-center gap-2 border-b border-wp-border px-3">
+        <h2 className="min-w-0 flex-1 text-[14px] leading-tight font-semibold text-wp-text">
+          <button
+            type="button"
+            onClick={toggle}
+            aria-expanded={open}
+            aria-controls={panelId}
+            className="flex min-h-11 w-full items-center py-2 text-left md:min-h-0 md:cursor-default"
+          >
+            <span className="truncate">{title}</span>
+          </button>
+        </h2>
         {action}
         <button
           type="button"
-          onClick={() => setOpen((v) => !v)}
+          onClick={toggle}
           aria-expanded={open}
+          aria-controls={panelId}
           aria-label={open ? `Collapse ${title}` : `Expand ${title}`}
-          className="rounded p-1 text-wp-muted hover:text-wp-text"
+          className="-mr-1 flex size-11 shrink-0 items-center justify-center rounded text-wp-muted hover:text-wp-text md:size-7"
         >
           <ChevronUp size={16} className={cn("transition-transform", !open && "rotate-180")} />
         </button>
       </div>
-      {open && <div className="px-3 py-3 text-[13px] text-wp-text">{children}</div>}
+      <div id={panelId} hidden={!open} className="px-3 py-3 text-[13px] text-wp-text">
+        {children}
+      </div>
     </section>
   );
 }

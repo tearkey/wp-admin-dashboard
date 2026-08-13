@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Column, ListTable, RowActions } from "@/components/wp/ListTable";
 import { FilterTabs } from "@/components/wp/ListToolbar";
 
 import { ScreenMeta } from "@/components/wp/ScreenMeta";
 import { useDashboardData } from "@/hooks/use-dashboard-data";
+import { usePersistentState } from "@/hooks/use-persistent-state";
 import type { PostStatus, WpPost } from "@/data/wp-mock";
 import { cn } from "@/lib/utils";
 
@@ -35,8 +36,8 @@ type Filter = "all" | PostStatus;
 
 function PostsScreen() {
   const { posts } = useDashboardData();
-  const [filter, setFilter] = useState<Filter>("all");
-  const [search, setSearch] = useState("");
+  const [filter, setFilter] = usePersistentState<Filter>("posts:filter", "all");
+  const [search, setSearch] = usePersistentState("posts:search", "");
 
   const statusCounts = useMemo(() => {
     const by = (s: PostStatus) => posts.filter((p) => p.status === s).length;

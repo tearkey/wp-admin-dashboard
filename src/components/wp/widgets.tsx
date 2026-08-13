@@ -25,7 +25,7 @@ function fmt(iso: string) {
 export function AtAGlanceWidget({ data }: { data: Data }) {
   const { counts, site } = data;
   return (
-    <Postbox title="At a Glance">
+    <Postbox title="At a Glance" id="at-a-glance">
       <ul className="grid grid-cols-2 gap-y-1.5">
         <GlanceStat icon={Pin} label={`${counts.posts} Posts`} />
         <GlanceStat icon={FileText} label={`${counts.pages} Pages`} />
@@ -79,7 +79,7 @@ export function ActivityWidget({ data }: { data: Data }) {
   const recentComments = data.comments.filter((c) => c.status !== "trash").slice(0, 4);
 
   return (
-    <Postbox title="Activity">
+    <Postbox title="Activity" id="activity" collapsedOnMobile>
       <h3 className="mb-1.5 text-[13px] font-semibold text-wp-text">Recently Published</h3>
       <ul className="mb-4 space-y-1">
         {recent.map((p) => (
@@ -163,7 +163,7 @@ export function QuickDraftWidget({ data }: { data: Data }) {
   const [content, setContent] = useState("");
 
   return (
-    <Postbox title="Quick Draft">
+    <Postbox title="Quick Draft" id="quick-draft" collapsedOnMobile>
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -223,7 +223,7 @@ export function QuickDraftWidget({ data }: { data: Data }) {
 
 export function EventsNewsWidget({ data }: { data: Data }) {
   return (
-    <Postbox title="WordPress Events and News">
+    <Postbox title="WordPress Events and News" id="events-news" collapsedOnMobile>
       <p className="mb-2 text-wp-muted">
         Attend an upcoming event near {eventLocation}.{" "}
         <button type="button" className="text-wp-blue hover:underline">
@@ -269,7 +269,7 @@ export function SiteHealthWidget({ data }: { data: Data }) {
   const good = criticalIssues === 0;
 
   return (
-    <Postbox title="Site Health Status">
+    <Postbox title="Site Health Status" id="site-health" collapsedOnMobile>
       <div className="flex items-center gap-4">
         <div
           className="grid size-[100px] shrink-0 place-items-center rounded-full"

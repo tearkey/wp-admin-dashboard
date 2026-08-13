@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Column, ListTable, RowActions } from "@/components/wp/ListTable";
+import { FilterTabs } from "@/components/wp/ListToolbar";
+
 import { ScreenMeta } from "@/components/wp/ScreenMeta";
 import { useDashboardData } from "@/hooks/use-dashboard-data";
 import type { PostStatus, WpPost } from "@/data/wp-mock";
@@ -124,47 +126,42 @@ function PostsScreen() {
         </button>
       </div>
 
-      <div className="mb-2 flex flex-wrap items-center gap-3">
-        <ul className="flex flex-wrap items-center gap-x-1 text-[13px]">
-          {(
-            [
-              ["all", "All", statusCounts.all],
-              ["publish", "Published", statusCounts.publish],
-              ["draft", "Drafts", statusCounts.draft],
-              ["pending", "Pending", statusCounts.pending],
-            ] as const
-          ).map(([key, label, count], i) => (
-            <li key={key} className="flex items-center gap-1">
-              {i > 0 && <span className="text-wp-muted">|</span>}
-              <button
-                type="button"
-                onClick={() => setFilter(key)}
-                className={cn(
-                  "hover:underline",
-                  filter === key ? "font-semibold text-wp-text" : "text-wp-blue",
-                )}
-              >
-                {label} <span className="text-wp-muted">({count})</span>
-              </button>
-            </li>
-          ))}
-        </ul>
+      <ListTable
+        rows={rows}
+        columns={columns}
+        rowKey={(p) => p.id}
+        emptyLabel="No posts found."
+        toolbar={
+          <div className="mb-2 flex flex-wrap items-center gap-2">
+            <FilterTabs
+              tabs={
+                [
+                  ["all", "All", statusCounts.all],
+                  ["publish", "Published", statusCounts.publish],
+                  ["draft", "Drafts", statusCounts.draft],
+                  ["pending", "Pending", statusCounts.pending],
+                ] as const
+              }
+              value={filter}
+              onChange={setFilter}
+            />
+            <div className="flex w-full items-center gap-1 sm:ml-auto sm:w-auto">
+              <label htmlFor="post-search" className="sr-only">
+                Search posts
+              </label>
+              <input
+                id="post-search"
+                type="search"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search posts"
+                className="h-11 w-full rounded border border-wp-border bg-wp-surface px-2 text-[16px] outline-none focus:border-wp-blue sm:w-[220px] md:h-[30px] md:text-[13px]"
+              />
+            </div>
+          </div>
+        }
+      />
 
-        <div className="flex w-full items-center gap-1 sm:ml-auto sm:w-auto">
-          <label htmlFor="post-search" className="sr-only">
-            Search posts
-          </label>
-          <input
-            id="post-search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search posts"
-            className="h-[30px] w-full rounded sm:w-[220px]  border border-wp-border px-2 text-[13px] outline-none focus:border-wp-blue"
-          />
-        </div>
-      </div>
-
-      <ListTable rows={rows} columns={columns} rowKey={(p) => p.id} emptyLabel="No posts found." />
     </div>
   );
 }

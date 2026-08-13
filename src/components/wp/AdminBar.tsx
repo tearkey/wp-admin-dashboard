@@ -12,7 +12,10 @@ interface AdminBarProps {
 /** The fixed 32px wp-admin toolbar. */
 export function AdminBar({ pendingComments, onToggleMenu, menuOpen }: AdminBarProps) {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 flex h-8 items-stretch bg-wp-bar font-wp text-[13px] text-wp-menu-text">
+    <header
+      data-wp-adminbar
+      className="fixed inset-x-0 top-0 z-50 flex h-8 items-stretch bg-wp-bar font-wp text-[13px] text-wp-menu-text"
+    >
       <div className="flex items-stretch">
         <button
           type="button"

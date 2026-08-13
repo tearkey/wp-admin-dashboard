@@ -3,6 +3,8 @@ import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { AdminBar } from "@/components/wp/AdminBar";
 import { AdminMenu } from "@/components/wp/AdminMenu";
 import { comments } from "@/data/wp-mock";
+import { useAdminBarOffset } from "@/hooks/use-admin-bar-offset";
+import { usePersistentState } from "@/hooks/use-persistent-state";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_wpadmin")({
@@ -10,8 +12,9 @@ export const Route = createFileRoute("/_wpadmin")({
 });
 
 function AdminLayout() {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = usePersistentState("menu-collapsed", false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  useAdminBarOffset();
   const pendingComments = comments.filter((c) => c.status === "pending").length;
 
   return (

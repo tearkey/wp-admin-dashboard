@@ -13,6 +13,8 @@ interface ListTableProps<T> {
   rowKey: (row: T) => string | number;
   bulkActions?: string[];
   emptyLabel?: string;
+  /** Filters/search rendered above the bulk-action row, inside the sticky bar. */
+  toolbar?: React.ReactNode;
 }
 
 /** WP list-table: bulk-action bar, sortable-looking headers, row actions, count. */
@@ -22,27 +24,32 @@ export function ListTable<T>({
   rowKey,
   bulkActions = ["Bulk actions", "Edit", "Move to Trash"],
   emptyLabel = "No items found.",
+  toolbar,
 }: ListTableProps<T>) {
   return (
     <>
-      <div className="mb-2 flex flex-wrap items-center gap-2">
-        <select
-          className="h-[30px] rounded border border-wp-border bg-wp-surface px-2 text-[13px] text-wp-text"
-          aria-label="Bulk actions"
-          defaultValue={bulkActions[0]}
-        >
-          {bulkActions.map((a) => (
-            <option key={a}>{a}</option>
-          ))}
-        </select>
-        <button
-          type="button"
-          className="h-[30px] rounded border border-wp-border bg-wp-surface px-3 text-[13px] text-wp-text hover:border-wp-blue hover:text-wp-blue"
-        >
-          Apply
-        </button>
-        <span className="ml-auto shrink-0 text-[13px] text-wp-muted">{rows.length} items</span>
-      </div>
+      <ListToolbar>
+        {toolbar}
+        <div className="flex flex-wrap items-center gap-2">
+          <select
+            className="h-11 rounded border border-wp-border bg-wp-surface px-2 text-[13px] text-wp-text md:h-[30px]"
+            aria-label="Bulk actions"
+            defaultValue={bulkActions[0]}
+          >
+            {bulkActions.map((a) => (
+              <option key={a}>{a}</option>
+            ))}
+          </select>
+          <button
+            type="button"
+            className="h-11 rounded border border-wp-border bg-wp-surface px-3 text-[13px] text-wp-text hover:border-wp-blue hover:text-wp-blue md:h-[30px]"
+          >
+            Apply
+          </button>
+          <span className="ml-auto shrink-0 text-[13px] text-wp-muted">{rows.length} items</span>
+        </div>
+      </ListToolbar>
+
 
       <div className="-mx-3 overflow-x-auto sm:mx-0">
       <table className="w-full min-w-[320px] border-collapse border border-wp-border bg-wp-surface text-[13px]">

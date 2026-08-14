@@ -15,13 +15,13 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_admin/admin/")({
   head: () => ({
     meta: [
-      { title: "Dashboard — WP Admin" },
+      { title: "Dashboard — Techtrick CMS" },
       {
         name: "description",
         content:
           "Techtrick CMS dashboard with At a Glance, Activity, Quick Draft, Site Health and Events widgets.",
       },
-      { property: "og:title", content: "Dashboard — WP Admin" },
+      { property: "og:title", content: "Dashboard — Techtrick CMS" },
       {
         property: "og:description",
         content: "The Techtrick CMS admin dashboard, built in TypeScript.",

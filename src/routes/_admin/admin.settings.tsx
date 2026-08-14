@@ -6,12 +6,12 @@ import { useDashboardData } from "@/hooks/use-dashboard-data";
 export const Route = createFileRoute("/_admin/admin/settings")({
   head: () => ({
     meta: [
-      { title: "General Settings — WP Admin" },
+      { title: "General Settings — Techtrick CMS" },
       {
         name: "description",
         content: "Site title, tagline, address, timezone and date format settings.",
       },
-      { property: "og:title", content: "General Settings — WP Admin" },
+      { property: "og:title", content: "General Settings — Techtrick CMS" },
       { property: "og:description", content: "The Techtrick CMS General Settings form." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

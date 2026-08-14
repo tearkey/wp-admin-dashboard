@@ -16,12 +16,12 @@ import type { PostStatus, WpPost } from "@/data/cms-mock";
 export const Route = createFileRoute("/_admin/admin/posts")({
   head: () => ({
     meta: [
-      { title: "Posts — WP Admin" },
+      { title: "Posts — Techtrick CMS" },
       {
         name: "description",
         content: "Browse, filter and search all posts with the Techtrick CMS list-table interface.",
       },
-      { property: "og:title", content: "Posts — WP Admin" },
+      { property: "og:title", content: "Posts — Techtrick CMS" },
       { property: "og:description", content: "All posts, filterable by status, author and search." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

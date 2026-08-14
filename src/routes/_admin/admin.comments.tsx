@@ -16,12 +16,12 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/_admin/admin/comments")({
   head: () => ({
     meta: [
-      { title: "Comments — WP Admin" },
+      { title: "Comments — Techtrick CMS" },
       {
         name: "description",
         content: "Moderate comments: approve, unapprove, mark as spam or move to trash.",
       },
-      { property: "og:title", content: "Comments — WP Admin" },
+      { property: "og:title", content: "Comments — Techtrick CMS" },
       { property: "og:description", content: "The Techtrick CMS comment moderation queue." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

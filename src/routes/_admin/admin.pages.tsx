@@ -11,9 +11,9 @@ import type { WpPage } from "@/data/cms-mock";
 export const Route = createFileRoute("/_admin/admin/pages")({
   head: () => ({
     meta: [
-      { title: "Pages — WP Admin" },
+      { title: "Pages — Techtrick CMS" },
       { name: "description", content: "Manage every static page on the site from one list table." },
-      { property: "og:title", content: "Pages — WP Admin" },
+      { property: "og:title", content: "Pages — Techtrick CMS" },
       { property: "og:description", content: "All pages with authors, comment counts and dates." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

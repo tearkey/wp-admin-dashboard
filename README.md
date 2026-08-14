@@ -166,6 +166,11 @@ TanStack Start · TanStack Router · TanStack Query · React 19 · TypeScript ·
 Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) and our
 [Code of Conduct](CODE_OF_CONDUCT.md).
 
+## Security
+
+Please report vulnerabilities privately — see [SECURITY.md](SECURITY.md).
+
+
 ## License
 
 MIT © 2026 Techtrick Technologies — see [LICENSE](LICENSE).

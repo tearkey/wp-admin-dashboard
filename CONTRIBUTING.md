@@ -25,9 +25,11 @@ npm run lint
 npm run build
 npx tsc --noEmit
 npm run format
+npm run check:brand
 ```
 
-All three must pass. Please keep the app SSR-safe: read `localStorage` and other
+All of these must pass. `check:brand` fails if retired WordPress/Lovable branding is
+reintroduced; see the Brand guard section in the README. Please keep the app SSR-safe: read `localStorage` and other
 browser APIs inside effects, never during render.
 
 ## Commit style
@@ -49,8 +51,9 @@ docs: clarify data source swap in README
 
 ## Reporting issues
 
-Use the GitHub issue templates. For security concerns, email
-[hello@techtrick.com.bd](mailto:hello@techtrick.com.bd) instead of opening a public issue.
+Use the GitHub issue templates. For security concerns, follow [SECURITY.md](SECURITY.md)
+and email [hello@techtrick.com.bd](mailto:hello@techtrick.com.bd) instead of opening a
+public issue.
 
 ## Questions
 

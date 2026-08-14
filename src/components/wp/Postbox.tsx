@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import { ChevronUp } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { usePersistentState } from "@/hooks/use-persistent-state";
 import { cn } from "@/lib/utils";
 
 interface PostboxProps {
@@ -14,8 +14,6 @@ interface PostboxProps {
   collapsedOnMobile?: boolean;
 }
 
-const key = (id: string) => `wp-admin:postbox:${id}`;
-
 /** The wp-admin "postbox" metabox panel: header with a collapse toggle. */
 export function Postbox({
   title,
@@ -26,33 +24,15 @@ export function Postbox({
   collapsedOnMobile,
 }: PostboxProps) {
   const isMobile = useIsMobile();
-  const [open, setOpen] = useState(true);
+  // null = never toggled, so fall back to the responsive default.
+  const [stored, setStored] = usePersistentState<boolean | null>(
+    `postbox:${id ?? title}`,
+    null,
+  );
+  const open = stored ?? !(isMobile && collapsedOnMobile);
 
-  // Read persisted state (or apply the mobile default) after hydration so the
-  // server and first client render agree.
-  useEffect(() => {
-    let stored: string | null = null;
-    try {
-      stored = id ? window.localStorage.getItem(key(id)) : null;
-    } catch {
-      /* storage unavailable */
-    }
-    if (stored === "open") setOpen(true);
-    else if (stored === "closed") setOpen(false);
-    else setOpen(!(isMobile && collapsedOnMobile));
-  }, [id, isMobile, collapsedOnMobile]);
+  const toggle = () => setStored(!open);
 
-  const toggle = () => {
-    setOpen((v) => {
-      const next = !v;
-      try {
-        if (id) window.localStorage.setItem(key(id), next ? "open" : "closed");
-      } catch {
-        /* storage unavailable */
-      }
-      return next;
-    });
-  };
 
   const panelId = `postbox-${(id ?? title).replace(/\s+/g, "-").toLowerCase()}`;
 

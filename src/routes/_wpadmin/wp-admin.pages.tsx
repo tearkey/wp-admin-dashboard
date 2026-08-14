@@ -1,8 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Column, ListTable, RowActions } from "@/components/wp/ListTable";
+import { TableControls } from "@/components/wp/TableControls";
 import { ScreenMeta } from "@/components/wp/ScreenMeta";
 import { useDashboardData } from "@/hooks/use-dashboard-data";
+import { useScrollRestore } from "@/hooks/use-scroll-restore";
+import { useTablePrefs } from "@/hooks/use-table-prefs";
 import type { WpPage } from "@/data/wp-mock";
+
 
 export const Route = createFileRoute("/_wpadmin/wp-admin/pages")({
   head: () => ({
@@ -26,6 +30,9 @@ const dateFmt = new Intl.DateTimeFormat("en-US", { timeZone: "UTC",
 
 function PagesScreen() {
   const { pages } = useDashboardData();
+  const prefs = useTablePrefs("pages");
+  useScrollRestore("pages");
+
 
   const columns: Column<WpPage>[] = [
     {
@@ -89,7 +96,28 @@ function PagesScreen() {
           Add New Page
         </button>
       </div>
-      <ListTable rows={pages} columns={columns} rowKey={(p) => p.id} emptyLabel="No pages found." />
+      <ListTable
+        rows={pages}
+        columns={columns}
+        rowKey={(p) => p.id}
+        emptyLabel="No pages found."
+        hiddenColumnIds={prefs.hidden}
+        density={prefs.density}
+        toolbar={
+          <div className="mb-2">
+            <TableControls
+              columns={columns
+                .filter((c) => c.id !== "title")
+                .map((c) => ({ id: c.id, label: c.label }))}
+              hidden={prefs.hidden}
+              onToggleColumn={prefs.toggleColumn}
+              density={prefs.density}
+              onDensityChange={prefs.setDensity}
+              onReset={prefs.reset}
+            />
+          </div>
+        }
+      />
     </div>
   );
 }

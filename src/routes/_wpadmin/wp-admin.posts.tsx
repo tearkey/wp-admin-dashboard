@@ -2,12 +2,16 @@ import { useMemo } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Column, ListTable, RowActions } from "@/components/wp/ListTable";
 import { FilterTabs } from "@/components/wp/ListToolbar";
+import { TableControls } from "@/components/wp/TableControls";
 
 import { ScreenMeta } from "@/components/wp/ScreenMeta";
 import { useDashboardData } from "@/hooks/use-dashboard-data";
 import { usePersistentState } from "@/hooks/use-persistent-state";
+import { useScrollRestore } from "@/hooks/use-scroll-restore";
+import { useTablePrefs } from "@/hooks/use-table-prefs";
 import type { PostStatus, WpPost } from "@/data/wp-mock";
-import { cn } from "@/lib/utils";
+
+
 
 export const Route = createFileRoute("/_wpadmin/wp-admin/posts")({
   head: () => ({
@@ -38,6 +42,9 @@ function PostsScreen() {
   const { posts } = useDashboardData();
   const [filter, setFilter] = usePersistentState<Filter>("posts:filter", "all");
   const [search, setSearch] = usePersistentState("posts:search", "");
+  const prefs = useTablePrefs("posts");
+  useScrollRestore("posts");
+
 
   const statusCounts = useMemo(() => {
     const by = (s: PostStatus) => posts.filter((p) => p.status === s).length;
@@ -132,36 +139,51 @@ function PostsScreen() {
         columns={columns}
         rowKey={(p) => p.id}
         emptyLabel="No posts found."
+        hiddenColumnIds={prefs.hidden}
+        density={prefs.density}
         toolbar={
-          <div className="mb-2 flex flex-wrap items-center gap-2">
-            <FilterTabs
-              tabs={
-                [
-                  ["all", "All", statusCounts.all],
-                  ["publish", "Published", statusCounts.publish],
-                  ["draft", "Drafts", statusCounts.draft],
-                  ["pending", "Pending", statusCounts.pending],
-                ] as const
-              }
-              value={filter}
-              onChange={setFilter}
-            />
-            <div className="flex w-full items-center gap-1 sm:ml-auto sm:w-auto">
-              <label htmlFor="post-search" className="sr-only">
-                Search posts
-              </label>
-              <input
-                id="post-search"
-                type="search"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search posts"
-                className="h-11 w-full rounded border border-wp-border bg-wp-surface px-2 text-[16px] outline-none focus:border-wp-blue sm:w-[220px] md:h-[30px] md:text-[13px]"
+          <div className="mb-2 space-y-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <FilterTabs
+                tabs={
+                  [
+                    ["all", "All", statusCounts.all],
+                    ["publish", "Published", statusCounts.publish],
+                    ["draft", "Drafts", statusCounts.draft],
+                    ["pending", "Pending", statusCounts.pending],
+                  ] as const
+                }
+                value={filter}
+                onChange={setFilter}
               />
+              <div className="flex w-full items-center gap-1 sm:ml-auto sm:w-auto">
+                <label htmlFor="post-search" className="sr-only">
+                  Search posts
+                </label>
+                <input
+                  id="post-search"
+                  type="search"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search posts"
+                  className="h-11 w-full rounded border border-wp-border bg-wp-surface px-2 text-[16px] outline-none focus:border-wp-blue sm:w-[220px] md:h-[30px] md:text-[13px]"
+                />
+              </div>
             </div>
+            <TableControls
+              columns={columns
+                .filter((c) => c.id !== "title")
+                .map((c) => ({ id: c.id, label: c.label }))}
+              hidden={prefs.hidden}
+              onToggleColumn={prefs.toggleColumn}
+              density={prefs.density}
+              onDensityChange={prefs.setDensity}
+              onReset={prefs.reset}
+            />
           </div>
         }
       />
+
 
     </div>
   );

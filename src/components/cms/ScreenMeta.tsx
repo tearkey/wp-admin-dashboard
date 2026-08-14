@@ -30,14 +30,14 @@ export function ScreenMeta({ screenOptions, helpTabs = [] }: ScreenMetaProps) {
       </div>
 
       {panel === "options" && (
-        <div className="border-x border-b border-wp-border bg-wp-surface px-4 py-3">
+        <div className="border-x border-b border-tt-border bg-tt-surface px-4 py-3">
           {screenOptions}
         </div>
       )}
 
       {panel === "help" && helpTabs.length > 0 && (
-        <div className="flex border-x border-b border-wp-border bg-wp-surface">
-          <ul className="w-[150px] shrink-0 border-r border-wp-border py-2">
+        <div className="flex border-x border-b border-tt-border bg-tt-surface">
+          <ul className="w-[150px] shrink-0 border-r border-tt-border py-2">
             {helpTabs.map((tab) => (
               <li key={tab.id}>
                 <button
@@ -46,8 +46,8 @@ export function ScreenMeta({ screenOptions, helpTabs = [] }: ScreenMetaProps) {
                   className={cn(
                     "w-full border-l-4 px-3 py-1.5 text-left text-[13px]",
                     activeTab === tab.id
-                      ? "border-l-wp-blue bg-wp-body font-semibold text-wp-text"
-                      : "border-l-transparent text-wp-blue hover:underline",
+                      ? "border-l-tt-blue bg-tt-body font-semibold text-tt-text"
+                      : "border-l-transparent text-tt-blue hover:underline",
                   )}
                 >
                   {tab.label}
@@ -55,7 +55,7 @@ export function ScreenMeta({ screenOptions, helpTabs = [] }: ScreenMetaProps) {
               </li>
             ))}
           </ul>
-          <div className="flex-1 px-4 py-3 text-[13px] leading-relaxed text-wp-text">
+          <div className="flex-1 px-4 py-3 text-[13px] leading-relaxed text-tt-text">
             {helpTabs.find((t) => t.id === activeTab)?.content}
           </div>
         </div>
@@ -79,8 +79,8 @@ function MetaButton({
       onClick={onClick}
       aria-expanded={active}
       className={cn(
-        "rounded-b border-x border-b border-wp-border bg-wp-surface px-3 py-1 text-[13px] text-wp-muted hover:text-wp-text",
-        active && "text-wp-text",
+        "rounded-b border-x border-b border-tt-border bg-tt-surface px-3 py-1 text-[13px] text-tt-muted hover:text-tt-text",
+        active && "text-tt-text",
       )}
     >
       {children}

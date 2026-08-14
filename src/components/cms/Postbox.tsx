@@ -14,7 +14,7 @@ interface PostboxProps {
   collapsedOnMobile?: boolean;
 }
 
-/** The wp-admin "postbox" metabox panel: header with a collapse toggle. */
+/** The "postbox" metabox panel: header with a collapse toggle. */
 export function Postbox({
   title,
   children,
@@ -39,12 +39,12 @@ export function Postbox({
   return (
     <section
       className={cn(
-        "mb-4 border border-wp-border bg-wp-surface shadow-[0_1px_1px_rgba(0,0,0,0.04)]",
+        "mb-4 border border-tt-border bg-tt-surface shadow-[0_1px_1px_rgba(0,0,0,0.04)]",
         className,
       )}
     >
-      <div className="flex items-center gap-2 border-b border-wp-border px-3">
-        <h2 className="min-w-0 flex-1 text-[14px] leading-tight font-semibold text-wp-text">
+      <div className="flex items-center gap-2 border-b border-tt-border px-3">
+        <h2 className="min-w-0 flex-1 text-[14px] leading-tight font-semibold text-tt-text">
           <button
             type="button"
             onClick={toggle}
@@ -62,12 +62,12 @@ export function Postbox({
           aria-expanded={open}
           aria-controls={panelId}
           aria-label={open ? `Collapse ${title}` : `Expand ${title}`}
-          className="-mr-1 flex size-11 shrink-0 items-center justify-center rounded text-wp-muted hover:text-wp-text md:size-7"
+          className="-mr-1 flex size-11 shrink-0 items-center justify-center rounded text-tt-muted hover:text-tt-text md:size-7"
         >
           <ChevronUp size={16} className={cn("transition-transform", !open && "rotate-180")} />
         </button>
       </div>
-      <div id={panelId} hidden={!open} className="px-3 py-3 text-[13px] text-wp-text">
+      <div id={panelId} hidden={!open} className="px-3 py-3 text-[13px] text-tt-text">
         {children}
       </div>
     </section>

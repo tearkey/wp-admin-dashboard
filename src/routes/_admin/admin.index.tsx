@@ -1,30 +1,30 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ScreenMeta } from "@/components/wp/ScreenMeta";
+import { ScreenMeta } from "@/components/cms/ScreenMeta";
 import {
   ActivityWidget,
   AtAGlanceWidget,
   EventsNewsWidget,
   QuickDraftWidget,
   SiteHealthWidget,
-} from "@/components/wp/widgets";
+} from "@/components/cms/widgets";
 import { useDashboardData } from "@/hooks/use-dashboard-data";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { DASHBOARD_WIDGETS, useScreenOptions, type WidgetId } from "@/hooks/use-screen-options";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/_wpadmin/wp-admin/")({
+export const Route = createFileRoute("/_admin/admin/")({
   head: () => ({
     meta: [
-      { title: "Dashboard — WP Admin" },
+      { title: "Dashboard — Techtrick CMS" },
       {
         name: "description",
         content:
-          "WordPress admin dashboard with At a Glance, Activity, Quick Draft, Site Health and Events widgets.",
+          "Techtrick CMS dashboard with At a Glance, Activity, Quick Draft, Site Health and Events widgets.",
       },
-      { property: "og:title", content: "Dashboard — WP Admin" },
+      { property: "og:title", content: "Dashboard — Techtrick CMS" },
       {
         property: "og:description",
-        content: "A faithful WordPress wp-admin dashboard rebuilt in TypeScript.",
+        content: "The Techtrick CMS admin dashboard, built in TypeScript.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -57,7 +57,7 @@ function DashboardScreen() {
         screenOptions={
           <div className="space-y-3">
             <fieldset>
-              <legend className="mb-1.5 font-semibold text-wp-text">Boxes</legend>
+              <legend className="mb-1.5 font-semibold text-tt-text">Boxes</legend>
               <div className="flex flex-wrap gap-x-5 gap-y-1.5">
                 {DASHBOARD_WIDGETS.map((w) => (
                   <label key={w.id} className="flex items-center gap-1.5">
@@ -72,7 +72,7 @@ function DashboardScreen() {
               </div>
             </fieldset>
             <fieldset>
-              <legend className="mb-1.5 font-semibold text-wp-text">Layout</legend>
+              <legend className="mb-1.5 font-semibold text-tt-text">Layout</legend>
               <div className="flex gap-4">
                 {([1, 2] as const).map((n) => (
                   <label key={n} className="flex items-center gap-1.5">
@@ -95,7 +95,7 @@ function DashboardScreen() {
             label: "Overview",
             content: (
               <p>
-                Welcome to your WordPress Dashboard. Use Screen Options to show or hide boxes and
+                Welcome to your Techtrick CMS Dashboard. Use Screen Options to show or hide boxes and
                 choose a one- or two-column layout. Drag-free widgets keep their state per browser.
               </p>
             ),
@@ -113,7 +113,7 @@ function DashboardScreen() {
         ]}
       />
 
-      <h1 className="mt-1 mb-4 text-[23px] leading-[1.3] font-normal text-wp-text">Dashboard</h1>
+      <h1 className="mt-1 mb-4 text-[23px] leading-[1.3] font-normal text-tt-text">Dashboard</h1>
 
       <div className={cn("grid gap-4", columns === 2 ? "md:grid-cols-2" : "grid-cols-1")}>
         <div>{left.map((w) => <div key={w.id}>{w.node}</div>)}</div>

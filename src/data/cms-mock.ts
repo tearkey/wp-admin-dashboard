@@ -1,5 +1,5 @@
 /**
- * Mock WordPress data.
+ * Mock CMS data.
  *
  * Every screen reads from this module through `useDashboardData()` so that
  * swapping in a real WP REST API later is a single-file change.
@@ -53,7 +53,7 @@ export interface SiteHealthIssue {
 
 export interface WpEvent {
   id: string;
-  kind: "meetup" | "wordcamp";
+  kind: "meetup" | "conference";
   title: string;
   location: string;
   date: string;
@@ -77,10 +77,10 @@ export interface SiteInfo {
 
 export const site: SiteInfo = {
   name: "Renita21",
-  tagline: "Just another WordPress site",
+  tagline: "Just another Techtrick CMS site",
   url: "https://renita21.example",
   version: "6.7.1",
-  theme: "Twenty Twenty-Five",
+  theme: "Techtrick Default 2026",
   user: "admin",
   updates: 3,
 };
@@ -186,8 +186,8 @@ export const pages: WpPage[] = [
 export const comments: WpComment[] = [
   {
     id: 501,
-    author: "A WordPress Commenter",
-    authorEmail: "wapuu@wordpress.example",
+    author: "A Techtrick Commenter",
+    authorEmail: "hello@techtrick.com.bd",
     content:
       "Hi, this is a comment. To get started with moderating, editing, and deleting comments, please visit the Comments screen in the dashboard.",
     postTitle: "Hello world!",
@@ -249,7 +249,7 @@ export const drafts: WpDraft[] = [
 ];
 
 export const siteHealthIssues: SiteHealthIssue[] = [
-  { id: "php", label: "Your site is running an outdated version of PHP", severity: "recommended" },
+  { id: "php", label: "Your site is running an outdated version of Node.js", severity: "recommended" },
   { id: "cron", label: "A scheduled event has failed", severity: "recommended" },
   { id: "https", label: "Your site is using HTTPS", severity: "recommended" },
   { id: "updates", label: "Your plugins are all up to date", severity: "recommended" },
@@ -260,14 +260,14 @@ export const events: WpEvent[] = [
   {
     id: "e1",
     kind: "meetup",
-    title: "Monthly WordPress Meetup",
+    title: "Monthly Techtrick CMS Meetup",
     location: "Bengaluru, India",
     date: "2026-08-16T18:00:00Z",
   },
   {
     id: "e2",
-    kind: "wordcamp",
-    title: "WordCamp Asia 2026",
+    kind: "conference",
+    title: "Techtrick Conf Asia 2026",
     location: "Manila, Philippines",
     date: "2026-09-04T09:00:00Z",
   },
@@ -281,10 +281,10 @@ export const events: WpEvent[] = [
 ];
 
 export const news: WpNewsItem[] = [
-  { id: "n1", title: "WordPress 6.7.1 Maintenance Release", source: "WordPress News" },
-  { id: "n2", title: "The Month in WordPress – July 2026", source: "WordPress News" },
-  { id: "n3", title: "Do The Woo: Building blocks that ship", source: "Do The Woo" },
-  { id: "n4", title: "WPTavern: What the new admin design means for plugin authors", source: "WPTavern" },
+  { id: "n1", title: "Techtrick CMS 6.7.1 Maintenance Release", source: "Techtrick News" },
+  { id: "n2", title: "The Month in Techtrick CMS – July 2026", source: "Techtrick News" },
+  { id: "n3", title: "Techtrick Blog: Building blocks that ship", source: "Techtrick Blog" },
+  { id: "n4", title: "Community: What the new admin design means for plugin authors", source: "Techtrick Community" },
 ];
 
 export const eventLocation = "Bengaluru, India";

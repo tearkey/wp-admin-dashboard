@@ -20,7 +20,7 @@ export function useTablePrefs(tableId: string) {
   const reset = useCallback(() => {
     clearPersisted(`${tableId}:`);
     try {
-      window.localStorage.removeItem(`wp-admin:scroll:${tableId}`);
+      window.localStorage.removeItem(`techtrick:scroll:${tableId}`);
     } catch {
       /* storage unavailable */
     }

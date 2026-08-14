@@ -9,16 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WpadminRouteRouteImport } from './routes/_wpadmin/route'
+import { Route as AdminRouteRouteImport } from './routes/_admin/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as WpadminWpAdminIndexRouteImport } from './routes/_wpadmin/wp-admin.index'
-import { Route as WpadminWpAdminSettingsRouteImport } from './routes/_wpadmin/wp-admin.settings'
-import { Route as WpadminWpAdminPostsRouteImport } from './routes/_wpadmin/wp-admin.posts'
-import { Route as WpadminWpAdminPagesRouteImport } from './routes/_wpadmin/wp-admin.pages'
-import { Route as WpadminWpAdminCommentsRouteImport } from './routes/_wpadmin/wp-admin.comments'
+import { Route as WpAdminIndexRouteImport } from './routes/wp-admin.index'
+import { Route as WpAdminSplatRouteImport } from './routes/wp-admin.$'
+import { Route as AdminAdminIndexRouteImport } from './routes/_admin/admin.index'
+import { Route as AdminAdminSettingsRouteImport } from './routes/_admin/admin.settings'
+import { Route as AdminAdminPostsRouteImport } from './routes/_admin/admin.posts'
+import { Route as AdminAdminPagesRouteImport } from './routes/_admin/admin.pages'
+import { Route as AdminAdminCommentsRouteImport } from './routes/_admin/admin.comments'
 
-const WpadminRouteRoute = WpadminRouteRouteImport.update({
-  id: '/_wpadmin',
+const AdminRouteRoute = AdminRouteRouteImport.update({
+  id: '/_admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -26,98 +28,122 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WpadminWpAdminIndexRoute = WpadminWpAdminIndexRouteImport.update({
+const WpAdminIndexRoute = WpAdminIndexRouteImport.update({
   id: '/wp-admin/',
   path: '/wp-admin/',
-  getParentRoute: () => WpadminRouteRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-const WpadminWpAdminSettingsRoute = WpadminWpAdminSettingsRouteImport.update({
-  id: '/wp-admin/settings',
-  path: '/wp-admin/settings',
-  getParentRoute: () => WpadminRouteRoute,
+const WpAdminSplatRoute = WpAdminSplatRouteImport.update({
+  id: '/wp-admin/$',
+  path: '/wp-admin/$',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const WpadminWpAdminPostsRoute = WpadminWpAdminPostsRouteImport.update({
-  id: '/wp-admin/posts',
-  path: '/wp-admin/posts',
-  getParentRoute: () => WpadminRouteRoute,
+const AdminAdminIndexRoute = AdminAdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => AdminRouteRoute,
 } as any)
-const WpadminWpAdminPagesRoute = WpadminWpAdminPagesRouteImport.update({
-  id: '/wp-admin/pages',
-  path: '/wp-admin/pages',
-  getParentRoute: () => WpadminRouteRoute,
+const AdminAdminSettingsRoute = AdminAdminSettingsRouteImport.update({
+  id: '/admin/settings',
+  path: '/admin/settings',
+  getParentRoute: () => AdminRouteRoute,
 } as any)
-const WpadminWpAdminCommentsRoute = WpadminWpAdminCommentsRouteImport.update({
-  id: '/wp-admin/comments',
-  path: '/wp-admin/comments',
-  getParentRoute: () => WpadminRouteRoute,
+const AdminAdminPostsRoute = AdminAdminPostsRouteImport.update({
+  id: '/admin/posts',
+  path: '/admin/posts',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminAdminPagesRoute = AdminAdminPagesRouteImport.update({
+  id: '/admin/pages',
+  path: '/admin/pages',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminAdminCommentsRoute = AdminAdminCommentsRouteImport.update({
+  id: '/admin/comments',
+  path: '/admin/comments',
+  getParentRoute: () => AdminRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/wp-admin/comments': typeof WpadminWpAdminCommentsRoute
-  '/wp-admin/pages': typeof WpadminWpAdminPagesRoute
-  '/wp-admin/posts': typeof WpadminWpAdminPostsRoute
-  '/wp-admin/settings': typeof WpadminWpAdminSettingsRoute
-  '/wp-admin/': typeof WpadminWpAdminIndexRoute
+  '/wp-admin/$': typeof WpAdminSplatRoute
+  '/wp-admin/': typeof WpAdminIndexRoute
+  '/admin/comments': typeof AdminAdminCommentsRoute
+  '/admin/pages': typeof AdminAdminPagesRoute
+  '/admin/posts': typeof AdminAdminPostsRoute
+  '/admin/settings': typeof AdminAdminSettingsRoute
+  '/admin/': typeof AdminAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/wp-admin/comments': typeof WpadminWpAdminCommentsRoute
-  '/wp-admin/pages': typeof WpadminWpAdminPagesRoute
-  '/wp-admin/posts': typeof WpadminWpAdminPostsRoute
-  '/wp-admin/settings': typeof WpadminWpAdminSettingsRoute
-  '/wp-admin': typeof WpadminWpAdminIndexRoute
+  '/wp-admin/$': typeof WpAdminSplatRoute
+  '/wp-admin': typeof WpAdminIndexRoute
+  '/admin/comments': typeof AdminAdminCommentsRoute
+  '/admin/pages': typeof AdminAdminPagesRoute
+  '/admin/posts': typeof AdminAdminPostsRoute
+  '/admin/settings': typeof AdminAdminSettingsRoute
+  '/admin': typeof AdminAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_wpadmin': typeof WpadminRouteRouteWithChildren
-  '/_wpadmin/wp-admin/comments': typeof WpadminWpAdminCommentsRoute
-  '/_wpadmin/wp-admin/pages': typeof WpadminWpAdminPagesRoute
-  '/_wpadmin/wp-admin/posts': typeof WpadminWpAdminPostsRoute
-  '/_wpadmin/wp-admin/settings': typeof WpadminWpAdminSettingsRoute
-  '/_wpadmin/wp-admin/': typeof WpadminWpAdminIndexRoute
+  '/_admin': typeof AdminRouteRouteWithChildren
+  '/wp-admin/$': typeof WpAdminSplatRoute
+  '/wp-admin/': typeof WpAdminIndexRoute
+  '/_admin/admin/comments': typeof AdminAdminCommentsRoute
+  '/_admin/admin/pages': typeof AdminAdminPagesRoute
+  '/_admin/admin/posts': typeof AdminAdminPostsRoute
+  '/_admin/admin/settings': typeof AdminAdminSettingsRoute
+  '/_admin/admin/': typeof AdminAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/wp-admin/comments'
-    | '/wp-admin/pages'
-    | '/wp-admin/posts'
-    | '/wp-admin/settings'
+    | '/wp-admin/$'
     | '/wp-admin/'
+    | '/admin/comments'
+    | '/admin/pages'
+    | '/admin/posts'
+    | '/admin/settings'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/wp-admin/comments'
-    | '/wp-admin/pages'
-    | '/wp-admin/posts'
-    | '/wp-admin/settings'
+    | '/wp-admin/$'
     | '/wp-admin'
+    | '/admin/comments'
+    | '/admin/pages'
+    | '/admin/posts'
+    | '/admin/settings'
+    | '/admin'
   id:
     | '__root__'
     | '/'
-    | '/_wpadmin'
-    | '/_wpadmin/wp-admin/comments'
-    | '/_wpadmin/wp-admin/pages'
-    | '/_wpadmin/wp-admin/posts'
-    | '/_wpadmin/wp-admin/settings'
-    | '/_wpadmin/wp-admin/'
+    | '/_admin'
+    | '/wp-admin/$'
+    | '/wp-admin/'
+    | '/_admin/admin/comments'
+    | '/_admin/admin/pages'
+    | '/_admin/admin/posts'
+    | '/_admin/admin/settings'
+    | '/_admin/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  WpadminRouteRoute: typeof WpadminRouteRouteWithChildren
+  AdminRouteRoute: typeof AdminRouteRouteWithChildren
+  WpAdminSplatRoute: typeof WpAdminSplatRoute
+  WpAdminIndexRoute: typeof WpAdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/_wpadmin': {
-      id: '/_wpadmin'
+    '/_admin': {
+      id: '/_admin'
       path: ''
       fullPath: '/'
-      preLoaderRoute: typeof WpadminRouteRouteImport
+      preLoaderRoute: typeof AdminRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -127,67 +153,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_wpadmin/wp-admin/': {
-      id: '/_wpadmin/wp-admin/'
+    '/wp-admin/': {
+      id: '/wp-admin/'
       path: '/wp-admin'
       fullPath: '/wp-admin/'
-      preLoaderRoute: typeof WpadminWpAdminIndexRouteImport
-      parentRoute: typeof WpadminRouteRoute
+      preLoaderRoute: typeof WpAdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_wpadmin/wp-admin/settings': {
-      id: '/_wpadmin/wp-admin/settings'
-      path: '/wp-admin/settings'
-      fullPath: '/wp-admin/settings'
-      preLoaderRoute: typeof WpadminWpAdminSettingsRouteImport
-      parentRoute: typeof WpadminRouteRoute
+    '/wp-admin/$': {
+      id: '/wp-admin/$'
+      path: '/wp-admin/$'
+      fullPath: '/wp-admin/$'
+      preLoaderRoute: typeof WpAdminSplatRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/_wpadmin/wp-admin/posts': {
-      id: '/_wpadmin/wp-admin/posts'
-      path: '/wp-admin/posts'
-      fullPath: '/wp-admin/posts'
-      preLoaderRoute: typeof WpadminWpAdminPostsRouteImport
-      parentRoute: typeof WpadminRouteRoute
+    '/_admin/admin/': {
+      id: '/_admin/admin/'
+      path: '/admin'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminAdminIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
     }
-    '/_wpadmin/wp-admin/pages': {
-      id: '/_wpadmin/wp-admin/pages'
-      path: '/wp-admin/pages'
-      fullPath: '/wp-admin/pages'
-      preLoaderRoute: typeof WpadminWpAdminPagesRouteImport
-      parentRoute: typeof WpadminRouteRoute
+    '/_admin/admin/settings': {
+      id: '/_admin/admin/settings'
+      path: '/admin/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminAdminSettingsRouteImport
+      parentRoute: typeof AdminRouteRoute
     }
-    '/_wpadmin/wp-admin/comments': {
-      id: '/_wpadmin/wp-admin/comments'
-      path: '/wp-admin/comments'
-      fullPath: '/wp-admin/comments'
-      preLoaderRoute: typeof WpadminWpAdminCommentsRouteImport
-      parentRoute: typeof WpadminRouteRoute
+    '/_admin/admin/posts': {
+      id: '/_admin/admin/posts'
+      path: '/admin/posts'
+      fullPath: '/admin/posts'
+      preLoaderRoute: typeof AdminAdminPostsRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/_admin/admin/pages': {
+      id: '/_admin/admin/pages'
+      path: '/admin/pages'
+      fullPath: '/admin/pages'
+      preLoaderRoute: typeof AdminAdminPagesRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/_admin/admin/comments': {
+      id: '/_admin/admin/comments'
+      path: '/admin/comments'
+      fullPath: '/admin/comments'
+      preLoaderRoute: typeof AdminAdminCommentsRouteImport
+      parentRoute: typeof AdminRouteRoute
     }
   }
 }
 
-interface WpadminRouteRouteChildren {
-  WpadminWpAdminCommentsRoute: typeof WpadminWpAdminCommentsRoute
-  WpadminWpAdminPagesRoute: typeof WpadminWpAdminPagesRoute
-  WpadminWpAdminPostsRoute: typeof WpadminWpAdminPostsRoute
-  WpadminWpAdminSettingsRoute: typeof WpadminWpAdminSettingsRoute
-  WpadminWpAdminIndexRoute: typeof WpadminWpAdminIndexRoute
+interface AdminRouteRouteChildren {
+  AdminAdminCommentsRoute: typeof AdminAdminCommentsRoute
+  AdminAdminPagesRoute: typeof AdminAdminPagesRoute
+  AdminAdminPostsRoute: typeof AdminAdminPostsRoute
+  AdminAdminSettingsRoute: typeof AdminAdminSettingsRoute
+  AdminAdminIndexRoute: typeof AdminAdminIndexRoute
 }
 
-const WpadminRouteRouteChildren: WpadminRouteRouteChildren = {
-  WpadminWpAdminCommentsRoute: WpadminWpAdminCommentsRoute,
-  WpadminWpAdminPagesRoute: WpadminWpAdminPagesRoute,
-  WpadminWpAdminPostsRoute: WpadminWpAdminPostsRoute,
-  WpadminWpAdminSettingsRoute: WpadminWpAdminSettingsRoute,
-  WpadminWpAdminIndexRoute: WpadminWpAdminIndexRoute,
+const AdminRouteRouteChildren: AdminRouteRouteChildren = {
+  AdminAdminCommentsRoute: AdminAdminCommentsRoute,
+  AdminAdminPagesRoute: AdminAdminPagesRoute,
+  AdminAdminPostsRoute: AdminAdminPostsRoute,
+  AdminAdminSettingsRoute: AdminAdminSettingsRoute,
+  AdminAdminIndexRoute: AdminAdminIndexRoute,
 }
 
-const WpadminRouteRouteWithChildren = WpadminRouteRoute._addFileChildren(
-  WpadminRouteRouteChildren,
+const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
+  AdminRouteRouteChildren,
 )
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  WpadminRouteRoute: WpadminRouteRouteWithChildren,
+  AdminRouteRoute: AdminRouteRouteWithChildren,
+  WpAdminSplatRoute: WpAdminSplatRoute,
+  WpAdminIndexRoute: WpAdminIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

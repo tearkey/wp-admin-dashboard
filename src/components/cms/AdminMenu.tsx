@@ -19,11 +19,11 @@ import { useFocusTrap } from "@/hooks/use-focus-trap";
 import { cn } from "@/lib/utils";
 
 type AdminPath =
-  | "/wp-admin"
-  | "/wp-admin/posts"
-  | "/wp-admin/pages"
-  | "/wp-admin/comments"
-  | "/wp-admin/settings";
+  | "/admin"
+  | "/admin/posts"
+  | "/admin/pages"
+  | "/admin/comments"
+  | "/admin/settings";
 
 interface MenuItem {
   label: string;
@@ -34,16 +34,16 @@ interface MenuItem {
 }
 
 const MENU: MenuItem[] = [
-  { label: "Dashboard", icon: Gauge, to: "/wp-admin", submenu: ["Home", "Updates"] },
+  { label: "Dashboard", icon: Gauge, to: "/admin", submenu: ["Home", "Updates"] },
   {
     label: "Posts",
     icon: Pin,
-    to: "/wp-admin/posts",
+    to: "/admin/posts",
     submenu: ["All Posts", "Add New Post", "Categories", "Tags"],
   },
   { label: "Media", icon: ImageIcon, submenu: ["Library", "Add New Media File"] },
-  { label: "Pages", icon: FileText, to: "/wp-admin/pages", submenu: ["All Pages", "Add New Page"] },
-  { label: "Comments", icon: MessageSquare, to: "/wp-admin/comments", submenu: [] },
+  { label: "Pages", icon: FileText, to: "/admin/pages", submenu: ["All Pages", "Add New Page"] },
+  { label: "Comments", icon: MessageSquare, to: "/admin/comments", submenu: [] },
   {
     label: "Appearance",
     icon: Paintbrush,
@@ -55,7 +55,7 @@ const MENU: MenuItem[] = [
   {
     label: "Settings",
     icon: Settings,
-    to: "/wp-admin/settings",
+    to: "/admin/settings",
     submenu: ["General", "Writing", "Reading", "Discussion", "Permalinks"],
   },
 ];
@@ -95,7 +95,7 @@ export function AdminMenu({
         aria-label="Main menu"
         {...(mobileOpen ? { role: "dialog", "aria-modal": true } : {})}
         className={cn(
-          "fixed top-8 bottom-0 left-0 z-40 flex w-[190px] flex-col bg-wp-menu font-wp text-[13px] text-wp-menu-text transition-transform duration-150 md:transition-[width]",
+          "fixed top-8 bottom-0 left-0 z-40 flex w-[190px] flex-col bg-tt-menu font-tt text-[13px] text-tt-menu-text transition-transform duration-150 md:transition-[width]",
           mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0",
           collapsed ? "md:w-[36px]" : "md:w-[160px]",
         )}
@@ -106,7 +106,7 @@ export function AdminMenu({
             type="button"
             onClick={onCloseMobile}
             aria-label="Close menu"
-            className="flex size-11 items-center justify-center text-wp-menu-icon hover:text-wp-blue-hover"
+            className="flex size-11 items-center justify-center text-tt-menu-icon hover:text-tt-blue-hover"
           >
             <X size={18} />
           </button>
@@ -115,12 +115,12 @@ export function AdminMenu({
         <ul className="flex-1 overflow-x-visible overflow-y-auto py-1">
           {MENU.map((item) => {
             const active = item.to
-              ? item.to === "/wp-admin"
-                ? pathname === "/wp-admin"
+              ? item.to === "/admin"
+                ? pathname === "/admin"
                 : pathname.startsWith(item.to)
               : false;
             const submenuOpen = openSubmenu === item.label;
-            const submenuId = `wp-submenu-${item.label.toLowerCase()}`;
+            const submenuId = `tt-submenu-${item.label.toLowerCase()}`;
 
             return (
               <li
@@ -150,18 +150,18 @@ export function AdminMenu({
                   <ul
                     id={submenuId}
                     className={cn(
-                      "z-50 min-w-[160px] bg-wp-menu-hover py-1 shadow-lg md:absolute md:top-0 md:left-full",
+                      "z-50 min-w-[160px] bg-tt-menu-hover py-1 shadow-lg md:absolute md:top-0 md:left-full",
                       submenuOpen ? "block" : "hidden md:group-hover:block md:group-focus-within:block",
                     )}
                   >
-                    <li className="px-3 py-1.5 text-[13px] font-semibold text-wp-menu-text">
+                    <li className="px-3 py-1.5 text-[13px] font-semibold text-tt-menu-text">
                       {item.label}
                     </li>
                     {item.submenu.map((sub) => (
                       <li key={sub}>
                         <button
                           type="button"
-                          className="flex min-h-11 w-full items-center px-3 text-left text-wp-menu-icon hover:text-wp-blue-hover md:min-h-0 md:py-1.5"
+                          className="flex min-h-11 w-full items-center px-3 text-left text-tt-menu-icon hover:text-tt-blue-hover md:min-h-0 md:py-1.5"
                         >
                           {sub}
                         </button>
@@ -177,7 +177,7 @@ export function AdminMenu({
         <button
           type="button"
           onClick={onToggleCollapsed}
-          className="hidden h-[34px] shrink-0 items-center gap-2 px-2 text-wp-menu-icon hover:text-wp-blue-hover md:flex"
+          className="hidden h-[34px] shrink-0 items-center gap-2 px-2 text-tt-menu-icon hover:text-tt-blue-hover md:flex"
           aria-label={collapsed ? "Expand menu" : "Collapse menu"}
           aria-pressed={collapsed}
         >
@@ -216,7 +216,7 @@ function MenuRow({
       {badge !== undefined && badge > 0 && (
         <span
           className={cn(
-            "ml-auto rounded-[10px] bg-wp-red px-1.5 text-[11px] leading-[17px] font-semibold text-wp-menu-text",
+            "ml-auto rounded-[10px] bg-tt-red px-1.5 text-[11px] leading-[17px] font-semibold text-tt-menu-text",
             collapsed && "md:hidden",
           )}
         >
@@ -230,8 +230,8 @@ function MenuRow({
   const className = cn(
     "flex min-h-11 w-full items-center gap-2 border-l-4 px-2 text-left transition-colors md:h-[34px] md:min-h-0",
     active
-      ? "border-l-wp-blue bg-wp-menu-hover font-semibold text-wp-menu-text"
-      : "border-l-transparent text-wp-menu-icon hover:bg-wp-menu-hover hover:text-wp-blue-hover",
+      ? "border-l-tt-blue bg-tt-menu-hover font-semibold text-tt-menu-text"
+      : "border-l-transparent text-tt-menu-icon hover:bg-tt-menu-hover hover:text-tt-blue-hover",
   );
 
   if (item.to) {

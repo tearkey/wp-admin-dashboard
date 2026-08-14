@@ -60,23 +60,23 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* WordPress admin palette */
-  --color-wp-bar: var(--wp-bar);
-  --color-wp-menu: var(--wp-menu);
-  --color-wp-menu-hover: var(--wp-menu-hover);
-  --color-wp-menu-text: var(--wp-menu-text);
-  --color-wp-menu-icon: var(--wp-menu-icon);
-  --color-wp-blue: var(--wp-blue);
-  --color-wp-blue-hover: var(--wp-blue-hover);
-  --color-wp-body: var(--wp-body);
-  --color-wp-surface: var(--wp-surface);
-  --color-wp-border: var(--wp-border);
-  --color-wp-text: var(--wp-text);
-  --color-wp-muted: var(--wp-muted);
-  --color-wp-green: var(--wp-green);
-  --color-wp-orange: var(--wp-orange);
-  --color-wp-red: var(--wp-red);
-  --font-wp: var(--wp-font);
+  /* Techtrick CMS admin palette */
+  --color-tt-bar: var(--tt-bar);
+  --color-tt-menu: var(--tt-menu);
+  --color-tt-menu-hover: var(--tt-menu-hover);
+  --color-tt-menu-text: var(--tt-menu-text);
+  --color-tt-menu-icon: var(--tt-menu-icon);
+  --color-tt-blue: var(--tt-blue);
+  --color-tt-blue-hover: var(--tt-blue-hover);
+  --color-tt-body: var(--tt-body);
+  --color-tt-surface: var(--tt-surface);
+  --color-tt-border: var(--tt-border);
+  --color-tt-text: var(--tt-text);
+  --color-tt-muted: var(--tt-muted);
+  --color-tt-green: var(--tt-green);
+  --color-tt-orange: var(--tt-orange);
+  --color-tt-red: var(--tt-red);
+  --font-tt: var(--tt-font);
 }
 
 
@@ -115,23 +115,23 @@
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
 
-  /* WordPress admin palette (oklch equivalents of the wp-admin defaults) */
-  --wp-bar: oklch(0.256 0.011 253.5); /* #1d2327 */
-  --wp-menu: oklch(0.256 0.011 253.5); /* #1d2327 */
-  --wp-menu-hover: oklch(0.315 0.011 253.5); /* #2c3338 */
-  --wp-menu-text: oklch(0.925 0.005 247.9); /* #f0f0f1 */
-  --wp-menu-icon: oklch(0.735 0.013 253.5); /* #a7aaad */
-  --wp-blue: oklch(0.53 0.121 250.5); /* #2271b1 */
-  --wp-blue-hover: oklch(0.6 0.13 250.5); /* #135e96 lighten */
-  --wp-body: oklch(0.965 0 0); /* #f0f0f1 */
-  --wp-surface: oklch(1 0 0); /* #fff */
-  --wp-border: oklch(0.83 0.003 247.9); /* #c3c4c7 */
-  --wp-text: oklch(0.29 0.008 253.5); /* #1d2327 */
-  --wp-muted: oklch(0.53 0.008 253.5); /* #646970 */
-  --wp-green: oklch(0.62 0.13 155); /* #00a32a */
-  --wp-orange: oklch(0.72 0.15 62); /* #dba617 */
-  --wp-red: oklch(0.55 0.19 25); /* #d63638 */
-  --wp-font:
+  /* Techtrick CMS admin palette (oklch equivalents of the Techtrick CMS defaults) */
+  --tt-bar: oklch(0.256 0.011 253.5); /* #1d2327 */
+  --tt-menu: oklch(0.256 0.011 253.5); /* #1d2327 */
+  --tt-menu-hover: oklch(0.315 0.011 253.5); /* #2c3338 */
+  --tt-menu-text: oklch(0.925 0.005 247.9); /* #f0f0f1 */
+  --tt-menu-icon: oklch(0.735 0.013 253.5); /* #a7aaad */
+  --tt-blue: oklch(0.53 0.121 250.5); /* #2271b1 */
+  --tt-blue-hover: oklch(0.6 0.13 250.5); /* #135e96 lighten */
+  --tt-body: oklch(0.965 0 0); /* #f0f0f1 */
+  --tt-surface: oklch(1 0 0); /* #fff */
+  --tt-border: oklch(0.83 0.003 247.9); /* #c3c4c7 */
+  --tt-text: oklch(0.29 0.008 253.5); /* #1d2327 */
+  --tt-muted: oklch(0.53 0.008 253.5); /* #646970 */
+  --tt-green: oklch(0.62 0.13 155); /* #00a32a */
+  --tt-orange: oklch(0.72 0.15 62); /* #dba617 */
+  --tt-red: oklch(0.55 0.19 25); /* #d63638 */
+  --tt-font:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
     "Helvetica Neue", sans-serif;
 }

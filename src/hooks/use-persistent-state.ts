@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-export const PREFIX = "wp-admin:";
+export const PREFIX = "techtrick:";
 
 type Listener = (raw: string | null) => void;
 const listeners = new Map<string, Set<Listener>>();
@@ -20,7 +20,7 @@ export function broadcast(key: string, raw: string | null) {
   listeners.get(key)?.forEach((fn) => fn(raw));
 }
 
-/** Remove every stored key starting with `wp-admin:{prefix}` and sync listeners. */
+/** Remove every stored key starting with `techtrick:{prefix}` and sync listeners. */
 export function clearPersisted(prefix: string) {
   try {
     const full = PREFIX + prefix;
@@ -38,11 +38,34 @@ export function clearPersisted(prefix: string) {
   }
 }
 
+const LEGACY_PREFIX = "wp-admin:";
+
+/** One-time copy of pre-rename keys so saved preferences survive the upgrade. */
+function migrateLegacyKeys() {
+  try {
+    const legacy: string[] = [];
+    for (let i = 0; i < window.localStorage.length; i++) {
+      const k = window.localStorage.key(i);
+      if (k && k.startsWith(LEGACY_PREFIX)) legacy.push(k);
+    }
+    legacy.forEach((k) => {
+      const next = PREFIX + k.slice(LEGACY_PREFIX.length);
+      if (window.localStorage.getItem(next) === null) {
+        window.localStorage.setItem(next, window.localStorage.getItem(k) ?? "");
+      }
+      window.localStorage.removeItem(k);
+    });
+  } catch {
+    /* storage unavailable */
+  }
+}
+
 // One window-level listener translates cross-tab writes into local broadcasts.
 let wired = false;
 function ensureStorageListener() {
   if (wired || typeof window === "undefined") return;
   wired = true;
+  migrateLegacyKeys();
   window.addEventListener("storage", (e) => {
     if (!e.key || !e.key.startsWith(PREFIX)) return;
     broadcast(e.key.slice(PREFIX.length), e.newValue);

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const PREFIX = "wp-admin:scroll:";
+const PREFIX = "techtrick:scroll:";
 
 /**
  * Remembers the window scroll position for a screen and restores it on reload.

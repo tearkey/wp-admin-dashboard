@@ -10,7 +10,7 @@ import { usePersistentState } from "@/hooks/use-persistent-state";
 import { useScrollRestore } from "@/hooks/use-scroll-restore";
 import { useTablePrefs } from "@/hooks/use-table-prefs";
 import type { PostStatus, WpPost } from "@/data/wp-mock";
-import { cn } from "@/lib/utils";
+
 
 
 export const Route = createFileRoute("/_wpadmin/wp-admin/posts")({
@@ -42,6 +42,9 @@ function PostsScreen() {
   const { posts } = useDashboardData();
   const [filter, setFilter] = usePersistentState<Filter>("posts:filter", "all");
   const [search, setSearch] = usePersistentState("posts:search", "");
+  const prefs = useTablePrefs("posts");
+  useScrollRestore("posts");
+
 
   const statusCounts = useMemo(() => {
     const by = (s: PostStatus) => posts.filter((p) => p.status === s).length;

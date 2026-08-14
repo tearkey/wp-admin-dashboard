@@ -96,7 +96,28 @@ function PagesScreen() {
           Add New Page
         </button>
       </div>
-      <ListTable rows={pages} columns={columns} rowKey={(p) => p.id} emptyLabel="No pages found." />
+      <ListTable
+        rows={pages}
+        columns={columns}
+        rowKey={(p) => p.id}
+        emptyLabel="No pages found."
+        hiddenColumnIds={prefs.hidden}
+        density={prefs.density}
+        toolbar={
+          <div className="mb-2">
+            <TableControls
+              columns={columns
+                .filter((c) => c.id !== "title")
+                .map((c) => ({ id: c.id, label: c.label }))}
+              hidden={prefs.hidden}
+              onToggleColumn={prefs.toggleColumn}
+              density={prefs.density}
+              onDensityChange={prefs.setDensity}
+              onReset={prefs.reset}
+            />
+          </div>
+        }
+      />
     </div>
   );
 }

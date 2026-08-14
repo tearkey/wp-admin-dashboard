@@ -140,9 +140,21 @@ function CommentsScreen() {
         rowKey={(c) => c.id}
         bulkActions={["Bulk actions", "Approve", "Mark as spam", "Move to Trash"]}
         emptyLabel="No comments found."
+        hiddenColumnIds={prefs.hidden}
+        density={prefs.density}
         toolbar={
-          <div className="mb-2">
+          <div className="mb-2 space-y-2">
             <FilterTabs tabs={tabs} value={filter} onChange={setFilter} />
+            <TableControls
+              columns={columns
+                .filter((c) => c.id !== "comment")
+                .map((c) => ({ id: c.id, label: c.label }))}
+              hidden={prefs.hidden}
+              onToggleColumn={prefs.toggleColumn}
+              density={prefs.density}
+              onDensityChange={prefs.setDensity}
+              onReset={prefs.reset}
+            />
           </div>
         }
       />

@@ -71,7 +71,11 @@ function SettingsScreen() {
             <Row id="s-name" label="Site Title">
               <Text id="s-name" value={form.name} onChange={(v) => set("name", v)} />
             </Row>
-            <Row id="s-tagline" label="Tagline" hint="In a few words, explain what this site is about.">
+            <Row
+              id="s-tagline"
+              label="Tagline"
+              hint="In a few words, explain what this site is about."
+            >
               <Text id="s-tagline" value={form.tagline} onChange={(v) => set("tagline", v)} />
             </Row>
             <Row id="s-url" label="Techtrick CMS Address (URL)">

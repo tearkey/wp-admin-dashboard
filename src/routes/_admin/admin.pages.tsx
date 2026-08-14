@@ -7,7 +7,6 @@ import { useScrollRestore } from "@/hooks/use-scroll-restore";
 import { useTablePrefs } from "@/hooks/use-table-prefs";
 import type { WpPage } from "@/data/cms-mock";
 
-
 export const Route = createFileRoute("/_admin/admin/pages")({
   head: () => ({
     meta: [
@@ -22,7 +21,8 @@ export const Route = createFileRoute("/_admin/admin/pages")({
   component: PagesScreen,
 });
 
-const dateFmt = new Intl.DateTimeFormat("en-US", { timeZone: "UTC",
+const dateFmt = new Intl.DateTimeFormat("en-US", {
+  timeZone: "UTC",
   year: "numeric",
   month: "long",
   day: "numeric",
@@ -32,7 +32,6 @@ function PagesScreen() {
   const { pages } = useDashboardData();
   const prefs = useTablePrefs("pages");
   useScrollRestore("pages");
-
 
   const columns: Column<WpPage>[] = [
     {
@@ -56,7 +55,12 @@ function PagesScreen() {
         </>
       ),
     },
-    { id: "author", label: "Author", className: "hidden md:table-cell", render: (p) => <span className="text-tt-blue">{p.author}</span> },
+    {
+      id: "author",
+      label: "Author",
+      className: "hidden md:table-cell",
+      render: (p) => <span className="text-tt-blue">{p.author}</span>,
+    },
     {
       id: "comments",
       label: "Comments",

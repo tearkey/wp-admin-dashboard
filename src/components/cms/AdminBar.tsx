@@ -2,7 +2,6 @@ import { Menu, MessageSquare, Plus, RefreshCw, Search, User } from "lucide-react
 import { site } from "@/data/cms-mock";
 import { cn } from "@/lib/utils";
 
-
 interface AdminBarProps {
   pendingComments: number;
   onToggleMenu?: () => void;
@@ -121,4 +120,3 @@ function HouseGlyph() {
     </svg>
   );
 }
-

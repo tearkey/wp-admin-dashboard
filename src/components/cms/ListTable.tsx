@@ -1,7 +1,6 @@
 import { ListToolbar } from "@/components/cms/ListToolbar";
 import { cn } from "@/lib/utils";
 
-
 export interface Column<T> {
   id: string;
   label: string;
@@ -37,7 +36,6 @@ export function ListTable<T>({
   const visibleColumns = columns.filter((c) => !hiddenColumnIds.includes(c.id));
   const cell = density === "compact" ? "px-2 py-1 text-[12px]" : "px-2 py-2";
   return (
-
     <>
       <ListToolbar>
         {toolbar}
@@ -61,54 +59,52 @@ export function ListTable<T>({
         </div>
       </ListToolbar>
 
-
       <div className="-mx-3 overflow-x-auto sm:mx-0">
-      <table className="w-full min-w-[320px] border-collapse border border-tt-border bg-tt-surface text-[13px]">
-        <thead>
-          <tr className="border-b border-tt-border text-left">
-            <th scope="col" className={cn("w-[2.2em] align-top", cell)}>
-              <input type="checkbox" aria-label="Select all" className="align-middle" />
-            </th>
-            {visibleColumns.map((col) => (
-              <th
-                key={col.id}
-                scope="col"
-                className={cn("font-semibold text-tt-text", cell, col.className)}
-              >
-                {col.label}
+        <table className="w-full min-w-[320px] border-collapse border border-tt-border bg-tt-surface text-[13px]">
+          <thead>
+            <tr className="border-b border-tt-border text-left">
+              <th scope="col" className={cn("w-[2.2em] align-top", cell)}>
+                <input type="checkbox" aria-label="Select all" className="align-middle" />
               </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.length === 0 && (
-            <tr>
-              <td
-                colSpan={visibleColumns.length + 1}
-                className="px-2 py-6 text-center text-tt-muted"
-              >
-                {emptyLabel}
-              </td>
-            </tr>
-          )}
-          {rows.map((row, i) => (
-            <tr
-              key={rowKey(row)}
-              className={cn("group border-b border-tt-border", i % 2 === 1 && "bg-tt-body/60")}
-            >
-              <td className={cn("align-top", cell)}>
-                <input type="checkbox" aria-label="Select row" className="align-middle" />
-              </td>
               {visibleColumns.map((col) => (
-                <td key={col.id} className={cn("align-top", cell, col.className)}>
-                  {col.render(row)}
-                </td>
+                <th
+                  key={col.id}
+                  scope="col"
+                  className={cn("font-semibold text-tt-text", cell, col.className)}
+                >
+                  {col.label}
+                </th>
               ))}
             </tr>
-          ))}
-
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {rows.length === 0 && (
+              <tr>
+                <td
+                  colSpan={visibleColumns.length + 1}
+                  className="px-2 py-6 text-center text-tt-muted"
+                >
+                  {emptyLabel}
+                </td>
+              </tr>
+            )}
+            {rows.map((row, i) => (
+              <tr
+                key={rowKey(row)}
+                className={cn("group border-b border-tt-border", i % 2 === 1 && "bg-tt-body/60")}
+              >
+                <td className={cn("align-top", cell)}>
+                  <input type="checkbox" aria-label="Select row" className="align-middle" />
+                </td>
+                {visibleColumns.map((col) => (
+                  <td key={col.id} className={cn("align-top", cell, col.className)}>
+                    {col.render(row)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </>
   );

@@ -22,3 +22,7 @@ labels: bug
 - Techtrick CMS version or commit:
 
 **Screenshots or console output**
+
+---
+
+Found a security vulnerability? Do not file it here — follow [SECURITY.md](../../SECURITY.md).

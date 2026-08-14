@@ -95,8 +95,9 @@ function DashboardScreen() {
             label: "Overview",
             content: (
               <p>
-                Welcome to your Techtrick CMS Dashboard. Use Screen Options to show or hide boxes and
-                choose a one- or two-column layout. Drag-free widgets keep their state per browser.
+                Welcome to your Techtrick CMS Dashboard. Use Screen Options to show or hide boxes
+                and choose a one- or two-column layout. Drag-free widgets keep their state per
+                browser.
               </p>
             ),
           },
@@ -116,8 +117,18 @@ function DashboardScreen() {
       <h1 className="mt-1 mb-4 text-[23px] leading-[1.3] font-normal text-tt-text">Dashboard</h1>
 
       <div className={cn("grid gap-4", columns === 2 ? "md:grid-cols-2" : "grid-cols-1")}>
-        <div>{left.map((w) => <div key={w.id}>{w.node}</div>)}</div>
-        {columns === 2 && <div>{right.map((w) => <div key={w.id}>{w.node}</div>)}</div>}
+        <div>
+          {left.map((w) => (
+            <div key={w.id}>{w.node}</div>
+          ))}
+        </div>
+        {columns === 2 && (
+          <div>
+            {right.map((w) => (
+              <div key={w.id}>{w.node}</div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

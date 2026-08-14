@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ScreenMeta } from "@/components/wp/ScreenMeta";
+import { ScreenMeta } from "@/components/cms/ScreenMeta";
 import { useDashboardData } from "@/hooks/use-dashboard-data";
 
-export const Route = createFileRoute("/_wpadmin/wp-admin/settings")({
+export const Route = createFileRoute("/_admin/admin/settings")({
   head: () => ({
     meta: [
       { title: "General Settings — WP Admin" },
@@ -49,12 +49,12 @@ function SettingsScreen() {
           },
         ]}
       />
-      <h1 className="mt-1 mb-3 text-[23px] leading-[1.3] font-normal text-wp-text">
+      <h1 className="mt-1 mb-3 text-[23px] leading-[1.3] font-normal text-tt-text">
         General Settings
       </h1>
 
       {saved && (
-        <div className="mb-4 border-l-4 border-l-wp-green bg-wp-surface px-3 py-2 shadow-[0_1px_1px_rgba(0,0,0,0.04)]">
+        <div className="mb-4 border-l-4 border-l-tt-green bg-tt-surface px-3 py-2 shadow-[0_1px_1px_rgba(0,0,0,0.04)]">
           Settings saved.
         </div>
       )}
@@ -96,7 +96,7 @@ function SettingsScreen() {
                 id="s-tz"
                 value={form.timezone}
                 onChange={(e) => set("timezone", e.target.value)}
-                className="h-[30px] rounded border border-wp-border bg-wp-surface px-2 text-[13px]"
+                className="h-[30px] rounded border border-tt-border bg-tt-surface px-2 text-[13px]"
               >
                 {["UTC+0", "UTC+1", "UTC+5:30", "UTC-5", "UTC-8"].map((tz) => (
                   <option key={tz}>{tz}</option>
@@ -127,7 +127,7 @@ function SettingsScreen() {
 
         <button
           type="submit"
-          className="mt-4 h-[32px] rounded border border-wp-blue bg-wp-blue px-3 text-[13px] font-medium text-wp-menu-text hover:bg-wp-blue-hover"
+          className="mt-4 h-[32px] rounded border border-tt-blue bg-tt-blue px-3 text-[13px] font-medium text-tt-menu-text hover:bg-tt-blue-hover"
         >
           Save Changes
         </button>
@@ -149,12 +149,12 @@ function Row({
 }) {
   return (
     <tr className="align-top">
-      <th scope="row" className="w-[200px] py-4 pr-4 text-left font-semibold text-wp-text">
+      <th scope="row" className="w-[200px] py-4 pr-4 text-left font-semibold text-tt-text">
         <label htmlFor={id}>{label}</label>
       </th>
       <td className="py-4">
         {children}
-        {hint && <p className="mt-1 text-wp-muted">{hint}</p>}
+        {hint && <p className="mt-1 text-tt-muted">{hint}</p>}
       </td>
     </tr>
   );
@@ -174,7 +174,7 @@ function Text({
       id={id}
       value={value}
       onChange={(e) => onChange(e.target.value)}
-      className="h-[30px] w-full max-w-[400px] rounded border border-wp-border px-2 text-[13px] outline-none focus:border-wp-blue"
+      className="h-[30px] w-full max-w-[400px] rounded border border-tt-border px-2 text-[13px] outline-none focus:border-tt-blue"
     />
   );
 }

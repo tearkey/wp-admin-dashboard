@@ -1,4 +1,4 @@
-import { ListToolbar } from "@/components/wp/ListToolbar";
+import { ListToolbar } from "@/components/cms/ListToolbar";
 import { cn } from "@/lib/utils";
 
 
@@ -43,7 +43,7 @@ export function ListTable<T>({
         {toolbar}
         <div className="flex flex-wrap items-center gap-2">
           <select
-            className="h-11 rounded border border-wp-border bg-wp-surface px-2 text-[13px] text-wp-text md:h-[30px]"
+            className="h-11 rounded border border-tt-border bg-tt-surface px-2 text-[13px] text-tt-text md:h-[30px]"
             aria-label="Bulk actions"
             defaultValue={bulkActions[0]}
           >
@@ -53,19 +53,19 @@ export function ListTable<T>({
           </select>
           <button
             type="button"
-            className="h-11 rounded border border-wp-border bg-wp-surface px-3 text-[13px] text-wp-text hover:border-wp-blue hover:text-wp-blue md:h-[30px]"
+            className="h-11 rounded border border-tt-border bg-tt-surface px-3 text-[13px] text-tt-text hover:border-tt-blue hover:text-tt-blue md:h-[30px]"
           >
             Apply
           </button>
-          <span className="ml-auto shrink-0 text-[13px] text-wp-muted">{rows.length} items</span>
+          <span className="ml-auto shrink-0 text-[13px] text-tt-muted">{rows.length} items</span>
         </div>
       </ListToolbar>
 
 
       <div className="-mx-3 overflow-x-auto sm:mx-0">
-      <table className="w-full min-w-[320px] border-collapse border border-wp-border bg-wp-surface text-[13px]">
+      <table className="w-full min-w-[320px] border-collapse border border-tt-border bg-tt-surface text-[13px]">
         <thead>
-          <tr className="border-b border-wp-border text-left">
+          <tr className="border-b border-tt-border text-left">
             <th scope="col" className={cn("w-[2.2em] align-top", cell)}>
               <input type="checkbox" aria-label="Select all" className="align-middle" />
             </th>
@@ -73,7 +73,7 @@ export function ListTable<T>({
               <th
                 key={col.id}
                 scope="col"
-                className={cn("font-semibold text-wp-text", cell, col.className)}
+                className={cn("font-semibold text-tt-text", cell, col.className)}
               >
                 {col.label}
               </th>
@@ -85,7 +85,7 @@ export function ListTable<T>({
             <tr>
               <td
                 colSpan={visibleColumns.length + 1}
-                className="px-2 py-6 text-center text-wp-muted"
+                className="px-2 py-6 text-center text-tt-muted"
               >
                 {emptyLabel}
               </td>
@@ -94,7 +94,7 @@ export function ListTable<T>({
           {rows.map((row, i) => (
             <tr
               key={rowKey(row)}
-              className={cn("group border-b border-wp-border", i % 2 === 1 && "bg-wp-body/60")}
+              className={cn("group border-b border-tt-border", i % 2 === 1 && "bg-tt-body/60")}
             >
               <td className={cn("align-top", cell)}>
                 <input type="checkbox" aria-label="Select row" className="align-middle" />
@@ -120,10 +120,10 @@ export function RowActions({ actions }: { actions: { label: string; danger?: boo
     <div className="mt-0.5 text-[13px] opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100 md:focus-within:opacity-100">
       {actions.map((a, i) => (
         <span key={a.label}>
-          {i > 0 && <span className="text-wp-muted"> | </span>}
+          {i > 0 && <span className="text-tt-muted"> | </span>}
           <button
             type="button"
-            className={cn("hover:underline", a.danger ? "text-wp-red" : "text-wp-blue")}
+            className={cn("hover:underline", a.danger ? "text-tt-red" : "text-tt-blue")}
           >
             {a.label}
           </button>

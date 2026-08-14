@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 
 /**
- * Keeps the CSS variable `--wp-bar-h` in sync with the real rendered height of
+ * Keeps the CSS variable `--tt-bar-h` in sync with the real rendered height of
  * the fixed admin bar, so sticky toolbars never overlap it. Recalculates on
  * resize, orientation change and any size change of the bar itself.
  */
 export function useAdminBarOffset() {
   useEffect(() => {
     const root = document.documentElement;
-    const bar = document.querySelector<HTMLElement>("[data-wp-adminbar]");
+    const bar = document.querySelector<HTMLElement>("[data-tt-adminbar]");
     if (!bar) return;
 
     let frame = 0;
@@ -16,7 +16,7 @@ export function useAdminBarOffset() {
       cancelAnimationFrame(frame);
       // Batch into a frame so scroll/resize stay smooth.
       frame = requestAnimationFrame(() => {
-        root.style.setProperty("--wp-bar-h", `${Math.round(bar.getBoundingClientRect().height)}px`);
+        root.style.setProperty("--tt-bar-h", `${Math.round(bar.getBoundingClientRect().height)}px`);
       });
     };
 

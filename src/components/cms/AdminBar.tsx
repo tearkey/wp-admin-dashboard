@@ -1,5 +1,5 @@
 import { Menu, MessageSquare, Plus, RefreshCw, Search, User } from "lucide-react";
-import { site } from "@/data/wp-mock";
+import { site } from "@/data/cms-mock";
 import { cn } from "@/lib/utils";
 
 
@@ -13,8 +13,8 @@ interface AdminBarProps {
 export function AdminBar({ pendingComments, onToggleMenu, menuOpen }: AdminBarProps) {
   return (
     <header
-      data-wp-adminbar
-      className="fixed inset-x-0 top-0 z-50 flex h-8 items-stretch bg-wp-bar font-wp text-[13px] text-wp-menu-text"
+      data-tt-adminbar
+      className="fixed inset-x-0 top-0 z-50 flex h-8 items-stretch bg-tt-bar font-tt text-[13px] text-tt-menu-text"
     >
       <div className="flex items-stretch">
         <button
@@ -22,7 +22,7 @@ export function AdminBar({ pendingComments, onToggleMenu, menuOpen }: AdminBarPr
           onClick={onToggleMenu}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={!!menuOpen}
-          className="flex items-center px-2 text-wp-menu-icon hover:bg-wp-menu-hover hover:text-wp-blue-hover md:hidden"
+          className="flex items-center px-2 text-tt-menu-icon hover:bg-tt-menu-hover hover:text-tt-blue-hover md:hidden"
         >
           <Menu size={18} />
         </button>
@@ -47,8 +47,8 @@ export function AdminBar({ pendingComments, onToggleMenu, menuOpen }: AdminBarPr
             <span
               className={
                 pendingComments > 0
-                  ? "rounded-[10px] bg-wp-red px-1.5 text-[11px] leading-[17px] font-semibold text-wp-menu-text"
-                  : "text-wp-menu-icon"
+                  ? "rounded-[10px] bg-tt-red px-1.5 text-[11px] leading-[17px] font-semibold text-tt-menu-text"
+                  : "text-tt-menu-icon"
               }
             >
               {pendingComments}
@@ -70,7 +70,7 @@ export function AdminBar({ pendingComments, onToggleMenu, menuOpen }: AdminBarPr
         <BarItem title="My account">
           <span className="flex items-center gap-2">
             <span className="hidden sm:inline">Howdy, {site.user}</span>
-            <span className="grid size-[26px] place-items-center rounded-full bg-wp-menu-hover text-wp-menu-icon">
+            <span className="grid size-[26px] place-items-center rounded-full bg-tt-menu-hover text-tt-menu-icon">
               <User size={14} />
             </span>
           </span>
@@ -95,7 +95,7 @@ function BarItem({
       title={title}
       aria-label={title}
       className={cn(
-        "flex items-center px-2 text-wp-menu-icon transition-colors hover:bg-wp-menu-hover hover:text-wp-blue-hover sm:px-3",
+        "flex items-center px-2 text-tt-menu-icon transition-colors hover:bg-tt-menu-hover hover:text-tt-blue-hover sm:px-3",
         className,
       )}
     >

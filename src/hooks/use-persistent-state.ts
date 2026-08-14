@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-export const PREFIX = "wp-admin:";
+export const PREFIX = "techtrick:";
 
 type Listener = (raw: string | null) => void;
 const listeners = new Map<string, Set<Listener>>();
@@ -20,7 +20,7 @@ export function broadcast(key: string, raw: string | null) {
   listeners.get(key)?.forEach((fn) => fn(raw));
 }
 
-/** Remove every stored key starting with `wp-admin:{prefix}` and sync listeners. */
+/** Remove every stored key starting with `techtrick:{prefix}` and sync listeners. */
 export function clearPersisted(prefix: string) {
   try {
     const full = PREFIX + prefix;

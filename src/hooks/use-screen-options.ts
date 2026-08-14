@@ -15,7 +15,7 @@ export interface ScreenOptionsState {
   columns: 1 | 2;
 }
 
-const STORAGE_KEY = "wp-admin:screen-options";
+const STORAGE_KEY = "techtrick:screen-options";
 const DEFAULT_STATE: ScreenOptionsState = { hidden: [], columns: 2 };
 
 /**

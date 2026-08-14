@@ -13,9 +13,9 @@ export function ListToolbar({
 }) {
   return (
     <div
-      style={{ top: "var(--wp-bar-h, 32px)" }}
+      style={{ top: "var(--tt-bar-h, 32px)" }}
       className={cn(
-        "sticky z-20 -mx-3 mb-2 border-b border-wp-border bg-wp-body px-3 py-2 sm:-mx-5 sm:px-5",
+        "sticky z-20 -mx-3 mb-2 border-b border-tt-border bg-tt-body px-3 py-2 sm:-mx-5 sm:px-5",
         "md:static md:mx-0 md:border-0 md:bg-transparent md:px-0 md:py-0",
         className,
       )}
@@ -39,17 +39,17 @@ export function FilterTabs<T extends string>({
     <ul className="-mx-1 flex items-center gap-x-1 overflow-x-auto px-1 text-[13px] md:flex-wrap md:overflow-visible">
       {tabs.map(([key, label, count], i) => (
         <li key={key} className="flex shrink-0 items-center gap-1">
-          {i > 0 && <span className="text-wp-muted">|</span>}
+          {i > 0 && <span className="text-tt-muted">|</span>}
           <button
             type="button"
             onClick={() => onChange(key)}
             aria-current={value === key ? "true" : undefined}
             className={cn(
               "flex min-h-11 items-center whitespace-nowrap hover:underline md:min-h-0",
-              value === key ? "font-semibold text-wp-text" : "text-wp-blue",
+              value === key ? "font-semibold text-tt-text" : "text-tt-blue",
             )}
           >
-            {label} <span className="ml-1 text-wp-muted">({count})</span>
+            {label} <span className="ml-1 text-tt-muted">({count})</span>
           </button>
         </li>
       ))}

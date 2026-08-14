@@ -10,7 +10,7 @@ import {
   siteHealthIssues,
   type WpComment,
   type WpDraft,
-} from "@/data/wp-mock";
+} from "@/data/cms-mock";
 
 /**
  * Single read/write surface for every admin screen. Swap the seed imports for

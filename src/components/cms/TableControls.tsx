@@ -9,7 +9,7 @@ export interface ToggleableColumn {
 }
 
 const btn =
-  "flex h-11 items-center gap-1.5 rounded border border-wp-border bg-wp-surface px-2.5 text-[13px] text-wp-text hover:border-wp-blue hover:text-wp-blue md:h-[30px]";
+  "flex h-11 items-center gap-1.5 rounded border border-tt-border bg-tt-surface px-2.5 text-[13px] text-tt-text hover:border-tt-blue hover:text-tt-blue md:h-[30px]";
 
 /** Columns dropdown, density toggle and "Reset filters and search" button. */
 export function TableControls({
@@ -58,9 +58,9 @@ export function TableControls({
           Columns
         </button>
         {open && (
-          <div className="absolute left-0 z-30 mt-1 w-56 rounded border border-wp-border bg-wp-surface p-2 shadow-lg">
+          <div className="absolute left-0 z-30 mt-1 w-56 rounded border border-tt-border bg-tt-surface p-2 shadow-lg">
             <fieldset>
-              <legend className="mb-1 px-1 text-[12px] font-semibold text-wp-muted">Columns</legend>
+              <legend className="mb-1 px-1 text-[12px] font-semibold text-tt-muted">Columns</legend>
               {columns.map((c) => (
                 <label
                   key={c.id}
@@ -82,7 +82,7 @@ export function TableControls({
       <div
         role="group"
         aria-label="Row density"
-        className="flex overflow-hidden rounded border border-wp-border"
+        className="flex overflow-hidden rounded border border-tt-border"
       >
         {(["default", "compact"] as const).map((d) => (
           <button
@@ -93,8 +93,8 @@ export function TableControls({
             className={cn(
               "h-11 px-2.5 text-[13px] capitalize md:h-[30px]",
               density === d
-                ? "bg-wp-blue text-wp-menu-text"
-                : "bg-wp-surface text-wp-text hover:text-wp-blue",
+                ? "bg-tt-blue text-tt-menu-text"
+                : "bg-tt-surface text-tt-text hover:text-tt-blue",
             )}
           >
             {d}

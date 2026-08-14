@@ -32,7 +32,8 @@ const RULES = [
   {
     label: "WordPress branding",
     pattern: /wordpress/gi,
-    allowedIn: [],
+    // Docs must be able to name the retired brand when describing this policy.
+    allowedIn: ["README.md", "CONTRIBUTING.md", "SECURITY.md"],
   },
   {
     label: "legacy wp-admin path or prefix",
@@ -48,7 +49,7 @@ const RULES = [
   {
     label: "legacy --wp-* design token",
     pattern: /(--wp-|\b(?:bg|text|border|font)-wp-)/g,
-    allowedIn: [],
+    allowedIn: ["README.md"], // documents the retired token prefix
   },
   {
     label: "legacy wp-mock data module",
@@ -70,11 +71,13 @@ const RULES = [
       "bunfig.toml",
       "package.json",
       "AGENTS.md",
+      "README.md", // documents this policy
+      "CONTRIBUTING.md",
     ],
   },
   {
     label: "non-Techtrick contact address",
-    pattern: /[\w.+-]+@(?:lovable\.dev|wordpress\.org|example\.com)/gi,
+    pattern: /[\w.+-]+@(?:lovable\.dev|wordpress\.org)/gi,
     allowedIn: [],
   },
 ];

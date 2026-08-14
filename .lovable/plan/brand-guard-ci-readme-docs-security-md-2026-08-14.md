@@ -18,8 +18,8 @@ New script `scripts/check-brand.mjs` (Node, no new dependencies) run via a new
   - `src/routes/wp-admin.index.tsx` and `src/routes/wp-admin.$.tsx` — legacy redirect routes
   - `@lovable.dev/vite-tanstack-config` in `package.json` (build toolchain dependency)
   - `src/hooks/use-persistent-state.ts` legacy-key migration constant
-  The allowlist lives at the top of the script as a small array of `{ pattern, allowedIn }`
-  entries so future exceptions are one line.
+    The allowlist lives at the top of the script as a small array of `{ pattern, allowedIn }`
+    entries so future exceptions are one line.
 
 CI: add `- run: npm run check:brand` to `.github/workflows/ci.yml` right after `npm ci`,
 so a reintroduced string fails fast before lint/typecheck/build.
@@ -29,6 +29,7 @@ so a reintroduced string fails fast before lint/typecheck/build.
 Add two new sections after "Quick start":
 
 **Development**
+
 - Prerequisites (Node 20+, npm 10+), clone/install/run steps, dev URL `http://localhost:8080`
 - Full script table: `dev`, `build`, `build:dev`, `preview`, `lint`, `format`, `check:brand`
 - Pre-PR checklist (`npm run lint`, `npx tsc --noEmit`, `npm run check:brand`, `npm run build`)
@@ -36,6 +37,7 @@ Add two new sections after "Quick start":
   design tokens `--tt-*`, `techtrick:` localStorage prefix, SSR-safe browser API usage
 
 **Self-hosting**
+
 - Build with `npm run build`, what lands in the output directory
 - Serving the production build locally with `npm run preview`
 - Deploy notes for a static/node host and for edge platforms, environment variables

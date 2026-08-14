@@ -12,7 +12,6 @@ import { useDashboardData } from "@/hooks/use-dashboard-data";
 import type { CommentStatus, WpComment } from "@/data/cms-mock";
 import { cn } from "@/lib/utils";
 
-
 export const Route = createFileRoute("/_admin/admin/comments")({
   head: () => ({
     meta: [
@@ -30,7 +29,8 @@ export const Route = createFileRoute("/_admin/admin/comments")({
   component: CommentsScreen,
 });
 
-const dateFmt = new Intl.DateTimeFormat("en-US", { timeZone: "UTC",
+const dateFmt = new Intl.DateTimeFormat("en-US", {
+  timeZone: "UTC",
   year: "numeric",
   month: "long",
   day: "numeric",
@@ -45,7 +45,6 @@ function CommentsScreen() {
   const [filter, setFilter] = usePersistentState<Filter>("comments:filter", "all");
   const prefs = useTablePrefs("comments");
   useScrollRestore("comments");
-
 
   const rows = useMemo(
     () =>
@@ -109,7 +108,11 @@ function CommentsScreen() {
   ];
 
   const tabs = [
-    ["all", "All", comments.filter((c) => c.status === "approved" || c.status === "pending").length],
+    [
+      "all",
+      "All",
+      comments.filter((c) => c.status === "approved" || c.status === "pending").length,
+    ],
     ["pending", "Pending", counts.pendingComments],
     ["approved", "Approved", counts.comments],
     ["spam", "Spam", counts.spamComments],
@@ -158,7 +161,6 @@ function CommentsScreen() {
           </div>
         }
       />
-
     </div>
   );
 }

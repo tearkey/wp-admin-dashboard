@@ -249,7 +249,11 @@ export const drafts: WpDraft[] = [
 ];
 
 export const siteHealthIssues: SiteHealthIssue[] = [
-  { id: "php", label: "Your site is running an outdated version of Node.js", severity: "recommended" },
+  {
+    id: "php",
+    label: "Your site is running an outdated version of Node.js",
+    severity: "recommended",
+  },
   { id: "cron", label: "A scheduled event has failed", severity: "recommended" },
   { id: "https", label: "Your site is using HTTPS", severity: "recommended" },
   { id: "updates", label: "Your plugins are all up to date", severity: "recommended" },
@@ -284,7 +288,11 @@ export const news: WpNewsItem[] = [
   { id: "n1", title: "Techtrick CMS 6.7.1 Maintenance Release", source: "Techtrick News" },
   { id: "n2", title: "The Month in Techtrick CMS – July 2026", source: "Techtrick News" },
   { id: "n3", title: "Techtrick Blog: Building blocks that ship", source: "Techtrick Blog" },
-  { id: "n4", title: "Community: What the new admin design means for plugin authors", source: "Techtrick Community" },
+  {
+    id: "n4",
+    title: "Community: What the new admin design means for plugin authors",
+    source: "Techtrick Community",
+  },
 ];
 
 export const eventLocation = "Bengaluru, India";

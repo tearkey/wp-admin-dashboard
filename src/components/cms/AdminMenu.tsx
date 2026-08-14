@@ -18,12 +18,7 @@ import type { LucideIcon } from "lucide-react";
 import { useFocusTrap } from "@/hooks/use-focus-trap";
 import { cn } from "@/lib/utils";
 
-type AdminPath =
-  | "/admin"
-  | "/admin/posts"
-  | "/admin/pages"
-  | "/admin/comments"
-  | "/admin/settings";
+type AdminPath = "/admin" | "/admin/posts" | "/admin/pages" | "/admin/comments" | "/admin/settings";
 
 interface MenuItem {
   label: string;
@@ -151,7 +146,9 @@ export function AdminMenu({
                     id={submenuId}
                     className={cn(
                       "z-50 min-w-[160px] bg-tt-menu-hover py-1 shadow-lg md:absolute md:top-0 md:left-full",
-                      submenuOpen ? "block" : "hidden md:group-hover:block md:group-focus-within:block",
+                      submenuOpen
+                        ? "block"
+                        : "hidden md:group-hover:block md:group-focus-within:block",
                     )}
                   >
                     <li className="px-3 py-1.5 text-[13px] font-semibold text-tt-menu-text">
@@ -181,7 +178,10 @@ export function AdminMenu({
           aria-label={collapsed ? "Expand menu" : "Collapse menu"}
           aria-pressed={collapsed}
         >
-          <ChevronLeft size={18} className={cn("transition-transform", collapsed && "rotate-180")} />
+          <ChevronLeft
+            size={18}
+            className={cn("transition-transform", collapsed && "rotate-180")}
+          />
           {!collapsed && <span>Collapse menu</span>}
         </button>
       </nav>

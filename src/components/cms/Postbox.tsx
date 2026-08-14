@@ -25,14 +25,10 @@ export function Postbox({
 }: PostboxProps) {
   const isMobile = useIsMobile();
   // null = never toggled, so fall back to the responsive default.
-  const [stored, setStored] = usePersistentState<boolean | null>(
-    `postbox:${id ?? title}`,
-    null,
-  );
+  const [stored, setStored] = usePersistentState<boolean | null>(`postbox:${id ?? title}`, null);
   const open = stored ?? !(isMobile && collapsedOnMobile);
 
   const toggle = () => setStored(!open);
-
 
   const panelId = `postbox-${(id ?? title).replace(/\s+/g, "-").toLowerCase()}`;
 

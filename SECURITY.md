@@ -33,11 +33,11 @@ Report privately using either channel:
 
 ## Our response
 
-| Stage                                     | Target                |
-| ----------------------------------------- | --------------------- |
-| Acknowledge your report                    | 3 business days       |
-| Triage and severity assessment             | 7 days                |
-| Fix released or mitigation plan published  | 30 days               |
+| Stage                                     | Target          |
+| ----------------------------------------- | --------------- |
+| Acknowledge your report                   | 3 business days |
+| Triage and severity assessment            | 7 days          |
+| Fix released or mitigation plan published | 30 days         |
 
 We will keep you updated as the work progresses and credit you in the release
 notes unless you ask to stay anonymous.

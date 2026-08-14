@@ -2,7 +2,7 @@
   "name": "techtrick-cms",
   "version": "1.0.0",
   "private": false,
-  "description": "Techtrick CMS \u2014 an open-source TypeScript admin dashboard built with TanStack Start and React.",
+  "description": "Techtrick CMS — an open-source TypeScript admin dashboard built with TanStack Start and React.",
   "license": "MIT",
   "author": "Techtrick Technologies <hello@techtrick.com.bd> (https://www.techtrick.com.bd)",
   "homepage": "https://www.techtrick.com.bd",

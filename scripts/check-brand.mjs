@@ -58,7 +58,8 @@ const RULES = [
   },
   {
     label: "Lovable ownership text",
-    pattern: /(Lovable App|Lovable Generated Project|Made with Lovable|Edit with Lovable|lovable\.app|lovable-error-reporting|lovable_tagger)/gi,
+    pattern:
+      /(Lovable App|Lovable Generated Project|Made with Lovable|Edit with Lovable|lovable\.app|lovable-error-reporting|lovable_tagger)/gi,
     allowedIn: [],
   },
   {

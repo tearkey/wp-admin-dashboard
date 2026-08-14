@@ -1,12 +1,5 @@
 import { useState } from "react";
-import {
-  CircleAlert,
-  FileText,
-  MessageSquare,
-  Pin,
-  Rss,
-  ShieldCheck,
-} from "lucide-react";
+import { CircleAlert, FileText, MessageSquare, Pin, Rss, ShieldCheck } from "lucide-react";
 import { Postbox } from "@/components/cms/Postbox";
 import type { useDashboardData } from "@/hooks/use-dashboard-data";
 import { eventLocation } from "@/data/cms-mock";
@@ -14,8 +7,16 @@ import { cn } from "@/lib/utils";
 
 type Data = ReturnType<typeof useDashboardData>;
 
-const dateFmt = new Intl.DateTimeFormat("en-US", { timeZone: "UTC", month: "short", day: "numeric" });
-const timeFmt = new Intl.DateTimeFormat("en-US", { timeZone: "UTC", hour: "numeric", minute: "2-digit" });
+const dateFmt = new Intl.DateTimeFormat("en-US", {
+  timeZone: "UTC",
+  month: "short",
+  day: "numeric",
+});
+const timeFmt = new Intl.DateTimeFormat("en-US", {
+  timeZone: "UTC",
+  hour: "numeric",
+  minute: "2-digit",
+});
 
 function fmt(iso: string) {
   const d = new Date(iso);
@@ -292,8 +293,8 @@ export function SiteHealthWidget({ data }: { data: Data }) {
             {good ? "Good" : "Should be improved"}
           </p>
           <p className="mt-1 text-tt-muted">
-            Your site has {criticalIssues} critical{" "}
-            {criticalIssues === 1 ? "issue" : "issues"} and {recommendedIssues} recommended{" "}
+            Your site has {criticalIssues} critical {criticalIssues === 1 ? "issue" : "issues"} and{" "}
+            {recommendedIssues} recommended{" "}
             {recommendedIssues === 1 ? "improvement" : "improvements"}.
           </p>
         </div>

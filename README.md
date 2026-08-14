@@ -50,16 +50,16 @@ No environment variables or backend are required — the app ships with mock dat
 
 ### Scripts
 
-| Script                | What it does                                              |
-| --------------------- | --------------------------------------------------------- |
-| `npm run dev`         | Dev server with hot module replacement on port 8080        |
-| `npm run build`       | Production build                                           |
+| Script                | What it does                                                  |
+| --------------------- | ------------------------------------------------------------- |
+| `npm run dev`         | Dev server with hot module replacement on port 8080           |
+| `npm run build`       | Production build                                              |
 | `npm run build:dev`   | Production build in development mode (source maps, no minify) |
-| `npm run preview`     | Serve the built output locally                             |
-| `npm run lint`        | ESLint (includes Prettier rules)                           |
-| `npm run format`      | Rewrite files with Prettier                                |
-| `npm run check:brand` | Fail on retired branding strings (see below)               |
-| `npx tsc --noEmit`    | Type check                                                 |
+| `npm run preview`     | Serve the built output locally                                |
+| `npm run lint`        | ESLint (includes Prettier rules)                              |
+| `npm run format`      | Rewrite files with Prettier                                   |
+| `npm run check:brand` | Fail on retired branding strings (see below)                  |
+| `npx tsc --noEmit`    | Type check                                                    |
 
 ### Before opening a pull request
 
@@ -136,7 +136,6 @@ Replace that module with real API or database calls (TanStack Query is already w
 and no other change is needed. Add authentication before exposing the admin publicly —
 the demo has none.
 
-
 ## Project structure
 
 ```text
@@ -169,7 +168,6 @@ Contributions are welcome — see [CONTRIBUTING.md](CONTRIBUTING.md) and our
 ## Security
 
 Please report vulnerabilities privately — see [SECURITY.md](SECURITY.md).
-
 
 ## License
 

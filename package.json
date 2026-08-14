@@ -1,6 +1,27 @@
 {
-  "name": "tanstack_start_ts",
-  "private": true,
+  "name": "techtrick-cms",
+  "version": "1.0.0",
+  "private": false,
+  "description": "Techtrick CMS \u2014 an open-source TypeScript admin dashboard built with TanStack Start and React.",
+  "license": "MIT",
+  "author": "Techtrick Technologies <hello@techtrick.com.bd> (https://www.techtrick.com.bd)",
+  "homepage": "https://www.techtrick.com.bd",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/techtrick/techtrick-cms.git"
+  },
+  "bugs": {
+    "url": "https://github.com/techtrick/techtrick-cms/issues",
+    "email": "hello@techtrick.com.bd"
+  },
+  "keywords": [
+    "cms",
+    "admin-dashboard",
+    "tanstack-start",
+    "react",
+    "typescript",
+    "tailwindcss"
+  ],
   "sideEffects": false,
   "type": "module",
   "scripts": {

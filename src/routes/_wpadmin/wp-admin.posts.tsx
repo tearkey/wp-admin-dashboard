@@ -2,12 +2,16 @@ import { useMemo } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Column, ListTable, RowActions } from "@/components/wp/ListTable";
 import { FilterTabs } from "@/components/wp/ListToolbar";
+import { TableControls } from "@/components/wp/TableControls";
 
 import { ScreenMeta } from "@/components/wp/ScreenMeta";
 import { useDashboardData } from "@/hooks/use-dashboard-data";
 import { usePersistentState } from "@/hooks/use-persistent-state";
+import { useScrollRestore } from "@/hooks/use-scroll-restore";
+import { useTablePrefs } from "@/hooks/use-table-prefs";
 import type { PostStatus, WpPost } from "@/data/wp-mock";
 import { cn } from "@/lib/utils";
+
 
 export const Route = createFileRoute("/_wpadmin/wp-admin/posts")({
   head: () => ({

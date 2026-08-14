@@ -14,7 +14,7 @@ interface PostboxProps {
   collapsedOnMobile?: boolean;
 }
 
-/** The wp-admin "postbox" metabox panel: header with a collapse toggle. */
+/** The "postbox" metabox panel: header with a collapse toggle. */
 export function Postbox({
   title,
   children,

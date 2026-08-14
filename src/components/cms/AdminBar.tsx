@@ -9,7 +9,7 @@ interface AdminBarProps {
   menuOpen?: boolean;
 }
 
-/** The fixed 32px wp-admin toolbar. */
+/** The fixed 32px admin toolbar. */
 export function AdminBar({ pendingComments, onToggleMenu, menuOpen }: AdminBarProps) {
   return (
     <header
@@ -26,7 +26,7 @@ export function AdminBar({ pendingComments, onToggleMenu, menuOpen }: AdminBarPr
         >
           <Menu size={18} />
         </button>
-        <BarItem title="About WordPress">
+        <BarItem title="About Techtrick CMS">
           <WpLogo />
         </BarItem>
         <BarItem title={`Visit ${site.name}`}>

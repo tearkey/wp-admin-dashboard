@@ -120,7 +120,7 @@ export function AdminMenu({
                 : pathname.startsWith(item.to)
               : false;
             const submenuOpen = openSubmenu === item.label;
-            const submenuId = `wp-submenu-${item.label.toLowerCase()}`;
+            const submenuId = `tt-submenu-${item.label.toLowerCase()}`;
 
             return (
               <li

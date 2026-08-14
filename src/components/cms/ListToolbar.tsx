@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Sticky-on-mobile wrapper for a list-table's filters, search and bulk actions.
- * Sits just below the fixed 32px admin bar; static from `md` up like wp-admin.
+ * Sits just below the fixed 32px admin bar; static from `md` up like the desktop admin.
  */
 export function ListToolbar({
   children,

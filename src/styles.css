@@ -60,7 +60,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* WordPress admin palette */
+  /* Techtrick CMS admin palette */
   --color-tt-bar: var(--tt-bar);
   --color-tt-menu: var(--tt-menu);
   --color-tt-menu-hover: var(--tt-menu-hover);
@@ -115,7 +115,7 @@
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
 
-  /* WordPress admin palette (oklch equivalents of the wp-admin defaults) */
+  /* Techtrick CMS admin palette (oklch equivalents of the Techtrick CMS defaults) */
   --tt-bar: oklch(0.256 0.011 253.5); /* #1d2327 */
   --tt-menu: oklch(0.256 0.011 253.5); /* #1d2327 */
   --tt-menu-hover: oklch(0.315 0.011 253.5); /* #2c3338 */

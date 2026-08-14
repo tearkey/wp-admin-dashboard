@@ -19,7 +19,7 @@ export const Route = createFileRoute("/_admin/admin/posts")({
       { title: "Posts — WP Admin" },
       {
         name: "description",
-        content: "Browse, filter and search all posts with the WordPress list-table interface.",
+        content: "Browse, filter and search all posts with the Techtrick CMS list-table interface.",
       },
       { property: "og:title", content: "Posts — WP Admin" },
       { property: "og:description", content: "All posts, filterable by status, author and search." },

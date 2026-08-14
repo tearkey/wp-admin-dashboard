@@ -12,7 +12,7 @@ export const Route = createFileRoute("/_admin/admin/settings")({
         content: "Site title, tagline, address, timezone and date format settings.",
       },
       { property: "og:title", content: "General Settings — WP Admin" },
-      { property: "og:description", content: "The WordPress General Settings form." },
+      { property: "og:description", content: "The Techtrick CMS General Settings form." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -74,7 +74,7 @@ function SettingsScreen() {
             <Row id="s-tagline" label="Tagline" hint="In a few words, explain what this site is about.">
               <Text id="s-tagline" value={form.tagline} onChange={(v) => set("tagline", v)} />
             </Row>
-            <Row id="s-url" label="WordPress Address (URL)">
+            <Row id="s-url" label="Techtrick CMS Address (URL)">
               <Text id="s-url" value={form.url} onChange={(v) => set("url", v)} />
             </Row>
             <Row id="s-email" label="Administration Email Address">

@@ -22,7 +22,7 @@ export const Route = createFileRoute("/_admin/admin/comments")({
         content: "Moderate comments: approve, unapprove, mark as spam or move to trash.",
       },
       { property: "og:title", content: "Comments — WP Admin" },
-      { property: "og:description", content: "The WordPress comment moderation queue." },
+      { property: "og:description", content: "The Techtrick CMS comment moderation queue." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

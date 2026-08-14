@@ -19,12 +19,12 @@ export const Route = createFileRoute("/_admin/admin/")({
       {
         name: "description",
         content:
-          "WordPress admin dashboard with At a Glance, Activity, Quick Draft, Site Health and Events widgets.",
+          "Techtrick CMS dashboard with At a Glance, Activity, Quick Draft, Site Health and Events widgets.",
       },
       { property: "og:title", content: "Dashboard — WP Admin" },
       {
         property: "og:description",
-        content: "A faithful WordPress wp-admin dashboard rebuilt in TypeScript.",
+        content: "The Techtrick CMS admin dashboard, built in TypeScript.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -95,7 +95,7 @@ function DashboardScreen() {
             label: "Overview",
             content: (
               <p>
-                Welcome to your WordPress Dashboard. Use Screen Options to show or hide boxes and
+                Welcome to your Techtrick CMS Dashboard. Use Screen Options to show or hide boxes and
                 choose a one- or two-column layout. Drag-free widgets keep their state per browser.
               </p>
             ),

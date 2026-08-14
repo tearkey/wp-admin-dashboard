@@ -4,7 +4,7 @@ export const DASHBOARD_WIDGETS = [
   { id: "at-a-glance", label: "At a Glance" },
   { id: "activity", label: "Activity" },
   { id: "quick-draft", label: "Quick Draft" },
-  { id: "events-news", label: "WordPress Events and News" },
+  { id: "events-news", label: "Techtrick News and Events" },
   { id: "site-health", label: "Site Health Status" },
 ] as const;
 

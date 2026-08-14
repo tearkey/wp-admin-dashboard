@@ -39,7 +39,7 @@ export function AtAGlanceWidget({ data }: { data: Data }) {
         )}
       </ul>
       <p className="mt-3 border-t border-tt-border pt-2 text-tt-muted">
-        WordPress {site.version} running{" "}
+        Techtrick CMS {site.version} running{" "}
         <button type="button" className="text-tt-blue hover:underline">
           {site.theme}
         </button>{" "}
@@ -223,7 +223,7 @@ export function QuickDraftWidget({ data }: { data: Data }) {
 
 export function EventsNewsWidget({ data }: { data: Data }) {
   return (
-    <Postbox title="WordPress Events and News" id="events-news" collapsedOnMobile>
+    <Postbox title="Techtrick News and Events" id="events-news" collapsedOnMobile>
       <p className="mb-2 text-tt-muted">
         Attend an upcoming event near {eventLocation}.{" "}
         <button type="button" className="text-tt-blue hover:underline">

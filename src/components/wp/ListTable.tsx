@@ -17,6 +17,10 @@ interface ListTableProps<T> {
   emptyLabel?: string;
   /** Filters/search rendered above the bulk-action row, inside the sticky bar. */
   toolbar?: React.ReactNode;
+  /** Column ids hidden by the user's persisted preferences. */
+  hiddenColumnIds?: string[];
+  /** Row padding/typography density. */
+  density?: "default" | "compact";
 }
 
 /** WP list-table: bulk-action bar, sortable-looking headers, row actions, count. */
@@ -27,8 +31,13 @@ export function ListTable<T>({
   bulkActions = ["Bulk actions", "Edit", "Move to Trash"],
   emptyLabel = "No items found.",
   toolbar,
+  hiddenColumnIds = [],
+  density = "default",
 }: ListTableProps<T>) {
+  const visibleColumns = columns.filter((c) => !hiddenColumnIds.includes(c.id));
+  const cell = density === "compact" ? "px-2 py-1 text-[12px]" : "px-2 py-2";
   return (
+
     <>
       <ListToolbar>
         {toolbar}

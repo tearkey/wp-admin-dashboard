@@ -66,14 +66,14 @@ export function ListTable<T>({
       <table className="w-full min-w-[320px] border-collapse border border-wp-border bg-wp-surface text-[13px]">
         <thead>
           <tr className="border-b border-wp-border text-left">
-            <th scope="col" className="w-[2.2em] px-2 py-2 align-top">
+            <th scope="col" className={cn("w-[2.2em] align-top", cell)}>
               <input type="checkbox" aria-label="Select all" className="align-middle" />
             </th>
-            {columns.map((col) => (
+            {visibleColumns.map((col) => (
               <th
                 key={col.id}
                 scope="col"
-                className={cn("px-2 py-2 font-semibold text-wp-text", col.className)}
+                className={cn("font-semibold text-wp-text", cell, col.className)}
               >
                 {col.label}
               </th>
@@ -83,7 +83,10 @@ export function ListTable<T>({
         <tbody>
           {rows.length === 0 && (
             <tr>
-              <td colSpan={columns.length + 1} className="px-2 py-6 text-center text-wp-muted">
+              <td
+                colSpan={visibleColumns.length + 1}
+                className="px-2 py-6 text-center text-wp-muted"
+              >
                 {emptyLabel}
               </td>
             </tr>
@@ -93,16 +96,17 @@ export function ListTable<T>({
               key={rowKey(row)}
               className={cn("group border-b border-wp-border", i % 2 === 1 && "bg-wp-body/60")}
             >
-              <td className="px-2 py-2 align-top">
+              <td className={cn("align-top", cell)}>
                 <input type="checkbox" aria-label="Select row" className="align-middle" />
               </td>
-              {columns.map((col) => (
-                <td key={col.id} className={cn("px-2 py-2 align-top", col.className)}>
+              {visibleColumns.map((col) => (
+                <td key={col.id} className={cn("align-top", cell, col.className)}>
                   {col.render(row)}
                 </td>
               ))}
             </tr>
           ))}
+
         </tbody>
       </table>
       </div>

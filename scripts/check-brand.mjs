@@ -74,6 +74,7 @@ const RULES = [
       "AGENTS.md",
       "README.md", // documents this policy
       "CONTRIBUTING.md",
+      ".dockerignore", // excludes the local .lovable/ directory from build context
     ],
   },
   {

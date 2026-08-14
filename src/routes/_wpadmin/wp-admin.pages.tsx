@@ -1,8 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Column, ListTable, RowActions } from "@/components/wp/ListTable";
+import { TableControls } from "@/components/wp/TableControls";
 import { ScreenMeta } from "@/components/wp/ScreenMeta";
 import { useDashboardData } from "@/hooks/use-dashboard-data";
+import { useScrollRestore } from "@/hooks/use-scroll-restore";
+import { useTablePrefs } from "@/hooks/use-table-prefs";
 import type { WpPage } from "@/data/wp-mock";
+
 
 export const Route = createFileRoute("/_wpadmin/wp-admin/pages")({
   head: () => ({

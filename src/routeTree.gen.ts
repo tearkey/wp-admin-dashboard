@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as AdminRouteRouteImport } from './routes/_admin/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WpAdminIndexRouteImport } from './routes/wp-admin.index'
+import { Route as WpAdminSplatRouteImport } from './routes/wp-admin.$'
 import { Route as AdminAdminIndexRouteImport } from './routes/_admin/admin.index'
 import { Route as AdminAdminSettingsRouteImport } from './routes/_admin/admin.settings'
 import { Route as AdminAdminPostsRouteImport } from './routes/_admin/admin.posts'
@@ -30,6 +31,11 @@ const IndexRoute = IndexRouteImport.update({
 const WpAdminIndexRoute = WpAdminIndexRouteImport.update({
   id: '/wp-admin/',
   path: '/wp-admin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WpAdminSplatRoute = WpAdminSplatRouteImport.update({
+  id: '/wp-admin/$',
+  path: '/wp-admin/$',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminAdminIndexRoute = AdminAdminIndexRouteImport.update({
@@ -60,6 +66,7 @@ const AdminAdminCommentsRoute = AdminAdminCommentsRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/wp-admin/$': typeof WpAdminSplatRoute
   '/wp-admin/': typeof WpAdminIndexRoute
   '/admin/comments': typeof AdminAdminCommentsRoute
   '/admin/pages': typeof AdminAdminPagesRoute
@@ -69,6 +76,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/wp-admin/$': typeof WpAdminSplatRoute
   '/wp-admin': typeof WpAdminIndexRoute
   '/admin/comments': typeof AdminAdminCommentsRoute
   '/admin/pages': typeof AdminAdminPagesRoute
@@ -80,6 +88,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_admin': typeof AdminRouteRouteWithChildren
+  '/wp-admin/$': typeof WpAdminSplatRoute
   '/wp-admin/': typeof WpAdminIndexRoute
   '/_admin/admin/comments': typeof AdminAdminCommentsRoute
   '/_admin/admin/pages': typeof AdminAdminPagesRoute
@@ -91,6 +100,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/wp-admin/$'
     | '/wp-admin/'
     | '/admin/comments'
     | '/admin/pages'
@@ -100,6 +110,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/wp-admin/$'
     | '/wp-admin'
     | '/admin/comments'
     | '/admin/pages'
@@ -110,6 +121,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_admin'
+    | '/wp-admin/$'
     | '/wp-admin/'
     | '/_admin/admin/comments'
     | '/_admin/admin/pages'
@@ -121,6 +133,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
+  WpAdminSplatRoute: typeof WpAdminSplatRoute
   WpAdminIndexRoute: typeof WpAdminIndexRoute
 }
 
@@ -145,6 +158,13 @@ declare module '@tanstack/react-router' {
       path: '/wp-admin'
       fullPath: '/wp-admin/'
       preLoaderRoute: typeof WpAdminIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wp-admin/$': {
+      id: '/wp-admin/$'
+      path: '/wp-admin/$'
+      fullPath: '/wp-admin/$'
+      preLoaderRoute: typeof WpAdminSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_admin/admin/': {
@@ -208,6 +228,7 @@ const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRouteRoute: AdminRouteRouteWithChildren,
+  WpAdminSplatRoute: WpAdminSplatRoute,
   WpAdminIndexRoute: WpAdminIndexRoute,
 }
 export const routeTree = rootRouteImport

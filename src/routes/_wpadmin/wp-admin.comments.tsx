@@ -2,12 +2,16 @@ import { useMemo } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Column, ListTable } from "@/components/wp/ListTable";
 import { FilterTabs } from "@/components/wp/ListToolbar";
+import { TableControls } from "@/components/wp/TableControls";
 
 import { ScreenMeta } from "@/components/wp/ScreenMeta";
 import { usePersistentState } from "@/hooks/use-persistent-state";
+import { useScrollRestore } from "@/hooks/use-scroll-restore";
+import { useTablePrefs } from "@/hooks/use-table-prefs";
 import { useDashboardData } from "@/hooks/use-dashboard-data";
 import type { CommentStatus, WpComment } from "@/data/wp-mock";
 import { cn } from "@/lib/utils";
+
 
 export const Route = createFileRoute("/_wpadmin/wp-admin/comments")({
   head: () => ({
@@ -39,6 +43,9 @@ type Filter = "all" | CommentStatus;
 function CommentsScreen() {
   const { comments, counts, setCommentStatus } = useDashboardData();
   const [filter, setFilter] = usePersistentState<Filter>("comments:filter", "all");
+  const prefs = useTablePrefs("comments");
+  useScrollRestore("comments");
+
 
   const rows = useMemo(
     () =>

@@ -30,6 +30,9 @@ const dateFmt = new Intl.DateTimeFormat("en-US", { timeZone: "UTC",
 
 function PagesScreen() {
   const { pages } = useDashboardData();
+  const prefs = useTablePrefs("pages");
+  useScrollRestore("pages");
+
 
   const columns: Column<WpPage>[] = [
     {

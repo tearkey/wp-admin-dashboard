@@ -119,6 +119,36 @@ npm run preview
 - **Static-only hosting** — the demo has no server logic, so `.output/public` can be
   served as a static site provided you enable SPA fallback to `index.html`.
 
+### Docker
+
+The repository ships a multi-stage `Dockerfile` that builds the app with Nitro's
+`node-server` preset and runs the SSR server as a non-root user on port 3000.
+
+```sh
+docker build -t techtrick-cms .
+docker run --rm -p 3000:3000 techtrick-cms
+```
+
+Or with Compose:
+
+```sh
+cp .env.example .env
+docker compose up --build
+```
+
+Open `http://localhost:3000/admin`. Every setting the container reads is documented
+in [`.env.example`](.env.example) — no application secrets are required today.
+The container does not terminate TLS; put it behind a reverse proxy in production
+(`docker-compose.yml` includes commented Traefik and Caddy examples).
+
+Every pull request also gets a preview image published to GHCR by the
+`PR preview image` workflow, with a comment on the PR containing the exact
+`docker run` command to try that build locally:
+
+```sh
+docker run --rm -p 3000:3000 ghcr.io/techtrick/techtrick-cms:pr-123
+```
+
 ### Configuration
 
 - **Environment variables:** none required today. Client-side variables must be prefixed

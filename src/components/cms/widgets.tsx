@@ -234,7 +234,7 @@ export function EventsNewsWidget({ data }: { data: Data }) {
         {data.events.map((e) => (
           <li key={e.id} className="flex gap-2">
             <span className="mt-0.5 shrink-0 text-tt-muted">
-              {e.kind === "wordcamp" ? "◆" : "●"}
+              {e.kind === "conference" ? "◆" : "●"}
             </span>
             <div>
               <button type="button" className="text-left text-tt-blue hover:underline">

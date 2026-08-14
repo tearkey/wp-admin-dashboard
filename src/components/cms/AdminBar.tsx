@@ -27,7 +27,7 @@ export function AdminBar({ pendingComments, onToggleMenu, menuOpen }: AdminBarPr
           <Menu size={18} />
         </button>
         <BarItem title="About Techtrick CMS">
-          <WpLogo />
+          <BrandLogo />
         </BarItem>
         <BarItem title={`Visit ${site.name}`}>
           <span className="flex items-center gap-1.5">

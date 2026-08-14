@@ -17,6 +17,8 @@ npm run dev
 3. Run the checks below before pushing.
 4. Open a pull request describing the change, the motivation, and how you tested it.
    Include before/after screenshots for UI changes (mobile and desktop where relevant).
+5. CI builds a Docker preview image for the PR and comments the `docker run` command
+   so you (and reviewers) can validate the build locally before merging.
 
 ## Checks
 

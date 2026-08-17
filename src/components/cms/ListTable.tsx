@@ -20,6 +20,9 @@ interface ListTableProps<T> {
   hiddenColumnIds?: string[];
   /** Row padding/typography density. */
   density?: "default" | "compact";
+  /** Controlled row selection (opt-in). */
+  selected?: (string | number)[];
+  onSelectionChange?: (next: (string | number)[]) => void;
 }
 
 /** WP list-table: bulk-action bar, sortable-looking headers, row actions, count. */
@@ -32,9 +35,14 @@ export function ListTable<T>({
   toolbar,
   hiddenColumnIds = [],
   density = "default",
+  selected,
+  onSelectionChange,
 }: ListTableProps<T>) {
   const visibleColumns = columns.filter((c) => !hiddenColumnIds.includes(c.id));
   const cell = density === "compact" ? "px-2 py-1 text-[12px]" : "px-2 py-2";
+  const allKeys = rows.map(rowKey);
+  const allSelected = selected !== undefined && allKeys.length > 0 && allKeys.every((k) => selected.includes(k));
+
   return (
     <>
       <ListToolbar>

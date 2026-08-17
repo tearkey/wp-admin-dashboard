@@ -16,7 +16,6 @@ import { Route as WpAdminSplatRouteImport } from './routes/wp-admin.$'
 import { Route as AdminAdminIndexRouteImport } from './routes/_admin/admin.index'
 import { Route as AdminAdminSettingsRouteImport } from './routes/_admin/admin.settings'
 import { Route as AdminAdminPostsRouteImport } from './routes/_admin/admin.posts'
-import { Route as AdminAdminPagesRouteImport } from './routes/_admin/admin.pages'
 import { Route as AdminAdminCommentsRouteImport } from './routes/_admin/admin.comments'
 
 const AdminRouteRoute = AdminRouteRouteImport.update({
@@ -53,11 +52,6 @@ const AdminAdminPostsRoute = AdminAdminPostsRouteImport.update({
   path: '/admin/posts',
   getParentRoute: () => AdminRouteRoute,
 } as any)
-const AdminAdminPagesRoute = AdminAdminPagesRouteImport.update({
-  id: '/admin/pages',
-  path: '/admin/pages',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
 const AdminAdminCommentsRoute = AdminAdminCommentsRouteImport.update({
   id: '/admin/comments',
   path: '/admin/comments',
@@ -69,7 +63,6 @@ export interface FileRoutesByFullPath {
   '/wp-admin/$': typeof WpAdminSplatRoute
   '/wp-admin/': typeof WpAdminIndexRoute
   '/admin/comments': typeof AdminAdminCommentsRoute
-  '/admin/pages': typeof AdminAdminPagesRoute
   '/admin/posts': typeof AdminAdminPostsRoute
   '/admin/settings': typeof AdminAdminSettingsRoute
   '/admin/': typeof AdminAdminIndexRoute
@@ -79,7 +72,6 @@ export interface FileRoutesByTo {
   '/wp-admin/$': typeof WpAdminSplatRoute
   '/wp-admin': typeof WpAdminIndexRoute
   '/admin/comments': typeof AdminAdminCommentsRoute
-  '/admin/pages': typeof AdminAdminPagesRoute
   '/admin/posts': typeof AdminAdminPostsRoute
   '/admin/settings': typeof AdminAdminSettingsRoute
   '/admin': typeof AdminAdminIndexRoute
@@ -91,7 +83,6 @@ export interface FileRoutesById {
   '/wp-admin/$': typeof WpAdminSplatRoute
   '/wp-admin/': typeof WpAdminIndexRoute
   '/_admin/admin/comments': typeof AdminAdminCommentsRoute
-  '/_admin/admin/pages': typeof AdminAdminPagesRoute
   '/_admin/admin/posts': typeof AdminAdminPostsRoute
   '/_admin/admin/settings': typeof AdminAdminSettingsRoute
   '/_admin/admin/': typeof AdminAdminIndexRoute
@@ -103,7 +94,6 @@ export interface FileRouteTypes {
     | '/wp-admin/$'
     | '/wp-admin/'
     | '/admin/comments'
-    | '/admin/pages'
     | '/admin/posts'
     | '/admin/settings'
     | '/admin/'
@@ -113,7 +103,6 @@ export interface FileRouteTypes {
     | '/wp-admin/$'
     | '/wp-admin'
     | '/admin/comments'
-    | '/admin/pages'
     | '/admin/posts'
     | '/admin/settings'
     | '/admin'
@@ -124,7 +113,6 @@ export interface FileRouteTypes {
     | '/wp-admin/$'
     | '/wp-admin/'
     | '/_admin/admin/comments'
-    | '/_admin/admin/pages'
     | '/_admin/admin/posts'
     | '/_admin/admin/settings'
     | '/_admin/admin/'
@@ -188,13 +176,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAdminPostsRouteImport
       parentRoute: typeof AdminRouteRoute
     }
-    '/_admin/admin/pages': {
-      id: '/_admin/admin/pages'
-      path: '/admin/pages'
-      fullPath: '/admin/pages'
-      preLoaderRoute: typeof AdminAdminPagesRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
     '/_admin/admin/comments': {
       id: '/_admin/admin/comments'
       path: '/admin/comments'
@@ -207,7 +188,6 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteRouteChildren {
   AdminAdminCommentsRoute: typeof AdminAdminCommentsRoute
-  AdminAdminPagesRoute: typeof AdminAdminPagesRoute
   AdminAdminPostsRoute: typeof AdminAdminPostsRoute
   AdminAdminSettingsRoute: typeof AdminAdminSettingsRoute
   AdminAdminIndexRoute: typeof AdminAdminIndexRoute
@@ -215,7 +195,6 @@ interface AdminRouteRouteChildren {
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminAdminCommentsRoute: AdminAdminCommentsRoute,
-  AdminAdminPagesRoute: AdminAdminPagesRoute,
   AdminAdminPostsRoute: AdminAdminPostsRoute,
   AdminAdminSettingsRoute: AdminAdminSettingsRoute,
   AdminAdminIndexRoute: AdminAdminIndexRoute,

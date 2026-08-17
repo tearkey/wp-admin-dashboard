@@ -72,7 +72,14 @@ export function ListTable<T>({
           <thead>
             <tr className="border-b border-tt-border text-left">
               <th scope="col" className={cn("w-[2.2em] align-top", cell)}>
-                <input type="checkbox" aria-label="Select all" className="align-middle" />
+                <input
+                  type="checkbox"
+                  aria-label="Select all"
+                  className="align-middle"
+                  checked={allSelected}
+                  onChange={(e) => onSelectionChange?.(e.target.checked ? allKeys : [])}
+                />
+
               </th>
               {visibleColumns.map((col) => (
                 <th
@@ -102,7 +109,20 @@ export function ListTable<T>({
                 className={cn("group border-b border-tt-border", i % 2 === 1 && "bg-tt-body/60")}
               >
                 <td className={cn("align-top", cell)}>
-                  <input type="checkbox" aria-label="Select row" className="align-middle" />
+                  <input
+                    type="checkbox"
+                    aria-label="Select row"
+                    className="align-middle"
+                    checked={selected?.includes(rowKey(row)) ?? false}
+                    onChange={(e) => {
+                      const k = rowKey(row);
+                      const cur = selected ?? [];
+                      onSelectionChange?.(
+                        e.target.checked ? [...cur, k] : cur.filter((x) => x !== k),
+                      );
+                    }}
+                  />
+
                 </td>
                 {visibleColumns.map((col) => (
                   <td key={col.id} className={cn("align-top", cell, col.className)}>

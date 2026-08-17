@@ -20,6 +20,9 @@ interface ListTableProps<T> {
   hiddenColumnIds?: string[];
   /** Row padding/typography density. */
   density?: "default" | "compact";
+  /** Controlled row selection (opt-in). */
+  selected?: (string | number)[];
+  onSelectionChange?: (next: (string | number)[]) => void;
 }
 
 /** WP list-table: bulk-action bar, sortable-looking headers, row actions, count. */
@@ -32,9 +35,14 @@ export function ListTable<T>({
   toolbar,
   hiddenColumnIds = [],
   density = "default",
+  selected,
+  onSelectionChange,
 }: ListTableProps<T>) {
   const visibleColumns = columns.filter((c) => !hiddenColumnIds.includes(c.id));
   const cell = density === "compact" ? "px-2 py-1 text-[12px]" : "px-2 py-2";
+  const allKeys = rows.map(rowKey);
+  const allSelected = selected !== undefined && allKeys.length > 0 && allKeys.every((k) => selected.includes(k));
+
   return (
     <>
       <ListToolbar>
@@ -64,7 +72,14 @@ export function ListTable<T>({
           <thead>
             <tr className="border-b border-tt-border text-left">
               <th scope="col" className={cn("w-[2.2em] align-top", cell)}>
-                <input type="checkbox" aria-label="Select all" className="align-middle" />
+                <input
+                  type="checkbox"
+                  aria-label="Select all"
+                  className="align-middle"
+                  checked={allSelected}
+                  onChange={(e) => onSelectionChange?.(e.target.checked ? allKeys : [])}
+                />
+
               </th>
               {visibleColumns.map((col) => (
                 <th
@@ -94,7 +109,20 @@ export function ListTable<T>({
                 className={cn("group border-b border-tt-border", i % 2 === 1 && "bg-tt-body/60")}
               >
                 <td className={cn("align-top", cell)}>
-                  <input type="checkbox" aria-label="Select row" className="align-middle" />
+                  <input
+                    type="checkbox"
+                    aria-label="Select row"
+                    className="align-middle"
+                    checked={selected?.includes(rowKey(row)) ?? false}
+                    onChange={(e) => {
+                      const k = rowKey(row);
+                      const cur = selected ?? [];
+                      onSelectionChange?.(
+                        e.target.checked ? [...cur, k] : cur.filter((x) => x !== k),
+                      );
+                    }}
+                  />
+
                 </td>
                 {visibleColumns.map((col) => (
                   <td key={col.id} className={cn("align-top", cell, col.className)}>

@@ -18,6 +18,9 @@ import { Route as AdminAdminSettingsRouteImport } from './routes/_admin/admin.se
 import { Route as AdminAdminPostsRouteImport } from './routes/_admin/admin.posts'
 import { Route as AdminAdminPagesRouteImport } from './routes/_admin/admin.pages'
 import { Route as AdminAdminCommentsRouteImport } from './routes/_admin/admin.comments'
+import { Route as AdminAdminPagesIndexRouteImport } from './routes/_admin/admin.pages.index'
+import { Route as AdminAdminPagesNewRouteImport } from './routes/_admin/admin.pages.new'
+import { Route as AdminAdminPagesIdRouteImport } from './routes/_admin/admin.pages.$id'
 
 const AdminRouteRoute = AdminRouteRouteImport.update({
   id: '/_admin',
@@ -63,26 +66,46 @@ const AdminAdminCommentsRoute = AdminAdminCommentsRouteImport.update({
   path: '/admin/comments',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const AdminAdminPagesIndexRoute = AdminAdminPagesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminAdminPagesRoute,
+} as any)
+const AdminAdminPagesNewRoute = AdminAdminPagesNewRouteImport.update({
+  id: '/new',
+  path: '/new',
+  getParentRoute: () => AdminAdminPagesRoute,
+} as any)
+const AdminAdminPagesIdRoute = AdminAdminPagesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => AdminAdminPagesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/wp-admin/$': typeof WpAdminSplatRoute
   '/wp-admin/': typeof WpAdminIndexRoute
   '/admin/comments': typeof AdminAdminCommentsRoute
-  '/admin/pages': typeof AdminAdminPagesRoute
+  '/admin/pages': typeof AdminAdminPagesRouteWithChildren
   '/admin/posts': typeof AdminAdminPostsRoute
   '/admin/settings': typeof AdminAdminSettingsRoute
   '/admin/': typeof AdminAdminIndexRoute
+  '/admin/pages/$id': typeof AdminAdminPagesIdRoute
+  '/admin/pages/new': typeof AdminAdminPagesNewRoute
+  '/admin/pages/': typeof AdminAdminPagesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/wp-admin/$': typeof WpAdminSplatRoute
   '/wp-admin': typeof WpAdminIndexRoute
   '/admin/comments': typeof AdminAdminCommentsRoute
-  '/admin/pages': typeof AdminAdminPagesRoute
   '/admin/posts': typeof AdminAdminPostsRoute
   '/admin/settings': typeof AdminAdminSettingsRoute
   '/admin': typeof AdminAdminIndexRoute
+  '/admin/pages/$id': typeof AdminAdminPagesIdRoute
+  '/admin/pages/new': typeof AdminAdminPagesNewRoute
+  '/admin/pages': typeof AdminAdminPagesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -91,10 +114,13 @@ export interface FileRoutesById {
   '/wp-admin/$': typeof WpAdminSplatRoute
   '/wp-admin/': typeof WpAdminIndexRoute
   '/_admin/admin/comments': typeof AdminAdminCommentsRoute
-  '/_admin/admin/pages': typeof AdminAdminPagesRoute
+  '/_admin/admin/pages': typeof AdminAdminPagesRouteWithChildren
   '/_admin/admin/posts': typeof AdminAdminPostsRoute
   '/_admin/admin/settings': typeof AdminAdminSettingsRoute
   '/_admin/admin/': typeof AdminAdminIndexRoute
+  '/_admin/admin/pages/$id': typeof AdminAdminPagesIdRoute
+  '/_admin/admin/pages/new': typeof AdminAdminPagesNewRoute
+  '/_admin/admin/pages/': typeof AdminAdminPagesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -107,16 +133,21 @@ export interface FileRouteTypes {
     | '/admin/posts'
     | '/admin/settings'
     | '/admin/'
+    | '/admin/pages/$id'
+    | '/admin/pages/new'
+    | '/admin/pages/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/wp-admin/$'
     | '/wp-admin'
     | '/admin/comments'
-    | '/admin/pages'
     | '/admin/posts'
     | '/admin/settings'
     | '/admin'
+    | '/admin/pages/$id'
+    | '/admin/pages/new'
+    | '/admin/pages'
   id:
     | '__root__'
     | '/'
@@ -128,6 +159,9 @@ export interface FileRouteTypes {
     | '/_admin/admin/posts'
     | '/_admin/admin/settings'
     | '/_admin/admin/'
+    | '/_admin/admin/pages/$id'
+    | '/_admin/admin/pages/new'
+    | '/_admin/admin/pages/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -202,12 +236,49 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAdminCommentsRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/_admin/admin/pages/': {
+      id: '/_admin/admin/pages/'
+      path: '/'
+      fullPath: '/admin/pages/'
+      preLoaderRoute: typeof AdminAdminPagesIndexRouteImport
+      parentRoute: typeof AdminAdminPagesRoute
+    }
+    '/_admin/admin/pages/new': {
+      id: '/_admin/admin/pages/new'
+      path: '/new'
+      fullPath: '/admin/pages/new'
+      preLoaderRoute: typeof AdminAdminPagesNewRouteImport
+      parentRoute: typeof AdminAdminPagesRoute
+    }
+    '/_admin/admin/pages/$id': {
+      id: '/_admin/admin/pages/$id'
+      path: '/$id'
+      fullPath: '/admin/pages/$id'
+      preLoaderRoute: typeof AdminAdminPagesIdRouteImport
+      parentRoute: typeof AdminAdminPagesRoute
+    }
   }
 }
 
+interface AdminAdminPagesRouteChildren {
+  AdminAdminPagesIdRoute: typeof AdminAdminPagesIdRoute
+  AdminAdminPagesNewRoute: typeof AdminAdminPagesNewRoute
+  AdminAdminPagesIndexRoute: typeof AdminAdminPagesIndexRoute
+}
+
+const AdminAdminPagesRouteChildren: AdminAdminPagesRouteChildren = {
+  AdminAdminPagesIdRoute: AdminAdminPagesIdRoute,
+  AdminAdminPagesNewRoute: AdminAdminPagesNewRoute,
+  AdminAdminPagesIndexRoute: AdminAdminPagesIndexRoute,
+}
+
+const AdminAdminPagesRouteWithChildren = AdminAdminPagesRoute._addFileChildren(
+  AdminAdminPagesRouteChildren,
+)
+
 interface AdminRouteRouteChildren {
   AdminAdminCommentsRoute: typeof AdminAdminCommentsRoute
-  AdminAdminPagesRoute: typeof AdminAdminPagesRoute
+  AdminAdminPagesRoute: typeof AdminAdminPagesRouteWithChildren
   AdminAdminPostsRoute: typeof AdminAdminPostsRoute
   AdminAdminSettingsRoute: typeof AdminAdminSettingsRoute
   AdminAdminIndexRoute: typeof AdminAdminIndexRoute
@@ -215,7 +286,7 @@ interface AdminRouteRouteChildren {
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminAdminCommentsRoute: AdminAdminCommentsRoute,
-  AdminAdminPagesRoute: AdminAdminPagesRoute,
+  AdminAdminPagesRoute: AdminAdminPagesRouteWithChildren,
   AdminAdminPostsRoute: AdminAdminPostsRoute,
   AdminAdminSettingsRoute: AdminAdminSettingsRoute,
   AdminAdminIndexRoute: AdminAdminIndexRoute,

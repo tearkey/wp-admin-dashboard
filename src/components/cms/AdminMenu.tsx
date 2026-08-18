@@ -18,40 +18,71 @@ import type { LucideIcon } from "lucide-react";
 import { useFocusTrap } from "@/hooks/use-focus-trap";
 import { cn } from "@/lib/utils";
 
-type AdminPath = "/admin" | "/admin/posts" | "/admin/pages" | "/admin/comments" | "/admin/settings";
+type AdminPath =
+  | "/admin"
+  | "/admin/posts"
+  | "/admin/pages"
+  | "/admin/pages/new"
+  | "/admin/comments"
+  | "/admin/settings";
+
+interface SubItem {
+  label: string;
+  to?: AdminPath;
+}
 
 interface MenuItem {
   label: string;
   icon: LucideIcon;
   to?: AdminPath;
   badge?: number;
-  submenu: string[];
+  submenu: SubItem[];
 }
 
 const MENU: MenuItem[] = [
-  { label: "Dashboard", icon: Gauge, to: "/admin", submenu: ["Home", "Updates"] },
+  { label: "Dashboard", icon: Gauge, to: "/admin", submenu: [{ label: "Home", to: "/admin" }, { label: "Updates" }] },
   {
     label: "Posts",
     icon: Pin,
     to: "/admin/posts",
-    submenu: ["All Posts", "Add New Post", "Categories", "Tags"],
+    submenu: [
+      { label: "All Posts", to: "/admin/posts" },
+      { label: "Add New Post" },
+      { label: "Categories" },
+      { label: "Tags" },
+    ],
   },
-  { label: "Media", icon: ImageIcon, submenu: ["Library", "Add New Media File"] },
-  { label: "Pages", icon: FileText, to: "/admin/pages", submenu: ["All Pages", "Add New Page"] },
+  { label: "Media", icon: ImageIcon, submenu: [{ label: "Library" }, { label: "Add New Media File" }] },
+  { label: "Pages", icon: FileText, to: "/admin/pages", submenu: [
+      { label: "All Pages", to: "/admin/pages" },
+      { label: "Add New Page", to: "/admin/pages/new" },
+    ],
+  },
   { label: "Comments", icon: MessageSquare, to: "/admin/comments", submenu: [] },
   {
     label: "Appearance",
     icon: Paintbrush,
-    submenu: ["Themes", "Editor", "Patterns"],
+    submenu: [{ label: "Themes" }, { label: "Editor" }, { label: "Patterns" }],
   },
-  { label: "Plugins", icon: Plug, submenu: ["Installed Plugins", "Add New Plugin"] },
-  { label: "Users", icon: Users, submenu: ["All Users", "Add New User", "Profile"] },
-  { label: "Tools", icon: Wrench, submenu: ["Available Tools", "Import", "Export", "Site Health"] },
+  { label: "Plugins", icon: Plug, submenu: [{ label: "Installed Plugins" }, { label: "Add New Plugin" }] },
+  { label: "Users", icon: Users, submenu: [{ label: "All Users" }, { label: "Add New User" }, { label: "Profile" }] },
+  { label: "Tools", icon: Wrench, submenu: [
+      { label: "Available Tools" },
+      { label: "Import" },
+      { label: "Export" },
+      { label: "Site Health" },
+    ] },
   {
     label: "Settings",
     icon: Settings,
     to: "/admin/settings",
-    submenu: ["General", "Writing", "Reading", "Discussion", "Permalinks"],
+    submenu: [
+      { label: "General", to: "/admin/settings" },
+      { label: "Writing" },
+      { label: "Reading" },
+      { label: "Discussion" },
+      { label: "Permalinks" },
+    ],
   },
 ];
 
@@ -154,16 +185,28 @@ export function AdminMenu({
                     <li className="px-3 py-1.5 text-[13px] font-semibold text-tt-menu-text">
                       {item.label}
                     </li>
-                    {item.submenu.map((sub) => (
-                      <li key={sub}>
-                        <button
-                          type="button"
-                          className="flex min-h-11 w-full items-center px-3 text-left text-tt-menu-icon hover:text-tt-blue-hover md:min-h-0 md:py-1.5"
-                        >
-                          {sub}
-                        </button>
-                      </li>
-                    ))}
+                    {item.submenu.map((sub) =>
+                      sub.to ? (
+                        <li key={sub.label}>
+                          <Link
+                            to={sub.to}
+                            onClick={onCloseMobile}
+                            className="flex min-h-11 w-full items-center px-3 text-left text-tt-menu-icon hover:text-tt-blue-hover md:min-h-0 md:py-1.5"
+                          >
+                            {sub.label}
+                          </Link>
+                        </li>
+                      ) : (
+                        <li key={sub.label}>
+                          <button
+                            type="button"
+                            className="flex min-h-11 w-full items-center px-3 text-left text-tt-menu-icon hover:text-tt-blue-hover md:min-h-0 md:py-1.5"
+                          >
+                            {sub.label}
+                          </button>
+                        </li>
+                      ),
+                    )}
                   </ul>
                 )}
               </li>

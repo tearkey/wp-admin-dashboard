@@ -32,8 +32,7 @@ export function useCmsPages() {
             ? {
                 ...p,
                 ...patch,
-                slug:
-                  patch.slug !== undefined ? uniqueSlug(patch.slug, prev, id) : p.slug,
+                slug: patch.slug !== undefined ? uniqueSlug(patch.slug, prev, id) : p.slug,
                 updatedAt: new Date().toISOString(),
               }
             : p,
@@ -60,14 +59,8 @@ export function useCmsPages() {
     [setPages],
   );
 
-  const trash = useCallback(
-    (id: string) => update(id, { status: "trash" }),
-    [update],
-  );
-  const restore = useCallback(
-    (id: string) => update(id, { status: "draft" }),
-    [update],
-  );
+  const trash = useCallback((id: string) => update(id, { status: "trash" }), [update]);
+  const restore = useCallback((id: string) => update(id, { status: "draft" }), [update]);
   const remove = useCallback(
     (id: string) => setPages((prev) => prev.filter((p) => p.id !== id)),
     [setPages],

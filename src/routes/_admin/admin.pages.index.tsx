@@ -216,6 +216,8 @@ function PagesScreen() {
         emptyLabel="No pages found."
         hiddenColumnIds={prefs.hidden}
         density={prefs.density}
+        selected={selected}
+        onSelectionChange={(next) => setSelected(next.map(String))}
         toolbar={
           <div className="mb-2 space-y-2">
             <FilterTabs

@@ -40,7 +40,12 @@ interface MenuItem {
 }
 
 const MENU: MenuItem[] = [
-  { label: "Dashboard", icon: Gauge, to: "/admin", submenu: [{ label: "Home", to: "/admin" }, { label: "Updates" }] },
+  {
+    label: "Dashboard",
+    icon: Gauge,
+    to: "/admin",
+    submenu: [{ label: "Home", to: "/admin" }, { label: "Updates" }],
+  },
   {
     label: "Posts",
     icon: Pin,
@@ -52,8 +57,16 @@ const MENU: MenuItem[] = [
       { label: "Tags" },
     ],
   },
-  { label: "Media", icon: ImageIcon, submenu: [{ label: "Library" }, { label: "Add New Media File" }] },
-  { label: "Pages", icon: FileText, to: "/admin/pages", submenu: [
+  {
+    label: "Media",
+    icon: ImageIcon,
+    submenu: [{ label: "Library" }, { label: "Add New Media File" }],
+  },
+  {
+    label: "Pages",
+    icon: FileText,
+    to: "/admin/pages",
+    submenu: [
       { label: "All Pages", to: "/admin/pages" },
       { label: "Add New Page", to: "/admin/pages/new" },
     ],
@@ -64,14 +77,26 @@ const MENU: MenuItem[] = [
     icon: Paintbrush,
     submenu: [{ label: "Themes" }, { label: "Editor" }, { label: "Patterns" }],
   },
-  { label: "Plugins", icon: Plug, submenu: [{ label: "Installed Plugins" }, { label: "Add New Plugin" }] },
-  { label: "Users", icon: Users, submenu: [{ label: "All Users" }, { label: "Add New User" }, { label: "Profile" }] },
-  { label: "Tools", icon: Wrench, submenu: [
+  {
+    label: "Plugins",
+    icon: Plug,
+    submenu: [{ label: "Installed Plugins" }, { label: "Add New Plugin" }],
+  },
+  {
+    label: "Users",
+    icon: Users,
+    submenu: [{ label: "All Users" }, { label: "Add New User" }, { label: "Profile" }],
+  },
+  {
+    label: "Tools",
+    icon: Wrench,
+    submenu: [
       { label: "Available Tools" },
       { label: "Import" },
       { label: "Export" },
       { label: "Site Health" },
-    ] },
+    ],
+  },
   {
     label: "Settings",
     icon: Settings,

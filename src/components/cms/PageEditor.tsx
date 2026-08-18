@@ -60,10 +60,7 @@ export function PageEditor({
     <div className="px-3 pt-3 pb-24 sm:px-5">
       <div className="mb-3 flex flex-wrap items-center gap-2">
         <h1 className="text-[23px] leading-[1.3] font-normal text-tt-text">{heading}</h1>
-        <Link
-          to="/admin/pages"
-          className="text-[13px] text-tt-blue hover:underline"
-        >
+        <Link to="/admin/pages" className="text-[13px] text-tt-blue hover:underline">
           Back to all pages
         </Link>
       </div>
@@ -260,12 +257,9 @@ export function PageEditor({
           <Card title="Live preview">
             <div className="rounded border border-tt-border bg-tt-body p-3">
               <div className="text-[11px] tracking-wide text-tt-muted uppercase">
-                {draft.kind === "dynamic" ? "Dynamic template" : "Static page"} ·{" "}
-                {draft.template}
+                {draft.kind === "dynamic" ? "Dynamic template" : "Static page"} · {draft.template}
               </div>
-              <div className="mt-1 text-[11px] break-all text-tt-muted">
-                /{draft.slug ?? ""}
-              </div>
+              <div className="mt-1 text-[11px] break-all text-tt-muted">/{draft.slug ?? ""}</div>
               <h2 className="mt-2 text-[18px] font-semibold text-tt-text">
                 {draft.title || "Untitled page"}
               </h2>
@@ -277,8 +271,10 @@ export function PageEditor({
                       className="rounded border border-dashed border-tt-border bg-tt-surface p-2 text-[12px] text-tt-muted"
                     >
                       Loop item {i + 1} —{" "}
-                      {DYNAMIC_SOURCES.find((s) => s.value === (draft.source ?? "post-archive"))
-                        ?.label}
+                      {
+                        DYNAMIC_SOURCES.find((s) => s.value === (draft.source ?? "post-archive"))
+                          ?.label
+                      }
                     </li>
                   ))}
                 </ul>

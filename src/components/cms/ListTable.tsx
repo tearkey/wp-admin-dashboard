@@ -41,7 +41,8 @@ export function ListTable<T>({
   const visibleColumns = columns.filter((c) => !hiddenColumnIds.includes(c.id));
   const cell = density === "compact" ? "px-2 py-1 text-[12px]" : "px-2 py-2";
   const allKeys = rows.map(rowKey);
-  const allSelected = selected !== undefined && allKeys.length > 0 && allKeys.every((k) => selected.includes(k));
+  const allSelected =
+    selected !== undefined && allKeys.length > 0 && allKeys.every((k) => selected.includes(k));
 
   return (
     <>
@@ -79,7 +80,6 @@ export function ListTable<T>({
                   checked={allSelected}
                   onChange={(e) => onSelectionChange?.(e.target.checked ? allKeys : [])}
                 />
-
               </th>
               {visibleColumns.map((col) => (
                 <th
@@ -122,7 +122,6 @@ export function ListTable<T>({
                       );
                     }}
                   />
-
                 </td>
                 {visibleColumns.map((col) => (
                   <td key={col.id} className={cn("align-top", cell, col.className)}>

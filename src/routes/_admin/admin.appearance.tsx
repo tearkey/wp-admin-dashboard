@@ -696,9 +696,7 @@ function AppearanceScreen() {
                   onClick={() => setDevice(d)}
                   className={cn(
                     "rounded border px-2 py-1 text-[12px] capitalize",
-                    device === d
-                      ? "border-tt-blue text-tt-blue"
-                      : "border-tt-border text-tt-muted",
+                    device === d ? "border-tt-blue text-tt-blue" : "border-tt-border text-tt-muted",
                   )}
                 >
                   {d}

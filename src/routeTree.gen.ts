@@ -9,19 +9,28 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SiteRouteImport } from './routes/site'
 import { Route as AdminRouteRouteImport } from './routes/_admin/route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as WpAdminIndexRouteImport } from './routes/wp-admin.index'
+import { Route as SiteIndexRouteImport } from './routes/site.index'
 import { Route as WpAdminSplatRouteImport } from './routes/wp-admin.$'
+import { Route as SiteSlugRouteImport } from './routes/site.$slug'
 import { Route as AdminAdminIndexRouteImport } from './routes/_admin/admin.index'
 import { Route as AdminAdminSettingsRouteImport } from './routes/_admin/admin.settings'
 import { Route as AdminAdminPostsRouteImport } from './routes/_admin/admin.posts'
 import { Route as AdminAdminPagesRouteImport } from './routes/_admin/admin.pages'
 import { Route as AdminAdminCommentsRouteImport } from './routes/_admin/admin.comments'
+import { Route as AdminAdminAppearanceRouteImport } from './routes/_admin/admin.appearance'
 import { Route as AdminAdminPagesIndexRouteImport } from './routes/_admin/admin.pages.index'
 import { Route as AdminAdminPagesNewRouteImport } from './routes/_admin/admin.pages.new'
 import { Route as AdminAdminPagesIdRouteImport } from './routes/_admin/admin.pages.$id'
 
+const SiteRoute = SiteRouteImport.update({
+  id: '/site',
+  path: '/site',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRouteRoute = AdminRouteRouteImport.update({
   id: '/_admin',
   getParentRoute: () => rootRouteImport,
@@ -36,10 +45,20 @@ const WpAdminIndexRoute = WpAdminIndexRouteImport.update({
   path: '/wp-admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SiteIndexRoute = SiteIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SiteRoute,
+} as any)
 const WpAdminSplatRoute = WpAdminSplatRouteImport.update({
   id: '/wp-admin/$',
   path: '/wp-admin/$',
   getParentRoute: () => rootRouteImport,
+} as any)
+const SiteSlugRoute = SiteSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => SiteRoute,
 } as any)
 const AdminAdminIndexRoute = AdminAdminIndexRouteImport.update({
   id: '/admin/',
@@ -66,6 +85,11 @@ const AdminAdminCommentsRoute = AdminAdminCommentsRouteImport.update({
   path: '/admin/comments',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const AdminAdminAppearanceRoute = AdminAdminAppearanceRouteImport.update({
+  id: '/admin/appearance',
+  path: '/admin/appearance',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const AdminAdminPagesIndexRoute = AdminAdminPagesIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -84,8 +108,12 @@ const AdminAdminPagesIdRoute = AdminAdminPagesIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/site': typeof SiteRouteWithChildren
+  '/site/$slug': typeof SiteSlugRoute
   '/wp-admin/$': typeof WpAdminSplatRoute
+  '/site/': typeof SiteIndexRoute
   '/wp-admin/': typeof WpAdminIndexRoute
+  '/admin/appearance': typeof AdminAdminAppearanceRoute
   '/admin/comments': typeof AdminAdminCommentsRoute
   '/admin/pages': typeof AdminAdminPagesRouteWithChildren
   '/admin/posts': typeof AdminAdminPostsRoute
@@ -97,8 +125,11 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/site/$slug': typeof SiteSlugRoute
   '/wp-admin/$': typeof WpAdminSplatRoute
+  '/site': typeof SiteIndexRoute
   '/wp-admin': typeof WpAdminIndexRoute
+  '/admin/appearance': typeof AdminAdminAppearanceRoute
   '/admin/comments': typeof AdminAdminCommentsRoute
   '/admin/posts': typeof AdminAdminPostsRoute
   '/admin/settings': typeof AdminAdminSettingsRoute
@@ -111,8 +142,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_admin': typeof AdminRouteRouteWithChildren
+  '/site': typeof SiteRouteWithChildren
+  '/site/$slug': typeof SiteSlugRoute
   '/wp-admin/$': typeof WpAdminSplatRoute
+  '/site/': typeof SiteIndexRoute
   '/wp-admin/': typeof WpAdminIndexRoute
+  '/_admin/admin/appearance': typeof AdminAdminAppearanceRoute
   '/_admin/admin/comments': typeof AdminAdminCommentsRoute
   '/_admin/admin/pages': typeof AdminAdminPagesRouteWithChildren
   '/_admin/admin/posts': typeof AdminAdminPostsRoute
@@ -126,8 +161,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/site'
+    | '/site/$slug'
     | '/wp-admin/$'
+    | '/site/'
     | '/wp-admin/'
+    | '/admin/appearance'
     | '/admin/comments'
     | '/admin/pages'
     | '/admin/posts'
@@ -139,8 +178,11 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/site/$slug'
     | '/wp-admin/$'
+    | '/site'
     | '/wp-admin'
+    | '/admin/appearance'
     | '/admin/comments'
     | '/admin/posts'
     | '/admin/settings'
@@ -152,8 +194,12 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_admin'
+    | '/site'
+    | '/site/$slug'
     | '/wp-admin/$'
+    | '/site/'
     | '/wp-admin/'
+    | '/_admin/admin/appearance'
     | '/_admin/admin/comments'
     | '/_admin/admin/pages'
     | '/_admin/admin/posts'
@@ -167,12 +213,20 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRouteRoute: typeof AdminRouteRouteWithChildren
+  SiteRoute: typeof SiteRouteWithChildren
   WpAdminSplatRoute: typeof WpAdminSplatRoute
   WpAdminIndexRoute: typeof WpAdminIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/site': {
+      id: '/site'
+      path: '/site'
+      fullPath: '/site'
+      preLoaderRoute: typeof SiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_admin': {
       id: '/_admin'
       path: ''
@@ -194,12 +248,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WpAdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/site/': {
+      id: '/site/'
+      path: '/'
+      fullPath: '/site/'
+      preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/wp-admin/$': {
       id: '/wp-admin/$'
       path: '/wp-admin/$'
       fullPath: '/wp-admin/$'
       preLoaderRoute: typeof WpAdminSplatRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/site/$slug': {
+      id: '/site/$slug'
+      path: '/$slug'
+      fullPath: '/site/$slug'
+      preLoaderRoute: typeof SiteSlugRouteImport
+      parentRoute: typeof SiteRoute
     }
     '/_admin/admin/': {
       id: '/_admin/admin/'
@@ -234,6 +302,13 @@ declare module '@tanstack/react-router' {
       path: '/admin/comments'
       fullPath: '/admin/comments'
       preLoaderRoute: typeof AdminAdminCommentsRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/_admin/admin/appearance': {
+      id: '/_admin/admin/appearance'
+      path: '/admin/appearance'
+      fullPath: '/admin/appearance'
+      preLoaderRoute: typeof AdminAdminAppearanceRouteImport
       parentRoute: typeof AdminRouteRoute
     }
     '/_admin/admin/pages/': {
@@ -277,6 +352,7 @@ const AdminAdminPagesRouteWithChildren = AdminAdminPagesRoute._addFileChildren(
 )
 
 interface AdminRouteRouteChildren {
+  AdminAdminAppearanceRoute: typeof AdminAdminAppearanceRoute
   AdminAdminCommentsRoute: typeof AdminAdminCommentsRoute
   AdminAdminPagesRoute: typeof AdminAdminPagesRouteWithChildren
   AdminAdminPostsRoute: typeof AdminAdminPostsRoute
@@ -285,6 +361,7 @@ interface AdminRouteRouteChildren {
 }
 
 const AdminRouteRouteChildren: AdminRouteRouteChildren = {
+  AdminAdminAppearanceRoute: AdminAdminAppearanceRoute,
   AdminAdminCommentsRoute: AdminAdminCommentsRoute,
   AdminAdminPagesRoute: AdminAdminPagesRouteWithChildren,
   AdminAdminPostsRoute: AdminAdminPostsRoute,
@@ -296,9 +373,22 @@ const AdminRouteRouteWithChildren = AdminRouteRoute._addFileChildren(
   AdminRouteRouteChildren,
 )
 
+interface SiteRouteChildren {
+  SiteSlugRoute: typeof SiteSlugRoute
+  SiteIndexRoute: typeof SiteIndexRoute
+}
+
+const SiteRouteChildren: SiteRouteChildren = {
+  SiteSlugRoute: SiteSlugRoute,
+  SiteIndexRoute: SiteIndexRoute,
+}
+
+const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRouteRoute: AdminRouteRouteWithChildren,
+  SiteRoute: SiteRouteWithChildren,
   WpAdminSplatRoute: WpAdminSplatRoute,
   WpAdminIndexRoute: WpAdminIndexRoute,
 }

@@ -23,6 +23,7 @@ type AdminPath =
   | "/admin/posts"
   | "/admin/pages"
   | "/admin/pages/new"
+  | "/admin/appearance"
   | "/admin/comments"
   | "/admin/settings";
 
@@ -75,7 +76,12 @@ const MENU: MenuItem[] = [
   {
     label: "Appearance",
     icon: Paintbrush,
-    submenu: [{ label: "Themes" }, { label: "Editor" }, { label: "Patterns" }],
+    to: "/admin/appearance",
+    submenu: [
+      { label: "Theme Customizer", to: "/admin/appearance" },
+      { label: "Themes" },
+      { label: "Patterns" },
+    ],
   },
   {
     label: "Plugins",

@@ -637,6 +637,7 @@ function AppearanceScreen() {
                           enabled: true,
                           heading: "Heading",
                           body: "Body copy",
+                          tiers: { desktop: DEFAULT_PART_TIER, tablet: {}, mobile: {} },
                         },
                       ],
                     }))

@@ -6,7 +6,12 @@ import { PartBlock, SiteFooter, SiteHeader } from "@/components/site/SiteChrome"
 import { ScreenMeta } from "@/components/cms/ScreenMeta";
 import { useCmsPages } from "@/hooks/use-cms-pages";
 import { useThemeConfig } from "@/hooks/use-theme-config";
-import { SOCIAL_NETWORKS, uid, type SocialNetwork } from "@/lib/cms/theme";
+import {
+  DEFAULT_PART_TIER,
+  SOCIAL_NETWORKS,
+  uid,
+  type SocialNetwork,
+} from "@/lib/cms/theme";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/_admin/admin/appearance")({
@@ -637,6 +642,7 @@ function AppearanceScreen() {
                           enabled: true,
                           heading: "Heading",
                           body: "Body copy",
+                          tiers: { desktop: DEFAULT_PART_TIER, tablet: {}, mobile: {} },
                         },
                       ],
                     }))

@@ -20,18 +20,25 @@ const rowLabel = "flex items-center gap-2 text-[12px] font-semibold text-tt-text
 
 type Rec = Record<string, unknown>;
 
-interface FieldProps<T extends Rec> {
+interface FieldProps<T extends object> {
   tiers: Tiers<T>;
   device: Device;
-  name: keyof T & string;
+  name: string;
   label: string;
   onChange: (key: string, value: unknown | undefined) => void;
   render: (value: unknown, set: (v: unknown) => void) => ReactNode;
 }
 
 /** One setting row with an inherited badge + reset control on non-base tiers. */
-function TierField<T extends Rec>({ tiers, device, name, label, onChange, render }: FieldProps<T>) {
-  const effective = resolveTier(tiers, device) as Rec;
+function TierField<T extends object>({
+  tiers,
+  device,
+  name,
+  label,
+  onChange,
+  render,
+}: FieldProps<T>) {
+  const effective = resolveTier(tiers, device) as unknown as Rec;
   const overridden =
     device !== "desktop" && Object.prototype.hasOwnProperty.call(tiers[device], name);
 
@@ -133,14 +140,19 @@ interface PanelProps {
   device: Device;
 }
 
-function writeTier<T extends Rec>(tiers: Tiers<T>, device: Device, key: string, value: unknown) {
+function writeTier<T extends object>(
+  tiers: Tiers<T>,
+  device: Device,
+  key: string,
+  value: unknown,
+): Tiers<T> {
   if (device === "desktop") {
     return { ...tiers, desktop: { ...tiers.desktop, [key]: value } };
   }
-  const next = { ...(tiers[device] as Rec) };
+  const next = { ...tiers[device] } as Record<string, unknown>;
   if (value === undefined) delete next[key];
   else next[key] = value;
-  return { ...tiers, [device]: next };
+  return { ...tiers, [device]: next as Partial<T> };
 }
 
 /**
@@ -148,26 +160,26 @@ function writeTier<T extends Rec>(tiers: Tiers<T>, device: Device, key: string, 
  * base tier; tablet inherits desktop and mobile inherits tablet.
  */
 export function ResponsivePanel({ theme, update, device }: PanelProps) {
-  const headerTiers = theme.header.tiers as Tiers<HeaderTier & Rec>;
-  const footerTiers = theme.footer.tiers as Tiers<FooterTier & Rec>;
+  const headerTiers: Tiers<HeaderTier> = theme.header.tiers;
+  const footerTiers: Tiers<FooterTier> = theme.footer.tiers;
 
   const setHeader = (key: string, value: unknown) =>
     update((p) => ({
       ...p,
-      header: { ...p.header, tiers: writeTier(p.header.tiers as Tiers<Rec>, device, key, value) },
+      header: { ...p.header, tiers: writeTier(p.header.tiers, device, key, value) },
     }));
 
   const setFooter = (key: string, value: unknown) =>
     update((p) => ({
       ...p,
-      footer: { ...p.footer, tiers: writeTier(p.footer.tiers as Tiers<Rec>, device, key, value) },
+      footer: { ...p.footer, tiers: writeTier(p.footer.tiers, device, key, value) },
     }));
 
   const setPart = (id: string) => (key: string, value: unknown) =>
     update((p) => ({
       ...p,
       parts: p.parts.map((x) =>
-        x.id === id ? { ...x, tiers: writeTier(x.tiers as Tiers<Rec>, device, key, value) } : x,
+        x.id === id ? { ...x, tiers: writeTier(x.tiers, device, key, value) } : x,
       ),
     }));
 
@@ -320,7 +332,7 @@ export function ResponsivePanel({ theme, update, device }: PanelProps) {
       </Section>
 
       {theme.parts.map((part) => {
-        const tiers = part.tiers as Tiers<PartTier & Rec>;
+        const tiers: Tiers<PartTier> = part.tiers;
         const onChange = setPart(part.id);
         return (
           <Section key={part.id} title={part.label}>

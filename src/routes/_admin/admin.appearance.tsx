@@ -2,14 +2,18 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import { PartBlock, SiteFooter, SiteHeader } from "@/components/site/SiteChrome";
+import { PartBlock, SiteFooter, SiteHeader, themeScopeProps } from "@/components/site/SiteChrome";
+import { ResponsivePanel } from "@/components/cms/ResponsivePanel";
 import { ScreenMeta } from "@/components/cms/ScreenMeta";
 import { useCmsPages } from "@/hooks/use-cms-pages";
 import { useThemeConfig } from "@/hooks/use-theme-config";
 import {
   DEFAULT_PART_TIER,
+  DEVICE_WIDTH,
+  DEVICES,
   SOCIAL_NETWORKS,
   uid,
+  type Device,
   type SocialNetwork,
 } from "@/lib/cms/theme";
 import { cn } from "@/lib/utils";
@@ -41,14 +45,7 @@ const label = "block text-[12px] font-semibold text-tt-text";
 const smallBtn =
   "inline-flex items-center gap-1 rounded border border-tt-border px-2 py-1 text-[12px] text-tt-blue hover:bg-tt-body";
 
-type Tab = "header" | "footer" | "parts" | "code";
-type Device = "desktop" | "tablet" | "mobile";
-
-const DEVICE_WIDTH: Record<Device, string> = {
-  desktop: "100%",
-  tablet: "768px",
-  mobile: "390px",
-};
+type Tab = "header" | "footer" | "parts" | "responsive" | "code";
 
 function AppearanceScreen() {
   const { theme, update, reset } = useThemeConfig();
@@ -98,7 +95,7 @@ function AppearanceScreen() {
         {/* Settings rail */}
         <div className="rounded border border-tt-border bg-tt-surface">
           <div className="flex border-b border-tt-border">
-            {(["header", "footer", "parts", "code"] as Tab[]).map((t) => (
+            {(["header", "footer", "parts", "responsive", "code"] as Tab[]).map((t) => (
               <button
                 key={t}
                 type="button"
@@ -653,6 +650,10 @@ function AppearanceScreen() {
               </div>
             )}
 
+            {tab === "responsive" && (
+              <ResponsivePanel theme={theme} update={update} device={device} />
+            )}
+
             {tab === "code" && (
               <div className="space-y-3">
                 {(
@@ -695,11 +696,12 @@ function AppearanceScreen() {
           <div className="flex items-center gap-2 border-b border-tt-border bg-tt-surface px-3 py-2">
             <span className="text-[12px] font-semibold text-tt-text">Live preview</span>
             <div className="ml-auto flex gap-1">
-              {(["desktop", "tablet", "mobile"] as Device[]).map((d) => (
+              {DEVICES.map((d: Device) => (
                 <button
                   key={d}
                   type="button"
                   onClick={() => setDevice(d)}
+                  aria-pressed={device === d}
                   className={cn(
                     "rounded border px-2 py-1 text-[12px] capitalize",
                     device === d ? "border-tt-blue text-tt-blue" : "border-tt-border text-tt-muted",
@@ -712,7 +714,8 @@ function AppearanceScreen() {
           </div>
           <div className="overflow-x-auto p-3">
             <div
-              style={{ width: DEVICE_WIDTH[device] }}
+              {...themeScopeProps(theme, device)}
+              style={{ ...themeScopeProps(theme, device).style, width: DEVICE_WIDTH[device] }}
               className="mx-auto overflow-hidden rounded border border-tt-border bg-tt-surface"
             >
               <SiteHeader theme={theme} inert />

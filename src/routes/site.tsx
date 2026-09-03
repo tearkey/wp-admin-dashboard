@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { SiteFooter, SiteHeader } from "@/components/site/SiteChrome";
+import { SiteFooter, SiteHeader, ThemeStyle, themeScopeProps } from "@/components/site/SiteChrome";
 import { useCmsPages } from "@/hooks/use-cms-pages";
 import { useThemeConfig } from "@/hooks/use-theme-config";
 
@@ -12,7 +12,8 @@ function SiteLayout() {
   const { pages } = useCmsPages();
 
   return (
-    <div className="flex min-h-screen flex-col bg-tt-body font-tt">
+    <div {...themeScopeProps(theme)} className="flex min-h-screen flex-col bg-tt-body font-tt">
+      <ThemeStyle theme={theme} />
       <SiteHeader theme={theme} />
       <main className="flex-1">
         <Outlet />

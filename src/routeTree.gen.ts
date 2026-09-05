@@ -18,11 +18,13 @@ import { Route as WpAdminSplatRouteImport } from './routes/wp-admin.$'
 import { Route as SiteSlugRouteImport } from './routes/site.$slug'
 import { Route as AdminAdminIndexRouteImport } from './routes/_admin/admin.index'
 import { Route as AdminAdminSettingsRouteImport } from './routes/_admin/admin.settings'
+import { Route as AdminAdminSecurityRouteImport } from './routes/_admin/admin.security'
 import { Route as AdminAdminPostsRouteImport } from './routes/_admin/admin.posts'
 import { Route as AdminAdminPagesRouteImport } from './routes/_admin/admin.pages'
 import { Route as AdminAdminCommentsRouteImport } from './routes/_admin/admin.comments'
 import { Route as AdminAdminAppearanceRouteImport } from './routes/_admin/admin.appearance'
 import { Route as AdminAdminPagesIndexRouteImport } from './routes/_admin/admin.pages.index'
+import { Route as AdminAdminSecurityCloudflareRouteImport } from './routes/_admin/admin.security.cloudflare'
 import { Route as AdminAdminPagesNewRouteImport } from './routes/_admin/admin.pages.new'
 import { Route as AdminAdminPagesIdRouteImport } from './routes/_admin/admin.pages.$id'
 
@@ -70,6 +72,11 @@ const AdminAdminSettingsRoute = AdminAdminSettingsRouteImport.update({
   path: '/admin/settings',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const AdminAdminSecurityRoute = AdminAdminSecurityRouteImport.update({
+  id: '/admin/security',
+  path: '/admin/security',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const AdminAdminPostsRoute = AdminAdminPostsRouteImport.update({
   id: '/admin/posts',
   path: '/admin/posts',
@@ -95,6 +102,12 @@ const AdminAdminPagesIndexRoute = AdminAdminPagesIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminAdminPagesRoute,
 } as any)
+const AdminAdminSecurityCloudflareRoute =
+  AdminAdminSecurityCloudflareRouteImport.update({
+    id: '/cloudflare',
+    path: '/cloudflare',
+    getParentRoute: () => AdminAdminSecurityRoute,
+  } as any)
 const AdminAdminPagesNewRoute = AdminAdminPagesNewRouteImport.update({
   id: '/new',
   path: '/new',
@@ -117,10 +130,12 @@ export interface FileRoutesByFullPath {
   '/admin/comments': typeof AdminAdminCommentsRoute
   '/admin/pages': typeof AdminAdminPagesRouteWithChildren
   '/admin/posts': typeof AdminAdminPostsRoute
+  '/admin/security': typeof AdminAdminSecurityRouteWithChildren
   '/admin/settings': typeof AdminAdminSettingsRoute
   '/admin/': typeof AdminAdminIndexRoute
   '/admin/pages/$id': typeof AdminAdminPagesIdRoute
   '/admin/pages/new': typeof AdminAdminPagesNewRoute
+  '/admin/security/cloudflare': typeof AdminAdminSecurityCloudflareRoute
   '/admin/pages/': typeof AdminAdminPagesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -132,10 +147,12 @@ export interface FileRoutesByTo {
   '/admin/appearance': typeof AdminAdminAppearanceRoute
   '/admin/comments': typeof AdminAdminCommentsRoute
   '/admin/posts': typeof AdminAdminPostsRoute
+  '/admin/security': typeof AdminAdminSecurityRouteWithChildren
   '/admin/settings': typeof AdminAdminSettingsRoute
   '/admin': typeof AdminAdminIndexRoute
   '/admin/pages/$id': typeof AdminAdminPagesIdRoute
   '/admin/pages/new': typeof AdminAdminPagesNewRoute
+  '/admin/security/cloudflare': typeof AdminAdminSecurityCloudflareRoute
   '/admin/pages': typeof AdminAdminPagesIndexRoute
 }
 export interface FileRoutesById {
@@ -151,10 +168,12 @@ export interface FileRoutesById {
   '/_admin/admin/comments': typeof AdminAdminCommentsRoute
   '/_admin/admin/pages': typeof AdminAdminPagesRouteWithChildren
   '/_admin/admin/posts': typeof AdminAdminPostsRoute
+  '/_admin/admin/security': typeof AdminAdminSecurityRouteWithChildren
   '/_admin/admin/settings': typeof AdminAdminSettingsRoute
   '/_admin/admin/': typeof AdminAdminIndexRoute
   '/_admin/admin/pages/$id': typeof AdminAdminPagesIdRoute
   '/_admin/admin/pages/new': typeof AdminAdminPagesNewRoute
+  '/_admin/admin/security/cloudflare': typeof AdminAdminSecurityCloudflareRoute
   '/_admin/admin/pages/': typeof AdminAdminPagesIndexRoute
 }
 export interface FileRouteTypes {
@@ -170,10 +189,12 @@ export interface FileRouteTypes {
     | '/admin/comments'
     | '/admin/pages'
     | '/admin/posts'
+    | '/admin/security'
     | '/admin/settings'
     | '/admin/'
     | '/admin/pages/$id'
     | '/admin/pages/new'
+    | '/admin/security/cloudflare'
     | '/admin/pages/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -185,10 +206,12 @@ export interface FileRouteTypes {
     | '/admin/appearance'
     | '/admin/comments'
     | '/admin/posts'
+    | '/admin/security'
     | '/admin/settings'
     | '/admin'
     | '/admin/pages/$id'
     | '/admin/pages/new'
+    | '/admin/security/cloudflare'
     | '/admin/pages'
   id:
     | '__root__'
@@ -203,10 +226,12 @@ export interface FileRouteTypes {
     | '/_admin/admin/comments'
     | '/_admin/admin/pages'
     | '/_admin/admin/posts'
+    | '/_admin/admin/security'
     | '/_admin/admin/settings'
     | '/_admin/admin/'
     | '/_admin/admin/pages/$id'
     | '/_admin/admin/pages/new'
+    | '/_admin/admin/security/cloudflare'
     | '/_admin/admin/pages/'
   fileRoutesById: FileRoutesById
 }
@@ -283,6 +308,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAdminSettingsRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/_admin/admin/security': {
+      id: '/_admin/admin/security'
+      path: '/admin/security'
+      fullPath: '/admin/security'
+      preLoaderRoute: typeof AdminAdminSecurityRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/_admin/admin/posts': {
       id: '/_admin/admin/posts'
       path: '/admin/posts'
@@ -318,6 +350,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAdminPagesIndexRouteImport
       parentRoute: typeof AdminAdminPagesRoute
     }
+    '/_admin/admin/security/cloudflare': {
+      id: '/_admin/admin/security/cloudflare'
+      path: '/cloudflare'
+      fullPath: '/admin/security/cloudflare'
+      preLoaderRoute: typeof AdminAdminSecurityCloudflareRouteImport
+      parentRoute: typeof AdminAdminSecurityRoute
+    }
     '/_admin/admin/pages/new': {
       id: '/_admin/admin/pages/new'
       path: '/new'
@@ -351,11 +390,23 @@ const AdminAdminPagesRouteWithChildren = AdminAdminPagesRoute._addFileChildren(
   AdminAdminPagesRouteChildren,
 )
 
+interface AdminAdminSecurityRouteChildren {
+  AdminAdminSecurityCloudflareRoute: typeof AdminAdminSecurityCloudflareRoute
+}
+
+const AdminAdminSecurityRouteChildren: AdminAdminSecurityRouteChildren = {
+  AdminAdminSecurityCloudflareRoute: AdminAdminSecurityCloudflareRoute,
+}
+
+const AdminAdminSecurityRouteWithChildren =
+  AdminAdminSecurityRoute._addFileChildren(AdminAdminSecurityRouteChildren)
+
 interface AdminRouteRouteChildren {
   AdminAdminAppearanceRoute: typeof AdminAdminAppearanceRoute
   AdminAdminCommentsRoute: typeof AdminAdminCommentsRoute
   AdminAdminPagesRoute: typeof AdminAdminPagesRouteWithChildren
   AdminAdminPostsRoute: typeof AdminAdminPostsRoute
+  AdminAdminSecurityRoute: typeof AdminAdminSecurityRouteWithChildren
   AdminAdminSettingsRoute: typeof AdminAdminSettingsRoute
   AdminAdminIndexRoute: typeof AdminAdminIndexRoute
 }
@@ -365,6 +416,7 @@ const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminAdminCommentsRoute: AdminAdminCommentsRoute,
   AdminAdminPagesRoute: AdminAdminPagesRouteWithChildren,
   AdminAdminPostsRoute: AdminAdminPostsRoute,
+  AdminAdminSecurityRoute: AdminAdminSecurityRouteWithChildren,
   AdminAdminSettingsRoute: AdminAdminSettingsRoute,
   AdminAdminIndexRoute: AdminAdminIndexRoute,
 }

@@ -10,6 +10,8 @@ import {
   Pin,
   Plug,
   Settings,
+  ShieldCheck,
+
   Users,
   Wrench,
   X,

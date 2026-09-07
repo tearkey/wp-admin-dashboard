@@ -98,15 +98,27 @@ const MENU: MenuItem[] = [
     submenu: [{ label: "All Users" }, { label: "Add New User" }, { label: "Profile" }],
   },
   {
+    label: "Security",
+    icon: ShieldCheck,
+    to: "/admin/security",
+    submenu: [
+      { label: "Overview", to: "/admin/security" },
+      { label: "Cloudflare", to: "/admin/security/cloudflare" },
+    ],
+  },
+  {
     label: "Tools",
     icon: Wrench,
+    to: "/admin/tools/performance",
     submenu: [
+      { label: "Performance", to: "/admin/tools/performance" },
       { label: "Available Tools" },
       { label: "Import" },
       { label: "Export" },
       { label: "Site Health" },
     ],
   },
+
   {
     label: "Settings",
     icon: Settings,

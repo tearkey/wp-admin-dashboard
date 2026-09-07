@@ -12,10 +12,23 @@ Maintained by [Techtrick Technologies](https://www.techtrick.com.bd).
 - List tables for Posts, Pages and Comments with bulk actions, filters and row actions
 - Per-table column visibility, row density (default / compact) and a one-click reset
 - Screen Options and Help drawers
+- Theme customizer with per-device (desktop / tablet / mobile) overrides for header,
+  footer and page parts — inherited desktop → tablet → mobile, resolved on the public
+  site with CSS only
+- Three admin layouts: desktop sidebar, tablet icon rail, mobile bottom tab bar with
+  full-screen drawers, 44px tap targets and safe-area insets
+- Security screen with posture checks, rate limiting, 2FA, IP allow/deny and header
+  toggles, plus a Cloudflare panel (zone analytics, WAF rules, security level, Bot Fight
+  Mode, Always Use HTTPS, cache purge) driven by the real Cloudflare API v4
+- Performance & Optimizer screen using the real Google PageSpeed Insights API for mobile
+  and desktop, Core Web Vitals cards, heaviest-resource chart, opportunities with
+  estimated savings and a score history trend — plus image optimisation, database tools
+  and file cleanup with a dry-run mode
 - Mobile-first: off-canvas sidebar with focus trapping, sticky filter bar, collapsible widgets
 - All UI state (sidebar, widgets, filters, columns, density, scroll position) persists in
   `localStorage` and syncs live across browser tabs
 - Fully typed, SSR-safe, zero backend required (ships with mock data)
+
 
 ## Quick start
 

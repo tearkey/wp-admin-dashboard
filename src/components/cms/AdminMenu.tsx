@@ -25,7 +25,11 @@ type AdminPath =
   | "/admin/pages/new"
   | "/admin/appearance"
   | "/admin/comments"
+  | "/admin/security"
+  | "/admin/security/cloudflare"
+  | "/admin/tools/performance"
   | "/admin/settings";
+
 
 interface SubItem {
   label: string;

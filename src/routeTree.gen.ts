@@ -17,6 +17,7 @@ import { Route as SiteIndexRouteImport } from './routes/site.index'
 import { Route as WpAdminSplatRouteImport } from './routes/wp-admin.$'
 import { Route as SiteSlugRouteImport } from './routes/site.$slug'
 import { Route as AdminAdminIndexRouteImport } from './routes/_admin/admin.index'
+import { Route as AdminAdminThemePartsRouteImport } from './routes/_admin/admin.theme-parts'
 import { Route as AdminAdminSettingsRouteImport } from './routes/_admin/admin.settings'
 import { Route as AdminAdminPostsRouteImport } from './routes/_admin/admin.posts'
 import { Route as AdminAdminPagesRouteImport } from './routes/_admin/admin.pages'
@@ -66,6 +67,11 @@ const SiteSlugRoute = SiteSlugRouteImport.update({
 const AdminAdminIndexRoute = AdminAdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminAdminThemePartsRoute = AdminAdminThemePartsRouteImport.update({
+  id: '/admin/theme-parts',
+  path: '/admin/theme-parts',
   getParentRoute: () => AdminRouteRoute,
 } as any)
 const AdminAdminSettingsRoute = AdminAdminSettingsRouteImport.update({
@@ -138,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/admin/pages': typeof AdminAdminPagesRouteWithChildren
   '/admin/posts': typeof AdminAdminPostsRoute
   '/admin/settings': typeof AdminAdminSettingsRoute
+  '/admin/theme-parts': typeof AdminAdminThemePartsRoute
   '/admin/': typeof AdminAdminIndexRoute
   '/admin/pages/$id': typeof AdminAdminPagesIdRoute
   '/admin/pages/new': typeof AdminAdminPagesNewRoute
@@ -156,6 +163,7 @@ export interface FileRoutesByTo {
   '/admin/comments': typeof AdminAdminCommentsRoute
   '/admin/posts': typeof AdminAdminPostsRoute
   '/admin/settings': typeof AdminAdminSettingsRoute
+  '/admin/theme-parts': typeof AdminAdminThemePartsRoute
   '/admin': typeof AdminAdminIndexRoute
   '/admin/pages/$id': typeof AdminAdminPagesIdRoute
   '/admin/pages/new': typeof AdminAdminPagesNewRoute
@@ -178,6 +186,7 @@ export interface FileRoutesById {
   '/_admin/admin/pages': typeof AdminAdminPagesRouteWithChildren
   '/_admin/admin/posts': typeof AdminAdminPostsRoute
   '/_admin/admin/settings': typeof AdminAdminSettingsRoute
+  '/_admin/admin/theme-parts': typeof AdminAdminThemePartsRoute
   '/_admin/admin/': typeof AdminAdminIndexRoute
   '/_admin/admin/pages/$id': typeof AdminAdminPagesIdRoute
   '/_admin/admin/pages/new': typeof AdminAdminPagesNewRoute
@@ -200,6 +209,7 @@ export interface FileRouteTypes {
     | '/admin/pages'
     | '/admin/posts'
     | '/admin/settings'
+    | '/admin/theme-parts'
     | '/admin/'
     | '/admin/pages/$id'
     | '/admin/pages/new'
@@ -218,6 +228,7 @@ export interface FileRouteTypes {
     | '/admin/comments'
     | '/admin/posts'
     | '/admin/settings'
+    | '/admin/theme-parts'
     | '/admin'
     | '/admin/pages/$id'
     | '/admin/pages/new'
@@ -239,6 +250,7 @@ export interface FileRouteTypes {
     | '/_admin/admin/pages'
     | '/_admin/admin/posts'
     | '/_admin/admin/settings'
+    | '/_admin/admin/theme-parts'
     | '/_admin/admin/'
     | '/_admin/admin/pages/$id'
     | '/_admin/admin/pages/new'
@@ -312,6 +324,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminAdminIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/_admin/admin/theme-parts': {
+      id: '/_admin/admin/theme-parts'
+      path: '/admin/theme-parts'
+      fullPath: '/admin/theme-parts'
+      preLoaderRoute: typeof AdminAdminThemePartsRouteImport
       parentRoute: typeof AdminRouteRoute
     }
     '/_admin/admin/settings': {
@@ -416,6 +435,7 @@ interface AdminRouteRouteChildren {
   AdminAdminPagesRoute: typeof AdminAdminPagesRouteWithChildren
   AdminAdminPostsRoute: typeof AdminAdminPostsRoute
   AdminAdminSettingsRoute: typeof AdminAdminSettingsRoute
+  AdminAdminThemePartsRoute: typeof AdminAdminThemePartsRoute
   AdminAdminIndexRoute: typeof AdminAdminIndexRoute
   AdminAdminSecurityCloudflareRoute: typeof AdminAdminSecurityCloudflareRoute
   AdminAdminToolsPerformanceRoute: typeof AdminAdminToolsPerformanceRoute
@@ -428,6 +448,7 @@ const AdminRouteRouteChildren: AdminRouteRouteChildren = {
   AdminAdminPagesRoute: AdminAdminPagesRouteWithChildren,
   AdminAdminPostsRoute: AdminAdminPostsRoute,
   AdminAdminSettingsRoute: AdminAdminSettingsRoute,
+  AdminAdminThemePartsRoute: AdminAdminThemePartsRoute,
   AdminAdminIndexRoute: AdminAdminIndexRoute,
   AdminAdminSecurityCloudflareRoute: AdminAdminSecurityCloudflareRoute,
   AdminAdminToolsPerformanceRoute: AdminAdminToolsPerformanceRoute,

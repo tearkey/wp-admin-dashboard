@@ -88,7 +88,13 @@ function PerformanceScreen() {
   const cleanFn = useServerFn(runFileCleanup);
   const purgeFn = useServerFn(purgeSiteCache);
 
-  const [url, setUrl] = useState("https://techtrick-cms-dashboard.lovable.app/site");
+  const [url, setUrl] = useState("");
+
+  // Default to this site's public page once the browser knows its own origin.
+  useEffect(() => {
+    setUrl((current) => current || `${window.location.origin}/site`);
+  }, []);
+
   const [running, setRunning] = useState(false);
   const [reports, setReports] = useState<Record<Strategy, SpeedReport | null>>({
     mobile: null,

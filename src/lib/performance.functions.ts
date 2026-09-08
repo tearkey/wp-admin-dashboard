@@ -132,7 +132,9 @@ export const runSpeedTest = createServerFn({ method: "POST" })
     }));
 
     const opportunities: Opportunity[] = Object.values(audits)
-      .filter((a) => (a.details?.overallSavingsMs ?? 0) > 0 || (a.details?.overallSavingsBytes ?? 0) > 0)
+      .filter(
+        (a) => (a.details?.overallSavingsMs ?? 0) > 0 || (a.details?.overallSavingsBytes ?? 0) > 0,
+      )
       .map((a) => ({
         id: a.id ?? a.title ?? "audit",
         title: a.title ?? "Opportunity",
@@ -194,9 +196,27 @@ export interface CleanupItem {
 }
 
 const SAMPLE_IMAGES: ImageIssue[] = [
-  { path: "/uploads/2026/01/hero-original.jpg", bytes: 2_450_000, width: 4032, height: 3024, reason: "Oversized for its largest display size" },
-  { path: "/uploads/2026/02/team.png", bytes: 1_180_000, width: 1600, height: 900, reason: "PNG that would be smaller as WebP" },
-  { path: "/uploads/2025/11/banner.jpg", bytes: 860_000, width: 2400, height: 800, reason: "No AVIF/WebP variant generated" },
+  {
+    path: "/uploads/2026/01/hero-original.jpg",
+    bytes: 2_450_000,
+    width: 4032,
+    height: 3024,
+    reason: "Oversized for its largest display size",
+  },
+  {
+    path: "/uploads/2026/02/team.png",
+    bytes: 1_180_000,
+    width: 1600,
+    height: 900,
+    reason: "PNG that would be smaller as WebP",
+  },
+  {
+    path: "/uploads/2025/11/banner.jpg",
+    bytes: 860_000,
+    width: 2400,
+    height: 800,
+    reason: "No AVIF/WebP variant generated",
+  },
 ];
 
 const SAMPLE_TABLES: DbTable[] = [
@@ -251,7 +271,13 @@ export const runDatabaseAction = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) =>
     z
       .object({
-        action: z.enum(["optimize", "repair", "clean-revisions", "clean-transients", "clean-orphans"]),
+        action: z.enum([
+          "optimize",
+          "repair",
+          "clean-revisions",
+          "clean-transients",
+          "clean-orphans",
+        ]),
         tables: z.array(z.string().min(1)).max(200).default([]),
         dryRun: z.boolean(),
       })
@@ -309,5 +335,10 @@ export const purgeSiteCache = createServerFn({ method: "POST" })
       body: data,
     });
     if (live?.connected) return { ok: true, persisted: true as const, purged: live.data.purged };
-    return { ok: true, persisted: false as const, purged: data.urls.length, message: live?.message };
+    return {
+      ok: true,
+      persisted: false as const,
+      purged: data.urls.length,
+      message: live?.message,
+    };
   });

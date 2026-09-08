@@ -71,6 +71,9 @@ export async function hostingRequest<T>(
   }
 }
 
-export function mock<T>(data: T, message = "Sample data — hosting API not connected."): ProviderResult<T> {
+export function mock<T>(
+  data: T,
+  message = "Sample data — hosting API not connected.",
+): ProviderResult<T> {
   return { connected: false, source: "mock", message, data };
 }

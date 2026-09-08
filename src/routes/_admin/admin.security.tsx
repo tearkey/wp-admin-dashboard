@@ -76,8 +76,14 @@ function SecurityScreen() {
   const onSave = async () => {
     const next: Controls = {
       ...controls,
-      allowList: allowText.split("\n").map((s) => s.trim()).filter(Boolean),
-      denyList: denyText.split("\n").map((s) => s.trim()).filter(Boolean),
+      allowList: allowText
+        .split("\n")
+        .map((s) => s.trim())
+        .filter(Boolean),
+      denyList: denyText
+        .split("\n")
+        .map((s) => s.trim())
+        .filter(Boolean),
     };
     setControls(next);
     setSaving(true);
@@ -216,9 +222,7 @@ function SecurityScreen() {
                 <input
                   type="checkbox"
                   checked={controls.rateLimitEnabled}
-                  onChange={(e) =>
-                    setControls({ ...controls, rateLimitEnabled: e.target.checked })
-                  }
+                  onChange={(e) => setControls({ ...controls, rateLimitEnabled: e.target.checked })}
                 />
                 Rate-limit login attempts
               </label>

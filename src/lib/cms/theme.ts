@@ -101,6 +101,8 @@ export interface FooterColumn {
 export interface ThemePart {
   id: string;
   label: string;
+  /** Optional note describing where this template is used. */
+  description?: string;
   enabled: boolean;
   heading: string;
   body: string;

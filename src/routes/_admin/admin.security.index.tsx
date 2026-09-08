@@ -10,7 +10,7 @@ import { usePersistentState } from "@/hooks/use-persistent-state";
 import { getSecurityPosture, saveSecurityControls } from "@/lib/security.functions";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/_admin/admin/security")({
+export const Route = createFileRoute("/_admin/admin/security/")({
   head: () => ({
     meta: [
       { title: "Security — Techtrick CMS" },
@@ -76,8 +76,14 @@ function SecurityScreen() {
   const onSave = async () => {
     const next: Controls = {
       ...controls,
-      allowList: allowText.split("\n").map((s) => s.trim()).filter(Boolean),
-      denyList: denyText.split("\n").map((s) => s.trim()).filter(Boolean),
+      allowList: allowText
+        .split("\n")
+        .map((s) => s.trim())
+        .filter(Boolean),
+      denyList: denyText
+        .split("\n")
+        .map((s) => s.trim())
+        .filter(Boolean),
     };
     setControls(next);
     setSaving(true);
@@ -216,9 +222,7 @@ function SecurityScreen() {
                 <input
                   type="checkbox"
                   checked={controls.rateLimitEnabled}
-                  onChange={(e) =>
-                    setControls({ ...controls, rateLimitEnabled: e.target.checked })
-                  }
+                  onChange={(e) => setControls({ ...controls, rateLimitEnabled: e.target.checked })}
                 />
                 Rate-limit login attempts
               </label>

@@ -68,7 +68,10 @@ async function cf<T>(
     });
     const json = (await res.json()) as CfEnvelope<T>;
     if (!res.ok || !json.success) {
-      return { ok: false, message: json.errors?.[0]?.message ?? `Cloudflare returned ${res.status}.` };
+      return {
+        ok: false,
+        message: json.errors?.[0]?.message ?? `Cloudflare returned ${res.status}.`,
+      };
     }
     return { ok: true, result: json.result };
   } catch {
@@ -130,7 +133,9 @@ export const getCloudflareSettings = createServerFn({ method: "GET" }).handler(
 
 export const setCloudflareSetting = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) =>
-    z.object({ id: z.string().min(1), value: z.union([z.string(), z.boolean(), z.number()]) }).parse(d),
+    z
+      .object({ id: z.string().min(1), value: z.union([z.string(), z.boolean(), z.number()]) })
+      .parse(d),
   )
   .handler(async ({ data }) => {
     const res = await cf(`/zones/{zone}/settings/${encodeURIComponent(data.id)}`, {
@@ -211,7 +216,9 @@ export const createFirewallRule = createServerFn({ method: "POST" })
 
 export const toggleFirewallRule = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) =>
-    z.object({ rulesetId: z.string().min(1), ruleId: z.string().min(1), enabled: z.boolean() }).parse(d),
+    z
+      .object({ rulesetId: z.string().min(1), ruleId: z.string().min(1), enabled: z.boolean() })
+      .parse(d),
   )
   .handler(async ({ data }) => {
     const res = await cf(`/zones/{zone}/rulesets/${data.rulesetId}/rules/${data.ruleId}`, {
@@ -319,12 +326,35 @@ const SAMPLE_POSTURE: SecurityPosture = {
     { id: "csp", label: "Content-Security-Policy", status: "fail", detail: "Header missing." },
     { id: "xfo", label: "X-Frame-Options", status: "pass", detail: "SAMEORIGIN." },
     { id: "perms", label: "File permissions", status: "pass", detail: "No world-writable files." },
-    { id: "integrity", label: "Core file integrity", status: "pass", detail: "No changes detected." },
+    {
+      id: "integrity",
+      label: "Core file integrity",
+      status: "pass",
+      detail: "No changes detected.",
+    },
   ],
   events: [
-    { id: "e1", at: "10:22", kind: "Blocked", ip: "198.51.100.24", detail: "SQL injection pattern" },
-    { id: "e2", at: "09:58", kind: "Failed login", ip: "203.0.113.9", detail: "admin — 5 attempts" },
-    { id: "e3", at: "08:14", kind: "Rate limited", ip: "192.0.2.77", detail: "120 req/min on /admin" },
+    {
+      id: "e1",
+      at: "10:22",
+      kind: "Blocked",
+      ip: "198.51.100.24",
+      detail: "SQL injection pattern",
+    },
+    {
+      id: "e2",
+      at: "09:58",
+      kind: "Failed login",
+      ip: "203.0.113.9",
+      detail: "admin — 5 attempts",
+    },
+    {
+      id: "e3",
+      at: "08:14",
+      kind: "Rate limited",
+      ip: "192.0.2.77",
+      detail: "120 req/min on /admin",
+    },
   ],
 };
 

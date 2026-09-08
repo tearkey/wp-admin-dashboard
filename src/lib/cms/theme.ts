@@ -272,7 +272,11 @@ export const DEFAULT_THEME: ThemeConfig = {
   snippets: { head: "", bodyOpen: "", bodyClose: "" },
 };
 
-const ALIGN_CSS: Record<Align, string> = { left: "flex-start", center: "center", right: "flex-end" };
+const ALIGN_CSS: Record<Align, string> = {
+  left: "flex-start",
+  center: "center",
+  right: "flex-end",
+};
 const TEXT_ALIGN: Record<Align, string> = { left: "left", center: "center", right: "right" };
 
 /** CSS custom properties for one resolved tier of the whole theme. */

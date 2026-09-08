@@ -342,9 +342,7 @@ export function ResponsivePanel({ theme, update, device }: PanelProps) {
               name="hidden"
               label="Visibility"
               onChange={onChange}
-              render={(v, set) => (
-                <ToggleControl value={v} set={set} text="Hide on this device" />
-              )}
+              render={(v, set) => <ToggleControl value={v} set={set} text="Hide on this device" />}
             />
             <TierField
               tiers={tiers}

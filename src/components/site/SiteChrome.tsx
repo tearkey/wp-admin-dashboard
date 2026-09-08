@@ -1,14 +1,6 @@
 import { useState, type CSSProperties } from "react";
 import { Link } from "@tanstack/react-router";
-import {
-  Facebook,
-  Github,
-  Instagram,
-  Linkedin,
-  Menu,
-  Twitter,
-  Youtube,
-} from "lucide-react";
+import { Facebook, Github, Instagram, Linkedin, Menu, Twitter, Youtube } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import {
   themeStylesheet,
@@ -205,10 +197,7 @@ export function SiteFooter({
         <div>
           <div className="text-[15px] font-semibold text-tt-text">{f.logoText}</div>
           <p className="mt-1 text-[13px] text-tt-muted">{f.about}</p>
-          <div
-            style={{ display: "var(--tt-f-social, flex)" }}
-            className="mt-3 flex-wrap gap-2"
-          >
+          <div style={{ display: "var(--tt-f-social, flex)" }} className="mt-3 flex-wrap gap-2">
             {f.social.map((s) => {
               const Icon = SOCIAL_ICON[s.network];
               const inner = <Icon size={16} />;

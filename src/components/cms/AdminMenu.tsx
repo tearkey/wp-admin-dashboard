@@ -11,7 +11,6 @@ import {
   Plug,
   Settings,
   ShieldCheck,
-
   Users,
   Wrench,
   X,
@@ -31,7 +30,6 @@ type AdminPath =
   | "/admin/security/cloudflare"
   | "/admin/tools/performance"
   | "/admin/settings";
-
 
 interface SubItem {
   label: string;

@@ -206,8 +206,21 @@ export function SiteFooter({
         className="mx-auto grid max-w-5xl gap-6 px-4"
       >
         <div>
-          <div className="text-[15px] font-semibold text-tt-text">{f.logoText}</div>
-          <p className="mt-1 text-[13px] text-tt-muted">{f.about}</p>
+          <Editable
+            as="div"
+            value={f.logoText}
+            label="Footer logo text"
+            className="text-[15px] font-semibold text-tt-text"
+            commit={(prev, text) => ({ ...prev, footer: { ...prev.footer, logoText: text } })}
+          />
+          <Editable
+            as="p"
+            multiline
+            value={f.about}
+            label="Footer about text"
+            className="mt-1 text-[13px] text-tt-muted"
+            commit={(prev, text) => ({ ...prev, footer: { ...prev.footer, about: text } })}
+          />
           <div style={{ display: "var(--tt-f-social, flex)" }} className="mt-3 flex-wrap gap-2">
             {f.social.map((s) => {
               const Icon = SOCIAL_ICON[s.network];
@@ -282,7 +295,11 @@ export function SiteFooter({
         )}
       </div>
       <div className="border-t border-tt-border py-3 text-center text-[12px] text-tt-muted">
-        {f.copyright}
+        <Editable
+          value={f.copyright}
+          label="Footer copyright"
+          commit={(prev, text) => ({ ...prev, footer: { ...prev.footer, copyright: text } })}
+        />
       </div>
     </footer>
   );
@@ -300,8 +317,27 @@ export function PartBlock({ part }: { part: ThemeConfig["parts"][number] }) {
       }}
       className="rounded border border-tt-border bg-tt-surface px-4"
     >
-      <h2 className="text-[17px] font-semibold text-tt-text">{part.heading}</h2>
-      <p className="mt-1 text-[14px] text-tt-muted">{part.body}</p>
+      <Editable
+        as="h2"
+        value={part.heading}
+        label={`${part.label} heading`}
+        className="text-[17px] font-semibold text-tt-text"
+        commit={(prev, text) => ({
+          ...prev,
+          parts: prev.parts.map((p) => (p.id === part.id ? { ...p, heading: text } : p)),
+        })}
+      />
+      <Editable
+        as="p"
+        multiline
+        value={part.body}
+        label={`${part.label} body`}
+        className="mt-1 text-[14px] text-tt-muted"
+        commit={(prev, text) => ({
+          ...prev,
+          parts: prev.parts.map((p) => (p.id === part.id ? { ...p, body: text } : p)),
+        })}
+      />
     </section>
   );
 }

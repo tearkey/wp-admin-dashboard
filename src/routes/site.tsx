@@ -5,9 +5,8 @@ import { useCmsPages } from "@/hooks/use-cms-pages";
 import { useThemeConfig } from "@/hooks/use-theme-config";
 
 export const Route = createFileRoute("/site")({
-  validateSearch: (search: Record<string, unknown>) => ({
-    edit: search.edit === "1" || search.edit === true ? true : undefined,
-  }),
+  validateSearch: (search: Record<string, unknown>): { edit?: true } =>
+    search.edit === "1" || search.edit === true ? { edit: true } : {},
   component: SiteLayout,
 });
 

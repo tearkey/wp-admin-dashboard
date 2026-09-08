@@ -10,6 +10,7 @@ import {
   type ThemeConfig,
 } from "@/lib/cms/theme";
 import type { CmsPage } from "@/lib/cms/types";
+import { Editable } from "@/components/site/live-edit";
 import { cn } from "@/lib/utils";
 
 const SOCIAL_ICON: Record<SocialNetwork, LucideIcon> = {
@@ -111,13 +112,23 @@ export function SiteHeader({ theme, inert }: ChromeProps) {
               {(h.logoText || "T").charAt(0).toUpperCase()}
             </span>
           )}
-          <span className="truncate text-[16px] font-semibold text-tt-text">{h.logoText}</span>
+          <Editable
+            value={h.logoText}
+            label="Header logo text"
+            className="truncate text-[16px] font-semibold text-tt-text"
+            commit={(prev, text) => ({ ...prev, header: { ...prev.header, logoText: text } })}
+          />
           {h.tagline && (
             <span
               style={{ display: "var(--tt-h-tagline, inline)" }}
               className="truncate text-[12px] text-tt-muted"
             >
-              — {h.tagline}
+              —{" "}
+              <Editable
+                value={h.tagline}
+                label="Header tagline"
+                commit={(prev, text) => ({ ...prev, header: { ...prev.header, tagline: text } })}
+              />
             </span>
           )}
         </div>

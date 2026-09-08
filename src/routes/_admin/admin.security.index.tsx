@@ -10,7 +10,7 @@ import { usePersistentState } from "@/hooks/use-persistent-state";
 import { getSecurityPosture, saveSecurityControls } from "@/lib/security.functions";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/_admin/admin/security")({
+export const Route = createFileRoute("/_admin/admin/security/")({
   head: () => ({
     meta: [
       { title: "Security — Techtrick CMS" },

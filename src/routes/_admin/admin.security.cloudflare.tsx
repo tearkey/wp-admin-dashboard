@@ -118,7 +118,10 @@ function CloudflareScreen() {
   const settingValue = (id: string) => settingsQ.data?.settings.find((s) => s.id === id)?.value;
 
   const doPurge = async () => {
-    const values = purgeValues.split("\n").map((s) => s.trim()).filter(Boolean);
+    const values = purgeValues
+      .split("\n")
+      .map((s) => s.trim())
+      .filter(Boolean);
     const res = await purge({ data: { mode: purgeMode, values } });
     if (res.ok) toast.success("Cache purge requested.");
     else toast.error(res.message ?? "Purge failed.");
@@ -179,7 +182,9 @@ function CloudflareScreen() {
       <div className="grid gap-3 lg:grid-cols-2">
         <section className={card}>
           <h2 className="mb-2 text-[15px] font-semibold text-tt-text">Traffic (last 24h)</h2>
-          {!connected && <p className="text-[13px] text-tt-muted">Connect a zone to see traffic.</p>}
+          {!connected && (
+            <p className="text-[13px] text-tt-muted">Connect a zone to see traffic.</p>
+          )}
           {connected && analyticsQ.data && !analyticsQ.data.ok && (
             <p className="text-[13px] text-tt-muted">{analyticsQ.data.message}</p>
           )}
@@ -281,7 +286,9 @@ function CloudflareScreen() {
 
         <section className={cn(card, "lg:col-span-2")}>
           <h2 className="mb-2 text-[15px] font-semibold text-tt-text">Firewall rules</h2>
-          {!connected && <p className="text-[13px] text-tt-muted">Connect a zone to manage rules.</p>}
+          {!connected && (
+            <p className="text-[13px] text-tt-muted">Connect a zone to manage rules.</p>
+          )}
           {connected && rulesQ.data && !rulesQ.data.ok && (
             <p className="text-[13px] text-tt-muted">{rulesQ.data.message}</p>
           )}

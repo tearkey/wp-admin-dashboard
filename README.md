@@ -29,7 +29,6 @@ Maintained by [Techtrick Technologies](https://www.techtrick.com.bd).
   `localStorage` and syncs live across browser tabs
 - Fully typed, SSR-safe, zero backend required (ships with mock data)
 
-
 ## Quick start
 
 ```sh

@@ -174,9 +174,7 @@ function PerformanceScreen() {
           </button>
         </div>
 
-        {active && !active.ok && (
-          <p className="mt-2 text-[13px] text-tt-red">{active.message}</p>
-        )}
+        {active && !active.ok && <p className="mt-2 text-[13px] text-tt-red">{active.message}</p>}
 
         <div className="mt-3 grid gap-3 md:grid-cols-2">
           {(["mobile", "desktop"] as Strategy[]).map((s) => {
@@ -186,7 +184,12 @@ function PerformanceScreen() {
                 <div className="mb-2 flex items-center gap-2">
                   <Gauge size={15} className="text-tt-muted" aria-hidden="true" />
                   <span className="text-[13px] font-semibold text-tt-text capitalize">{s}</span>
-                  <span className={cn("ml-auto text-[24px] font-semibold", scoreColor(r?.performanceScore ?? null))}>
+                  <span
+                    className={cn(
+                      "ml-auto text-[24px] font-semibold",
+                      scoreColor(r?.performanceScore ?? null),
+                    )}
+                  >
                     {r?.performanceScore ?? "—"}
                   </span>
                 </div>
@@ -194,7 +197,12 @@ function PerformanceScreen() {
                   {(r?.vitals ?? []).map((v) => (
                     <li key={v.id} className="rounded border border-tt-border p-1.5">
                       <div className="truncate text-[11px] text-tt-muted">{v.label}</div>
-                      <div className={cn("text-[14px] font-semibold", scoreColor(v.score === null ? null : v.score * 100))}>
+                      <div
+                        className={cn(
+                          "text-[14px] font-semibold",
+                          scoreColor(v.score === null ? null : v.score * 100),
+                        )}
+                      >
                         {v.display}
                       </div>
                     </li>
@@ -226,7 +234,13 @@ function PerformanceScreen() {
                 >
                   <CartesianGrid stroke="var(--tt-border)" horizontal={false} />
                   <XAxis type="number" stroke="var(--tt-muted)" fontSize={11} />
-                  <YAxis type="category" dataKey="name" width={130} stroke="var(--tt-muted)" fontSize={11} />
+                  <YAxis
+                    type="category"
+                    dataKey="name"
+                    width={130}
+                    stroke="var(--tt-muted)"
+                    fontSize={11}
+                  />
                   <Tooltip
                     contentStyle={{
                       background: "var(--tt-surface)",
@@ -335,7 +349,9 @@ function PerformanceScreen() {
             onClick={async () => {
               const res = await purgeFn({ data: { urls: [] } });
               toast.success(
-                res.persisted ? "Site cache purged." : "Hosting API not connected — nothing purged.",
+                res.persisted
+                  ? "Site cache purged."
+                  : "Hosting API not connected — nothing purged.",
               );
             }}
           >

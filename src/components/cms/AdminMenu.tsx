@@ -25,6 +25,7 @@ type AdminPath =
   | "/admin/pages"
   | "/admin/pages/new"
   | "/admin/appearance"
+  | "/admin/theme-parts"
   | "/admin/comments"
   | "/admin/security"
   | "/admin/security/cloudflare"
@@ -83,6 +84,7 @@ const MENU: MenuItem[] = [
     to: "/admin/appearance",
     submenu: [
       { label: "Theme Customizer", to: "/admin/appearance" },
+      { label: "Theme Parts", to: "/admin/theme-parts" },
       { label: "Themes" },
       { label: "Patterns" },
     ],

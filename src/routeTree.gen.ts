@@ -9,39 +9,44 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AdminRouteRouteImport } from './routes/_admin/route'
 import { Route as SiteRouteImport } from './routes/site'
-import { Route as SiteIndexRouteImport } from './routes/site.index'
-import { Route as SiteSlugRouteImport } from './routes/site.$slug'
+import { Route as AdminRouteRouteImport } from './routes/_admin/route'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as WpAdminIndexRouteImport } from './routes/wp-admin.index'
+import { Route as SiteIndexRouteImport } from './routes/site.index'
 import { Route as WpAdminSplatRouteImport } from './routes/wp-admin.$'
+import { Route as SiteSlugRouteImport } from './routes/site.$slug'
 import { Route as AdminAdminIndexRouteImport } from './routes/_admin/admin.index'
-import { Route as AdminAdminAppearanceRouteImport } from './routes/_admin/admin.appearance'
-import { Route as AdminAdminCommentsRouteImport } from './routes/_admin/admin.comments'
-import { Route as AdminAdminPagesRouteImport } from './routes/_admin/admin.pages'
-import { Route as AdminAdminPostsRouteImport } from './routes/_admin/admin.posts'
-import { Route as AdminAdminSettingsRouteImport } from './routes/_admin/admin.settings'
 import { Route as AdminAdminThemePartsRouteImport } from './routes/_admin/admin.theme-parts'
-import { Route as AdminAdminPagesIndexRouteImport } from './routes/_admin/admin.pages.index'
-import { Route as AdminAdminPagesIdRouteImport } from './routes/_admin/admin.pages.$id'
-import { Route as AdminAdminPagesNewRouteImport } from './routes/_admin/admin.pages.new'
+import { Route as AdminAdminSettingsRouteImport } from './routes/_admin/admin.settings'
+import { Route as AdminAdminPostsRouteImport } from './routes/_admin/admin.posts'
+import { Route as AdminAdminPagesRouteImport } from './routes/_admin/admin.pages'
+import { Route as AdminAdminCommentsRouteImport } from './routes/_admin/admin.comments'
+import { Route as AdminAdminAppearanceRouteImport } from './routes/_admin/admin.appearance'
 import { Route as AdminAdminSecurityIndexRouteImport } from './routes/_admin/admin.security.index'
-import { Route as AdminAdminSecurityCloudflareRouteImport } from './routes/_admin/admin.security.cloudflare'
+import { Route as AdminAdminPagesIndexRouteImport } from './routes/_admin/admin.pages.index'
 import { Route as AdminAdminToolsPerformanceRouteImport } from './routes/_admin/admin.tools.performance'
+import { Route as AdminAdminSecurityCloudflareRouteImport } from './routes/_admin/admin.security.cloudflare'
+import { Route as AdminAdminPagesNewRouteImport } from './routes/_admin/admin.pages.new'
+import { Route as AdminAdminPagesIdRouteImport } from './routes/_admin/admin.pages.$id'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const SiteRoute = SiteRouteImport.update({
+  id: '/site',
+  path: '/site',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRouteRoute = AdminRouteRouteImport.update({
   id: '/_admin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SiteRoute = SiteRouteImport.update({
-  id: '/site',
-  path: '/site',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WpAdminIndexRoute = WpAdminIndexRouteImport.update({
+  id: '/wp-admin/',
+  path: '/wp-admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SiteIndexRoute = SiteIndexRouteImport.update({
@@ -49,49 +54,19 @@ const SiteIndexRoute = SiteIndexRouteImport.update({
   path: '/',
   getParentRoute: () => SiteRoute,
 } as any)
-const SiteSlugRoute = SiteSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => SiteRoute,
-} as any)
-const WpAdminIndexRoute = WpAdminIndexRouteImport.update({
-  id: '/wp-admin/',
-  path: '/wp-admin/',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const WpAdminSplatRoute = WpAdminSplatRouteImport.update({
   id: '/wp-admin/$',
   path: '/wp-admin/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SiteSlugRoute = SiteSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => SiteRoute,
+} as any)
 const AdminAdminIndexRoute = AdminAdminIndexRouteImport.update({
   id: '/admin/',
   path: '/admin/',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminAdminAppearanceRoute = AdminAdminAppearanceRouteImport.update({
-  id: '/admin/appearance',
-  path: '/admin/appearance',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminAdminCommentsRoute = AdminAdminCommentsRouteImport.update({
-  id: '/admin/comments',
-  path: '/admin/comments',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminAdminPagesRoute = AdminAdminPagesRouteImport.update({
-  id: '/admin/pages',
-  path: '/admin/pages',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminAdminPostsRoute = AdminAdminPostsRouteImport.update({
-  id: '/admin/posts',
-  path: '/admin/posts',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminAdminSettingsRoute = AdminAdminSettingsRouteImport.update({
-  id: '/admin/settings',
-  path: '/admin/settings',
   getParentRoute: () => AdminRouteRoute,
 } as any)
 const AdminAdminThemePartsRoute = AdminAdminThemePartsRouteImport.update({
@@ -99,9 +74,56 @@ const AdminAdminThemePartsRoute = AdminAdminThemePartsRouteImport.update({
   path: '/admin/theme-parts',
   getParentRoute: () => AdminRouteRoute,
 } as any)
+const AdminAdminSettingsRoute = AdminAdminSettingsRouteImport.update({
+  id: '/admin/settings',
+  path: '/admin/settings',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminAdminPostsRoute = AdminAdminPostsRouteImport.update({
+  id: '/admin/posts',
+  path: '/admin/posts',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminAdminPagesRoute = AdminAdminPagesRouteImport.update({
+  id: '/admin/pages',
+  path: '/admin/pages',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminAdminCommentsRoute = AdminAdminCommentsRouteImport.update({
+  id: '/admin/comments',
+  path: '/admin/comments',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminAdminAppearanceRoute = AdminAdminAppearanceRouteImport.update({
+  id: '/admin/appearance',
+  path: '/admin/appearance',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
+const AdminAdminSecurityIndexRoute = AdminAdminSecurityIndexRouteImport.update({
+  id: '/admin/security/',
+  path: '/admin/security/',
+  getParentRoute: () => AdminRouteRoute,
+} as any)
 const AdminAdminPagesIndexRoute = AdminAdminPagesIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AdminAdminPagesRoute,
+} as any)
+const AdminAdminToolsPerformanceRoute =
+  AdminAdminToolsPerformanceRouteImport.update({
+    id: '/admin/tools/performance',
+    path: '/admin/tools/performance',
+    getParentRoute: () => AdminRouteRoute,
+  } as any)
+const AdminAdminSecurityCloudflareRoute =
+  AdminAdminSecurityCloudflareRouteImport.update({
+    id: '/admin/security/cloudflare',
+    path: '/admin/security/cloudflare',
+    getParentRoute: () => AdminRouteRoute,
+  } as any)
+const AdminAdminPagesNewRoute = AdminAdminPagesNewRouteImport.update({
+  id: '/new',
+  path: '/new',
   getParentRoute: () => AdminAdminPagesRoute,
 } as any)
 const AdminAdminPagesIdRoute = AdminAdminPagesIdRouteImport.update({
@@ -109,28 +131,6 @@ const AdminAdminPagesIdRoute = AdminAdminPagesIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => AdminAdminPagesRoute,
 } as any)
-const AdminAdminPagesNewRoute = AdminAdminPagesNewRouteImport.update({
-  id: '/new',
-  path: '/new',
-  getParentRoute: () => AdminAdminPagesRoute,
-} as any)
-const AdminAdminSecurityIndexRoute = AdminAdminSecurityIndexRouteImport.update({
-  id: '/admin/security/',
-  path: '/admin/security/',
-  getParentRoute: () => AdminRouteRoute,
-} as any)
-const AdminAdminSecurityCloudflareRoute =
-  AdminAdminSecurityCloudflareRouteImport.update({
-    id: '/admin/security/cloudflare',
-    path: '/admin/security/cloudflare',
-    getParentRoute: () => AdminRouteRoute,
-  } as any)
-const AdminAdminToolsPerformanceRoute =
-  AdminAdminToolsPerformanceRouteImport.update({
-    id: '/admin/tools/performance',
-    path: '/admin/tools/performance',
-    getParentRoute: () => AdminRouteRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -270,11 +270,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/site': {
+      id: '/site'
+      path: '/site'
+      fullPath: '/site'
+      preLoaderRoute: typeof SiteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_admin': {
@@ -284,11 +284,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/site': {
-      id: '/site'
-      path: '/site'
-      fullPath: '/site'
-      preLoaderRoute: typeof SiteRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/wp-admin/': {
+      id: '/wp-admin/'
+      path: '/wp-admin'
+      fullPath: '/wp-admin/'
+      preLoaderRoute: typeof WpAdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/site/': {
@@ -298,20 +305,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteIndexRouteImport
       parentRoute: typeof SiteRoute
     }
-    '/site/$slug': {
-      id: '/site/$slug'
-      path: '/$slug'
-      fullPath: '/site/$slug'
-      preLoaderRoute: typeof SiteSlugRouteImport
-      parentRoute: typeof SiteRoute
-    }
-    '/wp-admin/': {
-      id: '/wp-admin/'
-      path: '/wp-admin'
-      fullPath: '/wp-admin/'
-      preLoaderRoute: typeof WpAdminIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/wp-admin/$': {
       id: '/wp-admin/$'
       path: '/wp-admin/$'
@@ -319,46 +312,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WpAdminSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/site/$slug': {
+      id: '/site/$slug'
+      path: '/$slug'
+      fullPath: '/site/$slug'
+      preLoaderRoute: typeof SiteSlugRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/_admin/admin/': {
       id: '/_admin/admin/'
       path: '/admin'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminAdminIndexRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/_admin/admin/appearance': {
-      id: '/_admin/admin/appearance'
-      path: '/admin/appearance'
-      fullPath: '/admin/appearance'
-      preLoaderRoute: typeof AdminAdminAppearanceRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/_admin/admin/comments': {
-      id: '/_admin/admin/comments'
-      path: '/admin/comments'
-      fullPath: '/admin/comments'
-      preLoaderRoute: typeof AdminAdminCommentsRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/_admin/admin/pages': {
-      id: '/_admin/admin/pages'
-      path: '/admin/pages'
-      fullPath: '/admin/pages'
-      preLoaderRoute: typeof AdminAdminPagesRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/_admin/admin/posts': {
-      id: '/_admin/admin/posts'
-      path: '/admin/posts'
-      fullPath: '/admin/posts'
-      preLoaderRoute: typeof AdminAdminPostsRouteImport
-      parentRoute: typeof AdminRouteRoute
-    }
-    '/_admin/admin/settings': {
-      id: '/_admin/admin/settings'
-      path: '/admin/settings'
-      fullPath: '/admin/settings'
-      preLoaderRoute: typeof AdminAdminSettingsRouteImport
       parentRoute: typeof AdminRouteRoute
     }
     '/_admin/admin/theme-parts': {
@@ -368,6 +333,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAdminThemePartsRouteImport
       parentRoute: typeof AdminRouteRoute
     }
+    '/_admin/admin/settings': {
+      id: '/_admin/admin/settings'
+      path: '/admin/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminAdminSettingsRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/_admin/admin/posts': {
+      id: '/_admin/admin/posts'
+      path: '/admin/posts'
+      fullPath: '/admin/posts'
+      preLoaderRoute: typeof AdminAdminPostsRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/_admin/admin/pages': {
+      id: '/_admin/admin/pages'
+      path: '/admin/pages'
+      fullPath: '/admin/pages'
+      preLoaderRoute: typeof AdminAdminPagesRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/_admin/admin/comments': {
+      id: '/_admin/admin/comments'
+      path: '/admin/comments'
+      fullPath: '/admin/comments'
+      preLoaderRoute: typeof AdminAdminCommentsRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/_admin/admin/appearance': {
+      id: '/_admin/admin/appearance'
+      path: '/admin/appearance'
+      fullPath: '/admin/appearance'
+      preLoaderRoute: typeof AdminAdminAppearanceRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
+    '/_admin/admin/security/': {
+      id: '/_admin/admin/security/'
+      path: '/admin/security'
+      fullPath: '/admin/security/'
+      preLoaderRoute: typeof AdminAdminSecurityIndexRouteImport
+      parentRoute: typeof AdminRouteRoute
+    }
     '/_admin/admin/pages/': {
       id: '/_admin/admin/pages/'
       path: '/'
@@ -375,25 +382,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAdminPagesIndexRouteImport
       parentRoute: typeof AdminAdminPagesRoute
     }
-    '/_admin/admin/pages/$id': {
-      id: '/_admin/admin/pages/$id'
-      path: '/$id'
-      fullPath: '/admin/pages/$id'
-      preLoaderRoute: typeof AdminAdminPagesIdRouteImport
-      parentRoute: typeof AdminAdminPagesRoute
-    }
-    '/_admin/admin/pages/new': {
-      id: '/_admin/admin/pages/new'
-      path: '/new'
-      fullPath: '/admin/pages/new'
-      preLoaderRoute: typeof AdminAdminPagesNewRouteImport
-      parentRoute: typeof AdminAdminPagesRoute
-    }
-    '/_admin/admin/security/': {
-      id: '/_admin/admin/security/'
-      path: '/admin/security'
-      fullPath: '/admin/security/'
-      preLoaderRoute: typeof AdminAdminSecurityIndexRouteImport
+    '/_admin/admin/tools/performance': {
+      id: '/_admin/admin/tools/performance'
+      path: '/admin/tools/performance'
+      fullPath: '/admin/tools/performance'
+      preLoaderRoute: typeof AdminAdminToolsPerformanceRouteImport
       parentRoute: typeof AdminRouteRoute
     }
     '/_admin/admin/security/cloudflare': {
@@ -403,12 +396,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAdminSecurityCloudflareRouteImport
       parentRoute: typeof AdminRouteRoute
     }
-    '/_admin/admin/tools/performance': {
-      id: '/_admin/admin/tools/performance'
-      path: '/admin/tools/performance'
-      fullPath: '/admin/tools/performance'
-      preLoaderRoute: typeof AdminAdminToolsPerformanceRouteImport
-      parentRoute: typeof AdminRouteRoute
+    '/_admin/admin/pages/new': {
+      id: '/_admin/admin/pages/new'
+      path: '/new'
+      fullPath: '/admin/pages/new'
+      preLoaderRoute: typeof AdminAdminPagesNewRouteImport
+      parentRoute: typeof AdminAdminPagesRoute
+    }
+    '/_admin/admin/pages/$id': {
+      id: '/_admin/admin/pages/$id'
+      path: '/$id'
+      fullPath: '/admin/pages/$id'
+      preLoaderRoute: typeof AdminAdminPagesIdRouteImport
+      parentRoute: typeof AdminAdminPagesRoute
     }
   }
 }
